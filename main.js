@@ -33,7 +33,8 @@ function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    let object = [];
+    let tdObjects = [];
+    let trObjects = [];
     // let obj1 = $("#"+data+" td:nth-child(1)")[0];
     // let obj2 = $("#"+data+" td:nth-child(2)")[0];
     // let obj3 = $("#"+data+" td:nth-child(3)")[0];
@@ -44,13 +45,20 @@ function drop(ev) {
     }
     function moveItems(repeat){
       // ev.target.appendChild(document.getElementById(data));
+      let parentwrapper = $($("#"+data+" td:nth-child(1)")[0]).parent()[0];
     for (let i = 0; i < repeat; i++){
-      var toAdd = $("#"+data+" td:nth-child(1)")[0];
-      object.push(toAdd);
-      console.log($(data).parent());
+      let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
+      tdObjects.push(tdToAdd);
       let toTheRight = $(ev.target).nextUntil();
-      toTheRight[i].appendChild(object[i]);
+      trObjects.push(toTheRight[i]);
+      toTheRight[i].append(tdObjects[i]);
     }
+    for (let i = 0; i < repeat; i++){
+      trObjects[i].wrap(parentwrapper);
+
+    }
+    console.log(parentwrapper);
+    console.log(trObjects[0]);
     }
     // ev.target.appendChild(document.getElementById(data));
     // let toTheRight = $(ev.target).next();
