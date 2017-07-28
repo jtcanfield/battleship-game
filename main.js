@@ -31,16 +31,20 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
+    // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    console.log(data);
+    let toTheRight = $(ev.target).next();
+    // console.log(toTheRight);
+    let toTheLeft = $(ev.target).prev();
+    // console.log(toTheLeft);
     if (data === "player_aircraft_carrier"){
-      console.log("its a carrier")
-      let toTheRight = $(ev.target).next();
-      console.log(toTheRight);
-      let toTheLeft = $(ev.target).prev();
-      console.log(toTheLeft);
     }
     ev.target.appendChild(document.getElementById(data));
+    console.log(ev.target);
+    console.log(toTheRight[0]);
+    toTheRight[0].appendChild(document.getElementById(data));
+
+    toTheLeft[0].appendChild(document.getElementById(data));
 }
 
 //The below must be called on an ID
