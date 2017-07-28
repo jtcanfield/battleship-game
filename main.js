@@ -43,13 +43,20 @@ function drop(ev) {
       moveItems(5);
     }
     function moveItems(repeat){
+      // ev.target.appendChild(document.getElementById(data));
     for (let i = 0; i < repeat; i++){
-      let toAdd = $("#"+data+" td:nth-child(1)")[0];
+      var toAdd = $("#"+data+" td:nth-child(1)")[0];
       object.push(toAdd);
+      console.log($(data).parent());
       let toTheRight = $(ev.target).nextUntil();
       toTheRight[i].appendChild(object[i]);
     }
     }
+    // ev.target.appendChild(document.getElementById(data));
+    // let toTheRight = $(ev.target).next();
+    // let toTheLeft = $(ev.target).prev();
+    // toTheRight[0].appendChild(data2);
+    // toTheLeft[0].appendChild(document.getElementById(data2));
 }
 /*Super Cool REPLICATION:
 function drop(ev) {
