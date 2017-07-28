@@ -33,28 +33,23 @@ function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    let obj1 = $("#"+data+" td:nth-child(1)")[0];
-    console.log(obj1);
-    let obj2 = $("#"+data+" td:nth-child(2)")[0];
-    console.log(obj2);
-    let obj3 = $("#"+data+" td:nth-child(3)")[0];
-    console.log(obj3);
-    let obj4 = $("#"+data+" td:nth-child(4)")[0];
-    console.log(obj4);
-    let obj5 = $("#"+data+" td:nth-child(5)")[0];
-    console.log(obj5);
-    let repeat = 0;
+    let object = [];
+    // let obj1 = $("#"+data+" td:nth-child(1)")[0];
+    // let obj2 = $("#"+data+" td:nth-child(2)")[0];
+    // let obj3 = $("#"+data+" td:nth-child(3)")[0];
+    // let obj4 = $("#"+data+" td:nth-child(4)")[0];
+    // let obj5 = $("#"+data+" td:nth-child(5)")[0];
     if (data === "player_aircraft_carrier"){
-      let repeat = 1;
+      moveItems(5);
     }
+    function moveItems(repeat){
     for (let i = 0; i < repeat; i++){
+      let toAdd = $("#"+data+" td:nth-child(1)")[0];
+      object.push(toAdd);
+      let toTheRight = $(ev.target).nextUntil();
+      toTheRight[i].appendChild(object[i]);
     }
-    ev.target.appendChild(document.getElementById(data));
-    let toTheRight = $(ev.target).next();
-    let toTheLeft = $(ev.target).prev();
-    // toTheRight[0].appendChild(data2);
-
-    // toTheLeft[0].appendChild(document.getElementById(data2));
+    }
 }
 /*Super Cool REPLICATION:
 function drop(ev) {
