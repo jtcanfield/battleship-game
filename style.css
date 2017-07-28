@@ -4,4 +4,7 @@ html {
 #computer_player_box{
   border-radius: 100%;
   position:fixed;
+  background-color: yellow;
+  height:  50px;
+  width:  50px;
 }
