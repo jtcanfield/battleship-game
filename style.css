@@ -4,8 +4,13 @@ html {
 #battleship_board_container{
   display: inline-block;
 }
-table, tbody, thead, th, td{
+table{
   border: 1px solid black;
+}
+th, td{
+  border: 1px solid black;
+  height: 25px;
+  width: 25px;
 }
 #computer_player_box{
   border-radius: 100%;
