@@ -5,11 +5,11 @@ html {
 #battleship_board_container{
   display: inline-block;
 }
-table{
+#battleship_board_container table{
   border: 1px solid black;
   border-spacing: 0px;
 }
-th, td{
+#battleship_board_container th, #battleship_board_container td{
   border: 1px solid black;
   height: 25px;
   width: 25px;
