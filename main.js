@@ -11,6 +11,8 @@ $(document).ready(function() {
 
 
 
+
+
 //The below must be called on an ID
 function makeNewPosition(){
     var top = $(window).height();
