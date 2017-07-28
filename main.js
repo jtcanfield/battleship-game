@@ -1,4 +1,5 @@
-$(name).hide(0);
+$("#computer_player_avatar").hide(0);
+$(".direction_detector").hide(0);
 function main() {
 }
 $(document).ready(main);
@@ -29,6 +30,10 @@ function drag(ev) {
 }
 
 function drop(ev) {
+    // if (document.getElementById('player_aircraft_carrier').value){
+    //
+    // }
+    let type
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
@@ -36,15 +41,15 @@ function drop(ev) {
 
 //The below must be called on an ID
 function makeNewPosition(){
-    var top = $(window).height();
-    var left = $(window).width();
+    let top = $(window).height();
+    let left = $(window).width();
     let computer_player_box_top = (document.getElementById("computer_player_box").getBoundingClientRect()).top;
     let computer_player_box_left = (document.getElementById("computer_player_box").getBoundingClientRect()).left;
 
-    var starttop = Math.floor(Math.random()*(top-0+1)+0);
-    var startleft = Math.floor(Math.random()*((left+80)-left+20)+left);
-    var finaltop = computer_player_box_top - 110;
-    var finalleft = computer_player_box_left - 110;
+    let starttop = Math.floor(Math.random()*(top-0+1)+0);
+    let startleft = Math.floor(Math.random()*((left+80)-left+20)+left);
+    let finaltop = computer_player_box_top - 110;
+    let finalleft = computer_player_box_left - 110;
 
     var time = Math.floor(Math.random()*(4000-1000+1)+1000);
     let scale = Math.floor(Math.random()*(10-5+1)+5);
