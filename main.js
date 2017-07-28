@@ -33,15 +33,16 @@ function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    let numberOfChildren = document.getElementById(data);
-    console.log(numberOfChildren);
-    console.log(numberOfChildren.children.length);
     let obj1 = $("#"+data+" td:nth-child(1)")[0];
-    let obj2 = $("#"+data+" td:nth-child(1)")[0];
-    let obj3 = $("#"+data+" td:nth-child(1)")[0];
-    let obj4 = $("#"+data+" td:nth-child(1)")[0];
-    let obj5 = $("#"+data+" td:nth-child(1)")[0];
-    // console.log(obj1);
+    console.log(obj1);
+    let obj2 = $("#"+data+" td:nth-child(2)")[0];
+    console.log(obj2);
+    let obj3 = $("#"+data+" td:nth-child(3)")[0];
+    console.log(obj3);
+    let obj4 = $("#"+data+" td:nth-child(4)")[0];
+    console.log(obj4);
+    let obj5 = $("#"+data+" td:nth-child(5)")[0];
+    console.log(obj5);
     let repeat = 0;
     if (data === "player_aircraft_carrier"){
       let repeat = 1;
