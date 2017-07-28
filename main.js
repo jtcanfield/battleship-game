@@ -33,18 +33,23 @@ function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    let toTheRight = $(ev.target).next();
-    // console.log(toTheRight);
-    let toTheLeft = $(ev.target).prev();
-    // console.log(toTheLeft);
-    if (data === "player_aircraft_carrier"){
-    }
-    ev.target.appendChild(document.getElementById(data));
-    console.log(ev.target);
-    console.log(toTheRight[0]);
-    toTheRight[0].appendChild(document.getElementById(data));
 
-    toTheLeft[0].appendChild(document.getElementById(data));
+    var data2 = document.getElementById(data).cloneNode(true);
+    data2.id = "player_aircraft_carrier";
+    let toTheRight = $(ev.target).next();
+    let toTheLeft = $(ev.target).prev();
+    let repeat = 0;
+    if (data === "player_aircraft_carrier"){
+      let repeat = 1;
+    }
+    for (let i = 0; i < repeat; i++){
+      var data2 = document.getElementById(data).cloneNode(true);
+      data2.id = "player_aircraft_carrier" + [i];
+  }
+    ev.target.appendChild(document.getElementById(data));
+    toTheRight[0].appendChild(data2);
+
+    // toTheLeft[0].appendChild(document.getElementById(data2));
 }
 
 //The below must be called on an ID
