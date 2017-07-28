@@ -1,6 +1,12 @@
 html {
   text-align: center;
 }
+#battleship_board_container{
+  display: inline-block;
+}
+table, tbody, thead, th, td{
+  border: 1px solid black;
+}
 #computer_player_box{
   border-radius: 100%;
   position:fixed;
