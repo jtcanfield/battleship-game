@@ -1,5 +1,6 @@
 html {
   text-align: center;
+  background-color: white;
 }
 #battleship_board_container{
   display: inline-block;
@@ -12,10 +13,28 @@ th, td{
   height: 25px;
   width: 25px;
 }
-#computer_player_box{
+#computer_player_avatar{
   border-radius: 100%;
   position:fixed;
   background-color: yellow;
   height:  50px;
   width:  50px;
+}
+#computer_player_box{
+  position:fixed;
+  background-color: grey;
+  height:  60px;
+  width:  60px;
+}
+/*TABLET VERSION*/
+@media (max-width: 900px) {
+  html {
+    text-align: center;
+  }
+}
+/*MOBILE VERSION*/
+@media (max-width: 500px) {
+  html {
+    text-align: center;
+  }
 }
