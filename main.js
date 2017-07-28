@@ -30,12 +30,16 @@ function drag(ev) {
 }
 
 function drop(ev) {
-    // if (document.getElementById('player_aircraft_carrier').value){
-    //
-    // }
-    let type
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
+    let data = ev.dataTransfer.getData("text");
+    console.log(data);
+    if (data === "player_aircraft_carrier"){
+      console.log("its a carrier")
+      let toTheRight = $(ev.target).next();
+      console.log(toTheRight);
+      let toTheLeft = $(ev.target).prev();
+      console.log(toTheLeft);
+    }
     ev.target.appendChild(document.getElementById(data));
 }
 
@@ -51,7 +55,7 @@ function makeNewPosition(){
     let finaltop = computer_player_box_top - 110;
     let finalleft = computer_player_box_left - 110;
 
-    var time = Math.floor(Math.random()*(4000-1000+1)+1000);
+    let time = Math.floor(Math.random()*(4000-1000+1)+1000);
     let scale = Math.floor(Math.random()*(10-5+1)+5);
     return [starttop,startleft,finaltop,finalleft,time,scale];
 }
