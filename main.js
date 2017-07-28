@@ -4,6 +4,8 @@ function main() {
 $(document).ready(main);
 $(document).ready(function() {
   animateAvatarStart("#computer_player_avatar");
+  $("#start_game_button").click(function() {
+  });
 });
 
 
