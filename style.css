@@ -1,3 +1,7 @@
 html {
   text-align: center;
 }
+#computer_player_box{
+  border-radius: 100%;
+  position:fixed;
+}
