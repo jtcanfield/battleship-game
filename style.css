@@ -5,12 +5,18 @@ html {
 #battleship_board_container{
   display: inline-block;
 }
-#battleship_board_container table{
+table{
   border: 1px solid black;
   border-spacing: 0px;
 }
-#battleship_board_container th, #battleship_board_container td{
+
+th, td{
   border: 1px solid black;
+  height: 25px;
+  width: 25px;
+}
+.player_pieces th, .player_pieces td{
+  border: 1px solid white;
   height: 25px;
   width: 25px;
 }
