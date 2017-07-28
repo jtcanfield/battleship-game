@@ -17,12 +17,14 @@ th, td{
   border-radius: 100%;
   position:fixed;
   background-color: yellow;
+  margin: 8% 15%;
   height:  50px;
   width:  50px;
 }
 #computer_player_box{
   position:fixed;
   background-color: grey;
+  margin: 10% 15%;
   height:  60px;
   width:  60px;
 }
