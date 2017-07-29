@@ -63,24 +63,29 @@ function drop(ev) {
       boatsDown += 1;
       $("#player_ptboat").toggle();
     }
-    function moveItems(repeat, verticle){
-      if (verticle === 1){
+  function moveItems(repeat, verticle){
+    if (verticle === 1){
 
+    } else {
+        console.log($(ev.target).nextUntil(".player_pieces").length+1);
+        console.log(repeat);
+      if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
+        console.log("FUCK THE FUCK OFF")
       } else {
-    for (let i = 0; i < repeat; i++){
-      let toTheRight = $(ev.target).nextUntil();
-      console.log(toTheRight[i]);
-      if (i === 0){
-        $(ev.target).toggleClass("player_pieces");
-        $(ev.target).attr("id", data + "_piece1");
-      } else if (i > 0){
-      // $( "#mydiv" ).hasClass( "foo" )
-      $(toTheRight[i-1]).addClass("player_pieces");
-      $(toTheRight[i-1]).attr("id", data + "_piece"+(i+1));
+        for (let i = 0; i < repeat; i++){
+          if (i === 0){
+          $(ev.target).toggleClass("player_pieces");
+          $(ev.target).attr("id", data + "_piece1");
+          } else if (i > 0){
+            let toTheRight = $(ev.target).nextUntil();
+          // $( "#mydiv" ).hasClass( "foo" )
+          $(toTheRight[i-1]).addClass("player_pieces");
+          $(toTheRight[i-1]).attr("id", data + "_piece"+(i+1));
+          }
+        }
       }
     }
   }
-    }
 
 }
 $("#reset_player_boats").click(function () {
