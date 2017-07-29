@@ -33,35 +33,35 @@ function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    let trObjects = [];
-    let tdObjects = [];
-    if ($(ev.target).hasClass("label")){
+    if ($(ev.target).hasClass("label") || $(ev.target).hasClass("player_pieces")){
       console.log("FUCKOFF");
       announcements.innerHTML = "Invalid spot!";
     } else if (data === "player_aircraft_carrier"){
       moveItems(5);
+      $("#player_aircraft_carrier").toggle();
     } else if (data === "player_battleship"){
       moveItems(4);
-    } else if (data === "player_destoryer" || data === "player_submarine"){
+      $("#player_battleship").toggle();
+    } else if (data === "player_destoryer"){
       moveItems(3);
+      $("#player_destoryer").toggle();
+    } else if (data === "player_submarine"){
+      moveItems(3);
+      $("#player_submarine").toggle();
     } else if (data === "player_ptboat"){
       moveItems(2);
+      $("#player_ptboat").toggle();
     }
     function moveItems(repeat){
     for (let i = 0; i < repeat; i++){
-      let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
-      trObjects.push(tdToAdd);
       if (i === 0){
         $(ev.target).addClass("player_pieces");
         $(ev.target).attr("id", data + "_piece1")
       } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
-      tdObjects.push(toTheRight[i]);
-      console.log($(toTheRight[i]));
-      toTheRight[i-1].replaceWith(trObjects[i]);
+      $(toTheRight[i-1]).addClass("player_pieces");
+      $(toTheRight[i-1]).attr("id", data + "_piece1")
       }
-
-      // console.log($($("#"+data+" td:nth-child(1)")[0]).parent()[0]);
     }
     }
 }
@@ -118,8 +118,6 @@ function drop(ev) {
       console.log($(toTheRight[i]));
       toTheRight[i-1].replaceWith(trObjects[i]);
       }
-
-      // console.log($($("#"+data+" td:nth-child(1)")[0]).parent()[0]);
     }
     }
 }*/
