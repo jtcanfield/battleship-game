@@ -74,20 +74,35 @@ function drop(ev) {
     }
   function moveItems(repeat, vertical){
     if (vertical === 1){
+      let isActionLegal = 1;
       let theTarget = ev.target;
-      for (let i = 0; i < repeat; i++){
-        let rowIndexing = $(theTarget).prevUntil(".label").length;
-        let findNextRow = $(theTarget).parent().next();
-        console.log(theTarget);
-        theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
-      }/*
-        for (let i = 0; i < repeat; i++){
+        for (let i = 0; i < repeat-1; i++){
           let rowIndexing = $(theTarget).prevUntil(".label").length;
           let findNextRow = $(theTarget).parent().next();
-          $(theTarget).toggleClass("player_pieces");
-          $(theTarget).attr("id", data + "_piece"+(i+1));
+          console.log(findNextRow);
+          if ($(theTarget).hasClass("player_pieces")){
+              announcements.innerHTML = "Your ship would collide with other ships";
+              isActionLegal = 0;
+              $("#"+data).show();
+          } else if (findNextRow[0] === undefined){
+              announcements.innerHTML = "Your ship would be off the board";
+              console.log(data);
+              $("#"+data).show();
+              isActionLegal = 0;
+          }
           theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
-        }*/
+        }
+        if (isActionLegal === 1){
+          let theTarget = ev.target;
+          for (let i = 0; i < repeat; i++){
+            let rowIndexing = $(theTarget).prevUntil(".label").length;
+            let findNextRow = $(theTarget).parent().next();
+            $(theTarget).toggleClass("player_pieces");
+            $(theTarget).attr("id", data + "_piece"+(i+1));
+            theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+            console.log(theTarget);
+          }
+        }
       } else {
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
         announcements.innerHTML = "Your ship would collide with other ships";
