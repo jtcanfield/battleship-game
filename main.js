@@ -55,16 +55,19 @@ function drop(ev) {
     function moveItems(repeat){
     for (let i = 0; i < repeat; i++){
       if (i === 0){
-        $(ev.target).addClass("player_pieces");
-        $(ev.target).attr("id", data + "_piece1")
+        $(ev.target).toggleClass("player_pieces");
+        $(ev.target).attr("id", data + "_piece1");
       } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
       $(toTheRight[i-1]).addClass("player_pieces");
-      $(toTheRight[i-1]).attr("id", data + "_piece1")
+      $(toTheRight[i-1]).attr("id", data + "_piece1");
       }
     }
     }
 }
+$("#reset_player_boats").click(function () {
+  
+});
 /*Super Cool REPLICATION:
 function drop(ev) {
     ev.preventDefault();
