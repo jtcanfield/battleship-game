@@ -32,7 +32,7 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
-    let data = ev.dataTransfer.getData("text");
+    var data = ev.dataTransfer.getData("text");
     if ($(ev.target).hasClass("label") || $(ev.target).hasClass("player_pieces")){
       console.log("FUCKOFF");
       announcements.innerHTML = "Invalid spot!";
@@ -66,7 +66,13 @@ function drop(ev) {
     }
 }
 $("#reset_player_boats").click(function () {
-  
+  $("#player_battleship_board >table> tbody>tr>td").removeClass("player_pieces");
+  $("#player_battleship_board >table> tbody>tr>td").removeAttr("id");
+  $("#player_aircraft_carrier").show();
+  $("#player_battleship").show();
+  $("#player_destoryer").show();
+  $("#player_submarine").show();
+  $("#player_ptboat").show();
 });
 /*Super Cool REPLICATION:
 function drop(ev) {
