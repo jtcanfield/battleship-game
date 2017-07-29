@@ -16,7 +16,7 @@ th, td{
   width: 25px;
 }
 .player_pieces {
-  border: 1px solid white;
+  border: 1px solid red;
   background-color: black;
   height: 25px;
   width: 25px;
