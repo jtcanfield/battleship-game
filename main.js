@@ -35,18 +35,16 @@ function drop(ev) {
     let data = ev.dataTransfer.getData("text");
     let trObjects = [];
     let tdObjects = [];
-    if (data === "player_aircraft_carrier"){
+    if ($(ev.target).hasClass("label")){
+      console.log("FUCKOFF");
+      
+    } else if (data === "player_aircraft_carrier"){
       moveItems(5);
-      console.log(ev.target);
-      if (ev.target === )
-    }
-    if (data === "player_battleship"){
+    } else if (data === "player_battleship"){
       moveItems(4);
-    }
-    if (data === "player_destoryer" || data === "player_submarine"){
+    } else if (data === "player_destoryer" || data === "player_submarine"){
       moveItems(3);
-    }
-    if (data === "player_ptboat"){
+    } else if (data === "player_ptboat"){
       moveItems(2);
     }
     function moveItems(repeat){
