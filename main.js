@@ -70,7 +70,8 @@ function drop(ev) {
         console.log($(ev.target).nextUntil(".player_pieces").length+1);
         console.log(repeat);
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
-        console.log("FUCK THE FUCK OFF")
+        announcements.innerHTML = "Your ship would collide with other ships";
+        $("#"+data).toggle();
       } else {
         for (let i = 0; i < repeat; i++){
           if (i === 0){
@@ -86,7 +87,6 @@ function drop(ev) {
       }
     }
   }
-
 }
 $("#reset_player_boats").click(function () {
   $("#player_battleship_board >table> tbody>tr>td").removeClass("player_pieces");
@@ -96,6 +96,7 @@ $("#reset_player_boats").click(function () {
   $("#player_destoryer").show();
   $("#player_submarine").show();
   $("#player_ptboat").show();
+  announcements.innerHTML = "Place your Ships!";
   boatsDown += 0;
 });
 /*Super Cool REPLICATION:
