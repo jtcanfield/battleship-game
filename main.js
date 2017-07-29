@@ -74,30 +74,20 @@ function drop(ev) {
     }
   function moveItems(repeat, vertical){
     if (vertical === 1){
-      let theTarget = ev.target
-      let rowIndexing = $(theTarget).prevUntil(".label").length;
-      let findNextRow = $(theTarget).parent().next()
-      // $(findNextRow[0].childNodes[rowIndexing+2]).toggleClass("player_pieces");
-      // $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece1");
-      // if (/*$(ev.target).prevUntil(".label").length+1 < repeat*/){
-      //   announcements.innerHTML = "Wait how did this happen";
-      //   $("#"+data).toggle();
-      // } else {
+      let theTarget = ev.target;
+      for (let i = 0; i < repeat; i++){
+        let rowIndexing = $(theTarget).prevUntil(".label").length;
+        let findNextRow = $(theTarget).parent().next();
+        console.log(theTarget);
+        theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+      }/*
         for (let i = 0; i < repeat; i++){
-          if (i === 0){
+          let rowIndexing = $(theTarget).prevUntil(".label").length;
+          let findNextRow = $(theTarget).parent().next();
           $(theTarget).toggleClass("player_pieces");
-          $(theTarget).attr("id", data + "_piece1");
-          } else if (i > 0){
-            // findNextRow = ($(ev.target).prevUntil(".label")).parent().next()
-          // $( "#mydiv" ).hasClass( "foo" )
-          $(findNextRow[0].childNodes[rowIndexing+2]).addClass("player_pieces");
-          $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece"+(i+1));
-          targetChange = $(findNextRow[0].childNodes[rowIndexing+2]).parent().next();
-          theTarget = $(targetChange[0].childNodes[rowIndexing+2])[0]
-          console.log(theTarget);
-          }
-        }
-      // }
+          $(theTarget).attr("id", data + "_piece"+(i+1));
+          theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+        }*/
       } else {
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
         announcements.innerHTML = "Your ship would collide with other ships";
