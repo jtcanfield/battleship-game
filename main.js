@@ -76,21 +76,34 @@ function drop(ev) {
     if (vertical === 1){
       let isActionLegal = 1;
       let theTarget = ev.target;
-        for (let i = 0; i < repeat-1; i++){
-          let rowIndexing = $(theTarget).prevUntil(".label").length;
-          let findNextRow = $(theTarget).parent().next();
-          console.log(findNextRow);
-          if ($(theTarget).hasClass("player_pieces")){
-              announcements.innerHTML = "Your ship would collide with other ships";
-              isActionLegal = 0;
-              $("#"+data).show();
-          } else if (findNextRow[0] === undefined){
-              announcements.innerHTML = "Your ship would be off the board";
-              console.log(data);
-              $("#"+data).show();
-              isActionLegal = 0;
+        if (isActionLegal === 1){
+          for (let i = 0; i < repeat-1; i++){
+            let rowIndexing = $(theTarget).prevUntil(".label").length;
+            let findNextRow = $(theTarget).parent().next();
+            if (findNextRow[0] === undefined){
+                announcements.innerHTML = "Your ship would be off the board<br>If ship dissappears from list, press reset boats";
+                console.log(data);
+                $("#"+data).show();
+                isActionLegal = 0;
+                break;
+            }
+            theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
           }
-          theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+        }
+        if (isActionLegal === 1){
+          let theTarget = ev.target;
+          for (let i = 0; i < repeat-1; i++){
+            let rowIndexing = $(theTarget).prevUntil(".label").length;
+            let findNextRow = $(theTarget).parent().next();
+            console.log(theTarget);
+            theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+            if ($(theTarget).hasClass("player_pieces")){
+                announcements.innerHTML = "Your ship would collide with other ships<br>If ship dissappears from list, press reset boats";
+                isActionLegal = 0;
+                $("#"+data).show();
+                break;
+            }
+          }
         }
         if (isActionLegal === 1){
           let theTarget = ev.target;
@@ -99,13 +112,16 @@ function drop(ev) {
             let findNextRow = $(theTarget).parent().next();
             $(theTarget).toggleClass("player_pieces");
             $(theTarget).attr("id", data + "_piece"+(i+1));
+            if (findNextRow[0] === undefined){
+                break;
+            }
             theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
             console.log(theTarget);
           }
         }
       } else {
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
-        announcements.innerHTML = "Your ship would collide with other ships";
+        announcements.innerHTML = "Your ship would collide with other ships<br>If ship dissappears from list, press reset boats";
         $("#"+data).toggle();
       } else {
         for (let i = 0; i < repeat; i++){
