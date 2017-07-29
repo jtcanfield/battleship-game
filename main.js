@@ -37,15 +37,29 @@ function drop(ev) {
     let tdObjects = [];
     if (data === "player_aircraft_carrier"){
       moveItems(5);
+      console.log(ev.target);
+      if (ev.target === )
+    }
+    if (data === "player_battleship"){
+      moveItems(4);
+    }
+    if (data === "player_destoryer" || data === "player_submarine"){
+      moveItems(3);
+    }
+    if (data === "player_ptboat"){
+      moveItems(2);
     }
     function moveItems(repeat){
     for (let i = 0; i < repeat; i++){
       let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
       trObjects.push(tdToAdd);
+      if (i === 0){
+        ev.target.append(trObjects[i]);
+      } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
-      tdObjects.push(toTheRight[i]);
-      toTheRight[i].append(trObjects[i]);
-      console.log(tdObjects[i]);
+      tdObjects.push(toTheRight[i-1]);
+      toTheRight[i-1].append(trObjects[i]);
+      }
       // console.log($($("#"+data+" td:nth-child(1)")[0]).parent()[0]);
     }
     }
