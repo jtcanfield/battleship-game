@@ -1,18 +1,6 @@
 $("#computer_player_avatar").hide(0);
 $(".direction_detector").hide(0);
 let boatsDown = 0;
-let direction = 0;
-$('html').on('keydown',function(e){
-  if(e.which==82){
-    if(direction === 0){
-    direction = 1;
-    console.log("vertical");
-    } else {
-    direction = 0;
-    console.log("Horizantal");
-    }
-  }
-});
 function main() {
 }
 $(document).ready(main);
@@ -26,7 +14,16 @@ $(document).ready(function() {
     }
   });
 });
-
+let direction = 0;
+$('html').on('keydown',function(e){
+  if(e.which==82){
+    if(direction === 0){
+    direction = 1;
+    } else {
+    direction = 0;
+    }
+  }
+});
 
 /*TODO
 1. ADD BUTTON TO START GAME ONCE PLAYER PLACES PIECES
@@ -47,7 +44,6 @@ function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 function drop(ev) {
-    let direction = 0;
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if ($(ev.target).hasClass("label") || $(ev.target).hasClass("player_pieces")){
@@ -75,11 +71,10 @@ function drop(ev) {
       $("#player_ptboat").toggle();
     }
   function moveItems(repeat, vertical){
+            console.log(direction);
     if (vertical === 1){
       console.log("YO SHIT IS NOW vertical!!!!")
     } else {
-        console.log($(ev.target).nextUntil(".player_pieces").length+1);
-        console.log(repeat);
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
         announcements.innerHTML = "Your ship would collide with other ships";
         $("#"+data).toggle();
