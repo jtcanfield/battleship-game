@@ -37,7 +37,7 @@ function drop(ev) {
     let tdObjects = [];
     if ($(ev.target).hasClass("label")){
       console.log("FUCKOFF");
-      
+      announcements.innerHTML = "Invalid spot!";
     } else if (data === "player_aircraft_carrier"){
       moveItems(5);
     } else if (data === "player_battleship"){
@@ -52,12 +52,15 @@ function drop(ev) {
       let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
       trObjects.push(tdToAdd);
       if (i === 0){
-        ev.target.append(trObjects[i]);
+        $(ev.target)[0].append(trObjects[i]);
+        console.log($(ev.target)[0]);
       } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
-      tdObjects.push(toTheRight[i-1]);
-      toTheRight[i-1].append(trObjects[i]);
+      tdObjects.push(toTheRight[i]);
+      console.log(trObjects[i]);
+      toTheRight[i-1].replaceWith(trObjects[i]);
       }
+
       // console.log($($("#"+data+" td:nth-child(1)")[0]).parent()[0]);
     }
     }
@@ -88,32 +91,35 @@ function drop(ev) {
     ev.preventDefault();
     // let data gets the ID and info of the object
     let data = ev.dataTransfer.getData("text");
-    let tdObjects = [];
     let trObjects = [];
-    // let obj1 = $("#"+data+" td:nth-child(1)")[0];
-    // let obj2 = $("#"+data+" td:nth-child(2)")[0];
-    // let obj3 = $("#"+data+" td:nth-child(3)")[0];
-    // let obj4 = $("#"+data+" td:nth-child(4)")[0];
-    // let obj5 = $("#"+data+" td:nth-child(5)")[0];
-    if (data === "player_aircraft_carrier"){
+    let tdObjects = [];
+    if ($(ev.target).hasClass("label")){
+      console.log("FUCKOFF");
+      announcements.innerHTML = "Invalid spot!";
+    } else if (data === "player_aircraft_carrier"){
       moveItems(5);
+    } else if (data === "player_battleship"){
+      moveItems(4);
+    } else if (data === "player_destoryer" || data === "player_submarine"){
+      moveItems(3);
+    } else if (data === "player_ptboat"){
+      moveItems(2);
     }
     function moveItems(repeat){
-      // ev.target.appendChild(document.getElementById(data));
-      let parentwrapper = $($("#"+data+" td:nth-child(1)")[0]).parent()[0];
     for (let i = 0; i < repeat; i++){
       let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
-      tdObjects.push(tdToAdd);
+      trObjects.push(tdToAdd);
+      if (i === 0){
+        $(ev.target)[0].append(trObjects[i]);
+        console.log($(ev.target)[0]);
+      } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
-      trObjects.push(toTheRight[i]);
-      toTheRight[i].append(tdObjects[i]);
+      tdObjects.push(toTheRight[i]);
+      console.log(trObjects[i]);
+      toTheRight[i-1].replaceWith(trObjects[i]);
     }
-    for (let i = 0; i < repeat; i++){
-      trObjects.wrap(parentwrapper);
-
+      // console.log($($("#"+data+" td:nth-child(1)")[0]).parent()[0]);
     }
-    console.log(parentwrapper);
-    console.log(trObjects[0]);
     }
 }*/
 //The below must be called on an ID
