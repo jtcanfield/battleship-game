@@ -74,27 +74,30 @@ function drop(ev) {
     }
   function moveItems(repeat, vertical){
     if (vertical === 1){
-      let rowIndexing = $(ev.target).prevUntil(".label").length;
-      let findNextRow = ($(ev.target).prevUntil(".label")).parent().next()
-      $(findNextRow[0].childNodes[rowIndexing+2]).toggleClass("player_pieces");
-      $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece1");
-      if ($(ev.target).prevUntil(".label").length+1 < repeat){
-        announcements.innerHTML = "Your ship would collide with other ships";
-        $("#"+data).toggle();
-      } else {
+      let theTarget = ev.target
+      let rowIndexing = $(theTarget).prevUntil(".label").length;
+      let findNextRow = $(theTarget).parent().next()
+      // $(findNextRow[0].childNodes[rowIndexing+2]).toggleClass("player_pieces");
+      // $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece1");
+      // if (/*$(ev.target).prevUntil(".label").length+1 < repeat*/){
+      //   announcements.innerHTML = "Wait how did this happen";
+      //   $("#"+data).toggle();
+      // } else {
         for (let i = 0; i < repeat; i++){
           if (i === 0){
-          $(ev.target).toggleClass("player_pieces");
-          $(ev.target).attr("id", data + "_piece1");
+          $(theTarget).toggleClass("player_pieces");
+          $(theTarget).attr("id", data + "_piece1");
           } else if (i > 0){
-            // .table, p:nth-child(3)
-            // let nextRowDown = $(ev.target).nextUntil();
+            // findNextRow = ($(ev.target).prevUntil(".label")).parent().next()
           // $( "#mydiv" ).hasClass( "foo" )
-          $(findNextRow[0].childNodes[rowIndexing+2]).toggleClass("player_pieces");
-          $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece1");
+          $(findNextRow[0].childNodes[rowIndexing+2]).addClass("player_pieces");
+          $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece"+(i+1));
+          targetChange = $(findNextRow[0].childNodes[rowIndexing+2]).parent().next();
+          theTarget = $(targetChange[0].childNodes[rowIndexing+2])[0]
+          console.log(theTarget);
           }
         }
-      }
+      // }
       } else {
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
         announcements.innerHTML = "Your ship would collide with other ships";
