@@ -27,16 +27,6 @@ $('html').on('keydown',function(e){
   }
 });
 
-/*TODO
-1. ADD BUTTON TO START GAME ONCE PLAYER PLACES PIECES
-2. MAKE PIECES SNAP
-3. MAKE COMPUTER SET PIECES
-4. ADD CLICKER FOR PLAYER TO SELECT SPOTS ON BOARD, MAKE SURE PLAYER CANT ACTIVATE "FIRE" FUNCTION
-UNTIL READY
-5. SIMILAR WITH ABOVE FOR COMPUTER
-
-*/
-
 //DRAG AND DROP SCRIPT
 function allowDrop(ev) {
     ev.preventDefault();
@@ -83,7 +73,7 @@ function drop(ev) {
             if (findNextRow[0] === undefined){
                 announcements.innerHTML = "Your ship would be off the board<br>If ship dissappears from list, press reset boats";
                 console.log(data);
-                $("#"+data).show();
+                $("#"+data).toggle();
                 isActionLegal = 0;
                 break;
             }
@@ -100,7 +90,7 @@ function drop(ev) {
             if ($(theTarget).hasClass("player_pieces")){
                 announcements.innerHTML = "Your ship would collide with other ships<br>If ship dissappears from list, press reset boats";
                 isActionLegal = 0;
-                $("#"+data).show();
+                $("#"+data).toggle();
                 break;
             }
           }
@@ -149,6 +139,34 @@ $("#reset_player_boats").click(function () {
   announcements.innerHTML = "Place your Ships!";
   boatsDown += 0;
 });
+//END DRAG AND DROP SCRIPTS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*Super Cool REPLICATION:
 function drop(ev) {
     ev.preventDefault();

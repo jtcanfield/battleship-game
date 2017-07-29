@@ -104,13 +104,49 @@
         </table>
       </div>
     </div>
-    <!-- <div>
-      <div id="player_aircraft_carrier" draggable="true" ondragstart="drag(event)">
-            <div class="player_pieces" id="player_carrier_piece1"></div><div class="player_pieces" id="player_carrier_piece2"></div><div class="player_pieces" id="player_carrier_piece3"></div><div class="player_pieces" id="player_carrier_piece4"></div><div class="player_pieces" id="player_carrier_piece5"></div>
-      </div>
-    </div> -->
     <button id="reset_player_boats" type="submit">Reset Boats</button>
-    <div id="player_boat_holder">
+    <div id="player_horizontal_boat_holder">
+      <table id="player_aircraft_carrier" draggable="true" ondragstart="drag(event)">
+        <tbody>
+          <tr>
+            <td class="player_pieces" id="player_aircraft_carrier_piece1"></td><td class="player_pieces" id="player_aircraft_carrier_piece2"></td><td class="player_pieces" id="player_aircraft_carrier_piece3"></td><td class="player_pieces" id="player_aircraft_carrier_piece4"></td><td class="player_pieces" id="player_aircraft_carrier_piece5"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="player_battleship" draggable="true" ondragstart="drag(event)">
+        <tbody>
+          <tr>
+            <td class="player_pieces" id="player_battleship_piece1"></td><td class="player_pieces" id="player_battleship_piece2"></td><td class="player_pieces" id="player_battleship_piece3"></td><td class="player_pieces" id="player_battleship_piece4"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="player_destoryer" draggable="true" ondragstart="drag(event)">
+        <tbody>
+          <tr>
+            <td class="player_pieces" id="player_destoryer_piece1"></td><td class="player_pieces" id="player_destoryer_piece2"></td><td class="player_pieces" id="player_destoryer_piece3"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="player_submarine" draggable="true" ondragstart="drag(event)">
+        <tbody>
+          <tr>
+            <td class="player_pieces" id="player_submarine_piece1"></td><td class="player_pieces" id="player_submarine_piece2"></td><td class="player_pieces" id="player_submarine_piece3"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table id="player_ptboat" draggable="true" ondragstart="drag(event)">
+        <tbody>
+          <tr>
+            <td class="player_pieces" id="player_ptboat_piece1"></td><td class="player_pieces" id="player_ptboat_piece2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="player_vertical_boat_holder">
       <table id="player_aircraft_carrier" draggable="true" ondragstart="drag(event)">
         <tbody>
           <tr>
