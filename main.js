@@ -19,8 +19,10 @@ $('html').on('keydown',function(e){
   if(e.which==82){
     if(direction === 0){
     direction = 1;
+    console.log(direction);
     } else {
     direction = 0;
+    console.log(direction);
     }
   }
 });
@@ -71,10 +73,29 @@ function drop(ev) {
       $("#player_ptboat").toggle();
     }
   function moveItems(repeat, vertical){
-            console.log(direction);
     if (vertical === 1){
-      console.log("YO SHIT IS NOW vertical!!!!")
-    } else {
+      let rowIndexing = $(ev.target).prevUntil(".label").length;
+      let findNextRow = ($(ev.target).prevUntil(".label")).parent().next()
+      $(findNextRow[0].childNodes[rowIndexing+2]).toggleClass("player_pieces");
+      $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece1");
+      if ($(ev.target).prevUntil(".label").length+1 < repeat){
+        announcements.innerHTML = "Your ship would collide with other ships";
+        $("#"+data).toggle();
+      } else {
+        for (let i = 0; i < repeat; i++){
+          if (i === 0){
+          $(ev.target).toggleClass("player_pieces");
+          $(ev.target).attr("id", data + "_piece1");
+          } else if (i > 0){
+            // .table, p:nth-child(3)
+            // let nextRowDown = $(ev.target).nextUntil();
+          // $( "#mydiv" ).hasClass( "foo" )
+          $(findNextRow[0].childNodes[rowIndexing+2]).toggleClass("player_pieces");
+          $(findNextRow[0].childNodes[rowIndexing+2]).attr("id", data + "_piece1");
+          }
+        }
+      }
+      } else {
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
         announcements.innerHTML = "Your ship would collide with other ships";
         $("#"+data).toggle();
@@ -85,7 +106,6 @@ function drop(ev) {
           $(ev.target).attr("id", data + "_piece1");
           } else if (i > 0){
             let toTheRight = $(ev.target).nextUntil();
-          // $( "#mydiv" ).hasClass( "foo" )
           $(toTheRight[i-1]).addClass("player_pieces");
           $(toTheRight[i-1]).attr("id", data + "_piece"+(i+1));
           }
