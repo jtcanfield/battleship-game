@@ -1,11 +1,17 @@
 $("#computer_player_avatar").hide(0);
 $(".direction_detector").hide(0);
+let boatsDown = 0;
 function main() {
 }
 $(document).ready(main);
 $(document).ready(function() {
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_button").click(function() {
+    if (boatsDown !== 5){
+      console.log("place em all mother fucker")
+    } else {
+
+    }
   });
 });
 
@@ -28,42 +34,54 @@ function allowDrop(ev) {
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
-
+let yes = 1;
 function drop(ev) {
+    let direction = 0;
     ev.preventDefault();
-    // let data gets the ID and info of the object
     var data = ev.dataTransfer.getData("text");
     if ($(ev.target).hasClass("label") || $(ev.target).hasClass("player_pieces")){
       console.log("FUCKOFF");
       announcements.innerHTML = "Invalid spot!";
     } else if (data === "player_aircraft_carrier"){
-      moveItems(5);
+      moveItems(5, direction);
+      boatsDown += 1;
       $("#player_aircraft_carrier").toggle();
     } else if (data === "player_battleship"){
-      moveItems(4);
+      moveItems(4, direction);
+      boatsDown += 1;
       $("#player_battleship").toggle();
     } else if (data === "player_destoryer"){
-      moveItems(3);
+      moveItems(3, direction);
+      boatsDown += 1;
       $("#player_destoryer").toggle();
     } else if (data === "player_submarine"){
-      moveItems(3);
+      moveItems(3, direction);
+      boatsDown += 1;
       $("#player_submarine").toggle();
     } else if (data === "player_ptboat"){
-      moveItems(2);
+      moveItems(2, direction);
+      boatsDown += 1;
       $("#player_ptboat").toggle();
     }
-    function moveItems(repeat){
+    function moveItems(repeat, verticle){
+      if (verticle === 1){
+
+      } else {
     for (let i = 0; i < repeat; i++){
+      let toTheRight = $(ev.target).nextUntil();
+      console.log(toTheRight[i]);
       if (i === 0){
         $(ev.target).toggleClass("player_pieces");
         $(ev.target).attr("id", data + "_piece1");
       } else if (i > 0){
-      let toTheRight = $(ev.target).nextUntil();
+      // $( "#mydiv" ).hasClass( "foo" )
       $(toTheRight[i-1]).addClass("player_pieces");
-      $(toTheRight[i-1]).attr("id", data + "_piece1");
+      $(toTheRight[i-1]).attr("id", data + "_piece"+(i+1));
       }
     }
+  }
     }
+
 }
 $("#reset_player_boats").click(function () {
   $("#player_battleship_board >table> tbody>tr>td").removeClass("player_pieces");
@@ -73,6 +91,7 @@ $("#reset_player_boats").click(function () {
   $("#player_destoryer").show();
   $("#player_submarine").show();
   $("#player_ptboat").show();
+  boatsDown += 0;
 });
 /*Super Cool REPLICATION:
 function drop(ev) {
