@@ -1,6 +1,18 @@
 $("#computer_player_avatar").hide(0);
 $(".direction_detector").hide(0);
 let boatsDown = 0;
+let direction = 0;
+$('html').on('keydown',function(e){
+  if(e.which==82){
+    if(direction === 0){
+    direction = 1;
+    console.log("vertical");
+    } else {
+    direction = 0;
+    console.log("Horizantal");
+    }
+  }
+});
 function main() {
 }
 $(document).ready(main);
@@ -34,7 +46,6 @@ function allowDrop(ev) {
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
-let yes = 1;
 function drop(ev) {
     let direction = 0;
     ev.preventDefault();
@@ -63,9 +74,9 @@ function drop(ev) {
       boatsDown += 1;
       $("#player_ptboat").toggle();
     }
-  function moveItems(repeat, verticle){
-    if (verticle === 1){
-
+  function moveItems(repeat, vertical){
+    if (vertical === 1){
+      console.log("YO SHIT IS NOW vertical!!!!")
     } else {
         console.log($(ev.target).nextUntil(".player_pieces").length+1);
         console.log(repeat);
