@@ -52,12 +52,12 @@ function drop(ev) {
       let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
       trObjects.push(tdToAdd);
       if (i === 0){
-        $(ev.target)[0].append(trObjects[i]);
-        console.log($(ev.target)[0]);
+        $(ev.target).addClass("player_pieces");
+        $(ev.target).attr("id", data + "_piece1")
       } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
       tdObjects.push(toTheRight[i]);
-      console.log(trObjects[i]);
+      console.log($(toTheRight[i]));
       toTheRight[i-1].replaceWith(trObjects[i]);
       }
 
@@ -110,14 +110,15 @@ function drop(ev) {
       let tdToAdd = $("#"+data+" td:nth-child(1)")[0];
       trObjects.push(tdToAdd);
       if (i === 0){
-        $(ev.target)[0].append(trObjects[i]);
-        console.log($(ev.target)[0]);
+        $(ev.target).addClass("player_pieces");
+        $(ev.target).attr("id", data + "_piece1")
       } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
       tdObjects.push(toTheRight[i]);
-      console.log(trObjects[i]);
+      console.log($(toTheRight[i]));
       toTheRight[i-1].replaceWith(trObjects[i]);
-    }
+      }
+
       // console.log($($("#"+data+" td:nth-child(1)")[0]).parent()[0]);
     }
     }
