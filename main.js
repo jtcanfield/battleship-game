@@ -179,44 +179,24 @@ $("#reset_player_boats").click(function () {
 //END DRAG AND DROP SCRIPTS
 //START COMPUTER PLACING
 function computerPlaceShips(){
-  // let computerShipsPlaceholder = ["computer_aircraft_carrier", "computer_battleship", "computer_destoryer", "computer_submarine", "computer_ptboat"];
-  let computerShipsPlaceholder = {
-    computer_aircraft_carrier: {
-        idname : "computer_aircraft_carrier",
-        length : 5
-      }
-    computer_battleship: {
-        idname : "computer_battleship",
-        length : 4
-      }
-    computer_destoryer: {
-        idname : "computer_destoryer",
-        length : 3
-      }
-    computer_submarine: {
-        idname : "computer_submarine",
-        length : 3
-      }
-    computer_ptboat: {
-        idname : "computer_ptboat",
-        length : 2
-      }
-    },
-
+  let computerShips = ["computer_aircraft_carrier", "computer_battleship", "computer_destoryer", "computer_submarine", "computer_ptboat"];
+  let computerShipsSize = [5, 4, 3, 3, 2];
   for (let i = 0; i < 5; i++){
     let setDirectionofRandom = Math.random();
     if (setDirectionofRandom <=0.5) {
-      placeBoat(0, computerShipsPlaceholder[i])
+      placeBoat(0, computerShips[i], computerShipsSize[i]);
     } else {
-      placeBoat(1, computerShipsPlaceholder[i])
+      placeBoat(1, computerShips[i], computerShipsSize[i]);
     }
-    function placeBoat(v, typeOfShip, length){
+    function placeBoat(v, typeOfShip, lengthOfShips){
       if (v === 0){
         console.log("its going horizantal");
         console.log(typeOfShip);
+        console.log(lengthOfShips);
       } else {
         console.log("its going vertical");
         console.log(typeOfShip);
+        console.log(lengthOfShips);
       }
     }
   }
