@@ -45,6 +45,7 @@ function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 function drop(ev) {
+  announcements.innerHTML = "Place your Ships!";
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if ($(ev.target).hasClass("label") || $(ev.target).hasClass("player_pieces")){
@@ -54,27 +55,22 @@ function drop(ev) {
       moveItems(5, direction);
       boatsDown += 1;
       $("#player_aircraft_carrier").toggle();
-      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_battleship"){
       moveItems(4, direction);
       boatsDown += 1;
       $("#player_battleship").toggle();
-      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_destoryer"){
       moveItems(3, direction);
       boatsDown += 1;
       $("#player_destoryer").toggle();
-      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_submarine"){
       moveItems(3, direction);
       boatsDown += 1;
       $("#player_submarine").toggle();
-      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_ptboat"){
       moveItems(2, direction);
       boatsDown += 1;
       $("#player_ptboat").toggle();
-      announcements.innerHTML = "Place your Ships!";
     }
   function moveItems(repeat, vertical){
     if (vertical === 1){

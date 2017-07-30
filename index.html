@@ -104,23 +104,26 @@
         </table>
       </div>
     </div>
-    <button id="reset_player_boats" type="submit">Reset Boats</button>
-    <div id="player_boatholder">
-      <div class="carrier_placeholder" id="player_aircraft_carrier" draggable="true" ondragstart="drag(event)">
+    <div id="pregame_box">
+      <button id="reset_player_boats" type="submit">Reset Boats</button>
+      <p>Pick up the boats by the red boxes</p>
+      <div id="player_boatholder">
+        <div class="carrier_placeholder" id="player_aircraft_carrier" draggable="true" ondragstart="drag(event)">
+        </div>
+        <div class="battleship_placeholder" id="player_battleship" draggable="true" ondragstart="drag(event)">
+        </div>
+        <div class="destoryer_placeholder" id="player_destoryer" draggable="true" ondragstart="drag(event)">
+        </div>
+        <div class="submarine_placeholder" id="player_submarine" draggable="true" ondragstart="drag(event)">
+        </div>
+        <div class="ptboat_placeholder" id="player_ptboat" draggable="true" ondragstart="drag(event)">
+        </div>
       </div>
-      <div class="battleship_placeholder" id="player_battleship" draggable="true" ondragstart="drag(event)">
-      </div>
-      <div class="destoryer_placeholder" id="player_destoryer" draggable="true" ondragstart="drag(event)">
-      </div>
-      <div class="submarine_placeholder" id="player_submarine" draggable="true" ondragstart="drag(event)">
-      </div>
-      <div class="ptboat_placeholder" id="player_ptboat" draggable="true" ondragstart="drag(event)">
-      </div>
+      <br>
+      <button id="start_game_oneshotperturn" type="submit">Start Game!<br>One Shot per Turn</button>
+      <button id="start_game_fiveshots" type="submit">Start Game!<br>One Shot per Ship</button>
+      <p id="start_game_announcements"></p>
     </div>
-    <br>
-    <button id="start_game_oneshotperturn" type="submit">Start Game!<br>One Shot per Turn</button>
-    <button id="start_game_fiveshots" type="submit">Start Game!<br>One Shot per Ship</button>
-    <p id="start_game_announcements"></p>
   </body>
   <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
   <script src='main.js'></script>
