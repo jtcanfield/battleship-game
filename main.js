@@ -6,9 +6,16 @@ function main() {
 $(document).ready(main);
 $(document).ready(function() {
   animateAvatarStart("#computer_player_avatar");
-  $("#start_game_button").click(function() {
+  $("#start_game_oneshotperturn").click(function() {
     if (boatsDown !== 5){
-      console.log("place em all mother fucker")
+      start_game_announcements.innerHTML = "Please Place all boats before starting!"
+    } else {
+
+    }
+  });
+  $("#start_game_fiveshots").click(function() {
+    if (boatsDown !== 5){
+      start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
 
     }
@@ -47,22 +54,27 @@ function drop(ev) {
       moveItems(5, direction);
       boatsDown += 1;
       $("#player_aircraft_carrier").toggle();
+      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_battleship"){
       moveItems(4, direction);
       boatsDown += 1;
       $("#player_battleship").toggle();
+      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_destoryer"){
       moveItems(3, direction);
       boatsDown += 1;
       $("#player_destoryer").toggle();
+      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_submarine"){
       moveItems(3, direction);
       boatsDown += 1;
       $("#player_submarine").toggle();
+      announcements.innerHTML = "Place your Ships!";
     } else if (data === "player_ptboat"){
       moveItems(2, direction);
       boatsDown += 1;
       $("#player_ptboat").toggle();
+      announcements.innerHTML = "Place your Ships!";
     }
   function moveItems(repeat, vertical){
     if (vertical === 1){
