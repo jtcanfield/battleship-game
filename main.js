@@ -1,26 +1,35 @@
 $("#computer_player_avatar").hide(0);
 $(".direction_detector").hide(0);
 let boatsDown = 0;
+let playerShotsPerTurn = 1;
+let computerShotsPerTurn = 1;
 function main() {
 }
 $(document).ready(main);
 $(document).ready(function() {
+//START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
     if (boatsDown !== 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
-
+      playerShotsPerTurn = 1;
+      computerShotsPerTurn = 1;
+      
     }
   });
   $("#start_game_fiveshots").click(function() {
     if (boatsDown !== 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
-
+      playerShotsPerTurn = 5;
+      computerShotsPerTurn = 5;
+      console.log(playerShotsPerTurn);
     }
   });
 });
+//END START GAME FUNCTIONS
+//PLAYER ROTATE SHIP SCRIPTS
 let direction = 0;
 $('html').on('keydown',function(e){
   if(e.which==82){
@@ -49,12 +58,11 @@ $('html').on('keydown',function(e){
     }
   }
 });
-
-//DRAG AND DROP SCRIPT
+//END ROTATE SHIP SCRIPTS
+//PLAYER DRAG AND DROP SCRIPT
 function allowDrop(ev) {
     ev.preventDefault();
 }
-
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
@@ -163,7 +171,7 @@ $("#reset_player_boats").click(function () {
   boatsDown += 0;
 });
 //END DRAG AND DROP SCRIPTS
-
+//START COMPUTER PLACING
 
 
 
