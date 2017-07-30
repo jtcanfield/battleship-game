@@ -189,17 +189,21 @@ function computerPlaceShips(){
       placeBoat(1, computerShips[i], computerShipsSize[i]);
     }
     function placeBoat(v, typeOfShip, lengthOfShips){
-      let maxPosition = 10-lengthOfShips;
-      if (v === 0){
-        let verticalPosition = Math.floor(Math.random()*(10-1+1)+1);
-        let horizontalPosition = Math.floor(Math.random()*(maxPosition-1+1)+1);
-        $(theTarget).toggleClass("Computer_pieces");
-        $(theTarget).attr("id", typeOfShip + "_piece"+(i+1));
+      let maxHorizPosition = 10-lengthOfShips;
+      let maxVertPosition = 11-lengthOfShips;
+      if (v = 0){
+        let verticalPosition = Math.floor(Math.random()*(11-2+1)+2);
+        let horizontalPosition = Math.floor(Math.random()*(maxHorizPosition-1+1)+1);
+        let verticalPosition = 1;
+        let horizontalPosition = 10;
+        $("#computer_battleship_board tr:nth-child("+horizontalPosition+") td:nth-child("+verticalPosition+")").addClass("computer_pieces");
+        // $(theTarget).attr("id", typeOfShip + "_piece"+(i+1));
         console.log(horizontalPosition);
         console.log(typeOfShip);
       } else {
-        let verticalPosition = Math.floor(Math.random()*(maxPosition-1+1)+1);
+        let verticalPosition = Math.floor(Math.random()*(maxVertPosition-2+1)+2);
         let horizontalPosition = Math.floor(Math.random()*(10-1+1)+1);
+        $("#computer_battleship_board tr:nth-child("+horizontalPosition+") td:nth-child("+verticalPosition+")").addClass("computer_pieces");
         console.log(verticalPosition);
         console.log(typeOfShip);
       }
