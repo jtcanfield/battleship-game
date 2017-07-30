@@ -3,6 +3,8 @@ $(".direction_detector").hide(0);
 let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
+let playerShipsOnBoard = [];
+let computerShipsOnBoard = [player_aircraft_carrier, player_battleship, player_destoryer, player_submarine, player_ptboat];
 function main() {
 }
 $(document).ready(main);
@@ -10,21 +12,25 @@ $(document).ready(function() {
 //START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
-    if (boatsDown !== 5){
+    // if (boatsDown !== 5){
+    if (boatsDown > 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 1;
       computerShotsPerTurn = 1;
-      
+      $("#pregame_box").hide(1000);
+      computerPlaceShips();
     }
   });
   $("#start_game_fiveshots").click(function() {
-    if (boatsDown !== 5){
+    // if (boatsDown !== 5){
+    if (boatsDown > 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 5;
       computerShotsPerTurn = 5;
-      console.log(playerShotsPerTurn);
+      $("#pregame_box").hide(1000);
+      computerPlaceShips();
     }
   });
 });
@@ -172,7 +178,25 @@ $("#reset_player_boats").click(function () {
 });
 //END DRAG AND DROP SCRIPTS
 //START COMPUTER PLACING
-
+function computerPlaceShips(){
+  for (let i = 0; i < 5; i++){
+    let VerticalorHorizantal = Math.random();
+    if (VerticalorHorizantal <=0.5) {
+      placeBoat(0, )
+    } else {
+      placeBoat(1, )
+    }
+    function placeBoat(v, typeOfShip){
+      if (v === 0){
+        console.log("its going horizantal");
+        console.log(typeOfShip);
+      } else {
+        console.log("its going vertical");
+        console.log(typeOfShip);
+      }
+    }
+  }
+}
 
 
 
