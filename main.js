@@ -12,8 +12,7 @@ $(document).ready(function() {
 //START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
-    // if (boatsDown !== 5){
-    if (boatsDown > 5){
+    if (boatsDown !== 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 1;
@@ -23,14 +22,14 @@ $(document).ready(function() {
     }
   });
   $("#start_game_fiveshots").click(function() {
-    // if (boatsDown !== 5){
-    if (boatsDown > 5){
+    if (boatsDown !== 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
-      playerShotsPerTurn = 5;
-      computerShotsPerTurn = 5;
-      $("#pregame_box").hide(1000);
-      computerPlaceShips();
+      start_game_announcements.innerHTML = "This Option is not avaiable yet. Please start a One Shot Game!"
+      // playerShotsPerTurn = 5;
+      // computerShotsPerTurn = 5;
+      // $("#pregame_box").hide(1000);
+      // computerPlaceShips();
     }
   });
 });
