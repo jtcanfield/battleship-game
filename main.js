@@ -189,14 +189,19 @@ function computerPlaceShips(){
       placeBoat(1, computerShips[i], computerShipsSize[i]);
     }
     function placeBoat(v, typeOfShip, lengthOfShips){
+      let maxPosition = 10-lengthOfShips;
       if (v === 0){
-        console.log("its going horizantal");
+        let verticalPosition = Math.floor(Math.random()*(10-1+1)+1);
+        let horizontalPosition = Math.floor(Math.random()*(maxPosition-1+1)+1);
+        $(theTarget).toggleClass("Computer_pieces");
+        $(theTarget).attr("id", typeOfShip + "_piece"+(i+1));
+        console.log(horizontalPosition);
         console.log(typeOfShip);
-        console.log(lengthOfShips);
       } else {
-        console.log("its going vertical");
+        let verticalPosition = Math.floor(Math.random()*(maxPosition-1+1)+1);
+        let horizontalPosition = Math.floor(Math.random()*(10-1+1)+1);
+        console.log(verticalPosition);
         console.log(typeOfShip);
-        console.log(lengthOfShips);
       }
     }
   }
