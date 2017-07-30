@@ -39,10 +39,13 @@ th, td{
 #player_boatholder{
   display: flex;
   justify-content: space-around;
+  height: 150px;
+  align-items: center;
 }
 .carrier_placeholder, .battleship_placeholder, .destoryer_placeholder, .submarine_placeholder, .ptboat_placeholder{
   background-color: black;
   border: 1px solid red;
+  display: block;
 }
 .carrier_placeholder{
   height: 29px;
