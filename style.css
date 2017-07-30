@@ -36,6 +36,10 @@ th, td{
   height:  60px;
   width:  60px;
 }
+#player_boatholder{
+  display: flex;
+  justify-content: space-around;
+}
 .carrier_placeholder, .battleship_placeholder, .destoryer_placeholder, .submarine_placeholder, .ptboat_placeholder{
   background-color: black;
   border: 1px solid red;
@@ -66,6 +70,7 @@ th, td{
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
+  margin: 10px;
 }
 /*TABLET VERSION*/
 @media (max-width: 900px) {
