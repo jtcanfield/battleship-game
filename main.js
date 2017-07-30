@@ -19,9 +19,11 @@ $('html').on('keydown',function(e){
   if(e.which==82){
     if(direction === 0){
     direction = 1;
+    $("#player_boatholder").children().addClass("vertical_boats");
     console.log(direction);
     } else {
     direction = 0;
+    $("#player_boatholder").children().removeClass("vertical_boats");
     console.log(direction);
     }
   }

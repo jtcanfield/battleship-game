@@ -38,6 +38,7 @@ th, td{
 }
 .carrier_placeholder, .battleship_placeholder, .destoryer_placeholder, .submarine_placeholder, .ptboat_placeholder{
   background-color: black;
+  border: 1px solid red;
 }
 .carrier_placeholder{
   height: 29px;
@@ -58,6 +59,13 @@ th, td{
 .ptboat_placeholder{
   height: 29px;
   width: 58px;
+}
+.vertical_boats{
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 /*TABLET VERSION*/
 @media (max-width: 900px) {
