@@ -34,6 +34,7 @@ $('html').on('keydown',function(e){
       let newWidth = $("."+rotateShips).css("height");
       $("."+rotateShips).css("height", newHeight);
       $("."+rotateShips).css("width", newWidth);
+      $("."+rotateShips).css("background", "linear-gradient(to bottom, red 30px, red 30px, black 30px, black 50%,  black 100%)");
     }
     } else {
     direction = 0;
@@ -45,6 +46,7 @@ $('html').on('keydown',function(e){
       let newWidth = $("."+rotateShips).css("height");
       $("."+rotateShips).css("height", newHeight);
       $("."+rotateShips).css("width", newWidth);
+      $("."+rotateShips).css("background", "linear-gradient(to right, red 30px, red 30px, black 30px, black 50%,  black 100%)");
     }
     }
   }
