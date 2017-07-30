@@ -36,6 +36,29 @@ th, td{
   height:  60px;
   width:  60px;
 }
+.carrier_placeholder, .battleship_placeholder, .destoryer_placeholder, .submarine_placeholder, .ptboat_placeholder{
+  background-color: black;
+}
+.carrier_placeholder{
+  height: 29px;
+  width: 145px;
+}
+.battleship_placeholder{
+  height: 29px;
+  width: 116px;
+}
+.destoryer_placeholder{
+  height: 29px;
+  width: 87px;
+}
+.submarine_placeholder{
+  height: 29px;
+  width: 87px;
+}
+.ptboat_placeholder{
+  height: 29px;
+  width: 58px;
+}
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {
