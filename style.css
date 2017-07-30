@@ -46,7 +46,7 @@ th, td{
   background: linear-gradient(to right, red 30px, red 30px, black 30px, black 50%,  black 100%);
   border: 1px solid red;
 }
-.carrier_placeholder{
+/*.carrier_placeholder{
   height: 29px;
   width: 145px;
 }
@@ -65,15 +65,15 @@ th, td{
 .ptboat_placeholder{
   height: 29px;
   width: 58px;
-}
-.vertical_boats{
+}*/
+/*.vertical_boats{
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
   margin: 10px;
-}
+}*/
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {

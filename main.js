@@ -26,12 +26,26 @@ $('html').on('keydown',function(e){
   if(e.which==82){
     if(direction === 0){
     direction = 1;
-    $("#player_boatholder").children().addClass("vertical_boats");
-    console.log(direction);
+    let rotateShipsClass = document.querySelectorAll("#player_boatholder > div");
+    for (let i = 0; i < 5; i++){
+      let rotateShips = $(rotateShipsClass[i]).attr("class")
+      console.log(rotateShips);
+      let newHeight = $("."+rotateShips).css("width");
+      let newWidth = $("."+rotateShips).css("height");
+      $("."+rotateShips).css("height", newHeight);
+      $("."+rotateShips).css("width", newWidth);
+    }
     } else {
     direction = 0;
-    $("#player_boatholder").children().removeClass("vertical_boats");
-    console.log(direction);
+    let rotateShipsClass = document.querySelectorAll("#player_boatholder > div");
+    for (let i = 0; i < 5; i++){
+      let rotateShips = $(rotateShipsClass[i]).attr("class")
+      console.log(rotateShips);
+      let newHeight = $("."+rotateShips).css("width");
+      let newWidth = $("."+rotateShips).css("height");
+      $("."+rotateShips).css("height", newHeight);
+      $("."+rotateShips).css("width", newWidth);
+    }
     }
   }
 });
@@ -43,13 +57,17 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+    // if ($(ev.target).hasClass("vertical_boats")){
+    //   console.log("he is vertical");
+    // } else {
+    //   console.log("he is horizantal");
+    // }
 }
 function drop(ev) {
   announcements.innerHTML = "Place your Ships!";
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     if ($(ev.target).hasClass("label") || $(ev.target).hasClass("player_pieces")){
-      console.log("FUCKOFF");
       announcements.innerHTML = "Invalid spot!";
     } else if (data === "player_aircraft_carrier"){
       moveItems(5, direction);
