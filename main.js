@@ -4,7 +4,7 @@ let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
 let playerShipsOnBoard = [];
-let computerShipsOnBoard = [player_aircraft_carrier, player_battleship, player_destoryer, player_submarine, player_ptboat];
+let computerShipsOnBoard = [];
 function main() {
 }
 $(document).ready(main);
@@ -179,12 +179,13 @@ $("#reset_player_boats").click(function () {
 //END DRAG AND DROP SCRIPTS
 //START COMPUTER PLACING
 function computerPlaceShips(){
+  let computerShipsPlaceholder = ["computer_aircraft_carrier", "computer_battleship", "computer_destoryer", "computer_submarine", "computer_ptboat"];
   for (let i = 0; i < 5; i++){
-    let VerticalorHorizantal = Math.random();
-    if (VerticalorHorizantal <=0.5) {
-      placeBoat(0, )
+    let setDirectionofRandom = Math.random();
+    if (setDirectionofRandom <=0.5) {
+      placeBoat(0, computerShipsPlaceholder[i])
     } else {
-      placeBoat(1, )
+      placeBoat(1, computerShipsPlaceholder[i])
     }
     function placeBoat(v, typeOfShip){
       if (v === 0){
