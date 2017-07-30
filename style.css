@@ -42,38 +42,6 @@ th, td{
   height: 150px;
   align-items: center;
 }
-.carrier_placeholder, .battleship_placeholder, .destoryer_placeholder, .submarine_placeholder, .ptboat_placeholder{
-  /*background: linear-gradient(to right, red 30px, red 30px, black 30px, black 50%,  black 100%);*/
-  border: 1px solid red;
-}
-/*.carrier_placeholder{
-  height: 29px;
-  width: 145px;
-}
-.battleship_placeholder{
-  height: 29px;
-  width: 116px;
-}
-.destoryer_placeholder{
-  height: 29px;
-  width: 87px;
-}
-.submarine_placeholder{
-  height: 29px;
-  width: 87px;
-}
-.ptboat_placeholder{
-  height: 29px;
-  width: 58px;
-}*/
-/*.vertical_boats{
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-  margin: 10px;
-}*/
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {

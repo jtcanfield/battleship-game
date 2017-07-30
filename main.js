@@ -28,8 +28,7 @@ $('html').on('keydown',function(e){
     direction = 1;
     let rotateShipsClass = document.querySelectorAll("#player_boatholder > div");
     for (let i = 0; i < 5; i++){
-      let rotateShips = $(rotateShipsClass[i]).attr("class")
-      console.log(rotateShips);
+      let rotateShips = $(rotateShipsClass[i]).attr("class");
       let newHeight = $("."+rotateShips).css("width");
       let newWidth = $("."+rotateShips).css("height");
       $("."+rotateShips).css("height", newHeight);
@@ -40,8 +39,7 @@ $('html').on('keydown',function(e){
     direction = 0;
     let rotateShipsClass = document.querySelectorAll("#player_boatholder > div");
     for (let i = 0; i < 5; i++){
-      let rotateShips = $(rotateShipsClass[i]).attr("class")
-      console.log(rotateShips);
+      let rotateShips = $(rotateShipsClass[i]).attr("class");
       let newHeight = $("."+rotateShips).css("width");
       let newWidth = $("."+rotateShips).css("height");
       $("."+rotateShips).css("height", newHeight);
@@ -59,11 +57,6 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
-    // if ($(ev.target).hasClass("vertical_boats")){
-    //   console.log("he is vertical");
-    // } else {
-    //   console.log("he is horizantal");
-    // }
 }
 function drop(ev) {
   announcements.innerHTML = "Place your Ships!";
@@ -223,7 +216,6 @@ function drop(ev) {
     let trObjects = [];
     let tdObjects = [];
     if ($(ev.target).hasClass("label")){
-      console.log("FUCKOFF");
       announcements.innerHTML = "Invalid spot!";
     } else if (data === "player_aircraft_carrier"){
       moveItems(5);
@@ -244,7 +236,6 @@ function drop(ev) {
       } else if (i > 0){
       let toTheRight = $(ev.target).nextUntil();
       tdObjects.push(toTheRight[i]);
-      console.log($(toTheRight[i]));
       toTheRight[i-1].replaceWith(trObjects[i]);
       }
     }
