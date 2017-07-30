@@ -97,6 +97,7 @@ function drop(ev) {
                 announcements.innerHTML = "Your ship would be off the board!";
                 $("#"+data).toggle();
                 isActionLegal = 0;
+                boatsDown -= 1;
                 break;
             }
             theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
@@ -112,6 +113,7 @@ function drop(ev) {
                 announcements.innerHTML = "Your ship would collide with other ships!";
                 isActionLegal = 0;
                 $("#"+data).toggle();
+                boatsDown -= 1;
                 break;
             }
           }
@@ -132,6 +134,7 @@ function drop(ev) {
       } else {
       if ($(ev.target).nextUntil(".player_pieces").length+1 < repeat){
         announcements.innerHTML = "Your ship would collide with other ships!";
+        boatsDown -= 1;
         $("#"+data).toggle();
       } else {
         for (let i = 0; i < repeat; i++){
