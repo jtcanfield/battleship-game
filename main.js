@@ -104,6 +104,7 @@ function drop(ev) {
     if (vertical === 1){
       let isActionLegal = 1;
       let theTarget = ev.target;
+      //VERTICAL PLAYER UNDEFINED DETECTION
         if (isActionLegal === 1){
           for (let i = 0; i < repeat-1; i++){
             let rowIndexing = $(theTarget).prevUntil(".label").length;
@@ -118,6 +119,7 @@ function drop(ev) {
             theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
           }
         }
+        //VERTICAL PLAYER OTEHR PIECE DETECTION
         if (isActionLegal === 1){
           let theTarget = ev.target;
           for (let i = 0; i < repeat-1; i++){
@@ -133,6 +135,7 @@ function drop(ev) {
             }
           }
         }
+        //VERTICAL PLAYER PLACING
         if (isActionLegal === 1){
           let theTarget = ev.target;
           for (let i = 0; i < repeat; i++){
@@ -203,9 +206,9 @@ function computerPlaceShips(){
         //HORIZONTAL DETECTION
         for (let d = 0; d < lengthOfShips; d++){
           if ($(selectedPieceForDetection).nextUntil(".computer_pieces").length+1 < lengthOfShips){
-            console.log("CLASH");
+            console.log("HORIZONTAL CLASH");
+            actionLegal = 0;
           } else {
-            console.log(selectedPieceForDetection);
             selectedPieceForDetection = $(selectedPieceForDetection).nextUntil()[0];
           }
         }
@@ -216,6 +219,8 @@ function computerPlaceShips(){
             $(selectedPiece).attr("id", typeOfShip + "_piece"+(r+1));
             selectedPiece = $(selectedPiece).nextUntil()[0];
           }
+        } else if (actionLegal === 0){
+          i -= 1;
         }
       } else {
         //VERTICAL
@@ -225,7 +230,17 @@ function computerPlaceShips(){
         let selectedPieceForDetection = $("#computer_battleship_board tr:nth-child("+verticalPosition+") td:nth-child("+horizontalPosition+")");
         let actionLegal = 1;
         //VERTICAL DETECTION
-
+        for (let z = 0; z < lengthOfShips; z++){
+          let rowIndexing = $(selectedPieceForDetection).prevUntil(".label").length;
+          let findNextRow = $(selectedPieceForDetection).parent().next();
+          if ($(selectedPieceForDetection).hasClass("computer_pieces")){
+              console.log("VERTICAL CRASH");
+              actionLegal = 0;
+          } else {
+          console.log(selectedPieceForDetection);
+          selectedPieceForDetection = $(findNextRow[0].childNodes[rowIndexing+1])[0];
+          }
+        }
         //VERTICAL PLACING
         if (actionLegal === 1){
           for (let r = 0; r < lengthOfShips; r++){
@@ -238,12 +253,14 @@ function computerPlaceShips(){
             }
             selectedPiece = $(findNextRow[0].childNodes[rowIndexing+1])[0];
           }
+        } else if (actionLegal === 0){
+          i -= 1;
         }
       }
     }
   }
 }
-
+//END COMPUTER PLACING
 
 
 
