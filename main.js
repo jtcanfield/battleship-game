@@ -17,8 +17,8 @@ $(document).ready(function() {
 //START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
-    // if (boatsDown !== 5){
-      if (boatsDown > 6){
+    if (boatsDown !== 5){
+      // if (boatsDown > 6){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 1;
