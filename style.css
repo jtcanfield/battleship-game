@@ -28,6 +28,11 @@ th, td{
 .computer_pieces {
   /*Don't you dare put any code here*/
 }
+#bullet_animation{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+}
 #computer_player_avatar{
   border-radius: 100%;
   position:absolute;

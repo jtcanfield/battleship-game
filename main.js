@@ -16,7 +16,8 @@ $(document).ready(function() {
 //START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
-    if (boatsDown !== 5){
+    // if (boatsDown !== 5){
+      if (boatsDown > 6){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 1;
@@ -600,6 +601,7 @@ function playerTurnBegin(){
       $(this).addClass("dont_touch_this");
       $(this).removeClass("clickable");
       $(clickableEnemyBoard).off("click");
+      animateBullet($(this));
       $(clickableEnemyBoard).removeClass("clickable");
       if ($(this).hasClass("computer_pieces")){
         $(this).addClass("explosion_container").delay(1000).queue(function(next){
@@ -649,6 +651,58 @@ function animateAvatarStart(name){
 });
 };
 //END AVATAR RANDOMIZATION
+//BEGIN BULLET ANIMATION
+// var x;
+// var y;
+// $('article').each(function(index){
+//     $(this).click(function(){
+//         $(this).addClass('selected') ;
+//         x = $(this).offset().left;
+//         y = $(this).offset().top;
+//     })
+//     });
+
+function animateBullet(objectToShootAt){
+  function getOffset(selectedThing) {
+  selectedThing = selectedThing.getBoundingClientRect();
+  return {
+    left: selectedThing.left + window.scrollX,
+    top: selectedThing.top + window.scrollY
+  }
+}
+  let divBullet = document.createElement( "div" );
+  divBullet.id = "bullet_animation";
+  let startItem = $("#player_bullet_start_area");
+  leftPos = getOffset(startItem[0]).left;
+  topPos = getOffset(startItem[0]).top;
+  finalLeftPos = getOffset(objectToShootAt[0]).left;
+  finalTopPos = getOffset(objectToShootAt[0]).top;
+  $(divBullet).animate({ top: topPos, left: leftPos }, function(){});
+  $(divBullet).animate({ top: finalTopPos, left: finalLeftPos }, 3000, function(){});
+//   function myMove() {
+//   var pos = 0;
+//   var id = setInterval(frame, 10);
+//   function frame() {
+//       elem.style.top = pos + 'px';
+//       elem.style.left = pos + 'px';
+//   }
+// }
+
+    // var xi = $(this).offset().left;
+    // var yi = $(this).offset().top;
+    // $(this).css('left', xi).css('top', yi);
+    // $(this).click(function(){
+    //      $(this).animate({
+    // left: x,
+    // top: y
+    //      })
+    // })
+
+};
+//END BULLET ANIMATION
+
+
+
 
 
 /*Super Cool REPLICATION:
