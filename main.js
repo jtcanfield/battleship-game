@@ -4,6 +4,7 @@ let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
 let computerFoundPlayerShip = false;
+let enemyShipsDestroyed = 0;
 function main() {
 }
 $(document).ready(main);
@@ -85,10 +86,10 @@ function drop(ev) {
       moveItems(4, direction);
       boatsDown += 1;
       $("#player_battleship").toggle();
-    } else if (data === "player_destoryer"){
+    } else if (data === "player_destroyer"){
       moveItems(3, direction);
       boatsDown += 1;
-      $("#player_destoryer").toggle();
+      $("#player_destroyer").toggle();
     } else if (data === "player_submarine"){
       moveItems(3, direction);
       boatsDown += 1;
@@ -174,7 +175,7 @@ $("#reset_player_boats").click(function () {
   $("#player_battleship_board >table> tbody>tr>td").removeAttr("id");
   $("#player_aircraft_carrier").show();
   $("#player_battleship").show();
-  $("#player_destoryer").show();
+  $("#player_destroyer").show();
   $("#player_submarine").show();
   $("#player_ptboat").show();
   announcements.innerHTML = "Place your Ships!";
@@ -183,7 +184,7 @@ $("#reset_player_boats").click(function () {
 //END DRAG AND DROP SCRIPTS
 //START COMPUTER PLACING
 function computerPlaceShips(){
-  let computerShips = ["computer_aircraft_carrier", "computer_battleship", "computer_destoryer", "computer_submarine", "computer_ptboat"];
+  let computerShips = ["computer_aircraft_carrier", "computer_battleship", "computer_destroyer", "computer_submarine", "computer_ptboat"];
   let computerShipsSize = [5, 4, 3, 3, 2];
   for (let i = 0; i < 5; i++){
     let setDirectionofRandom = Math.random();
@@ -263,8 +264,9 @@ function computerPlaceShips(){
 //END COMPUTER PLACING
 //BEGIN TURN DETECTION
 function beginGame(whosTurnIsIt){
+  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed"
   //BEGIN DESTRUCTION DETECTION
-  let computerShipsOnBoard = ["computer_aircraft_carrier_piece", "computer_battleship_piece", "computer_destoryer_piece", "computer_submarine_piece", "computer_ptboat_piece",];
+  let computerShipsOnBoard = ["computer_aircraft_carrier_piece", "computer_battleship_piece", "computer_destroyer_piece", "computer_submarine_piece", "computer_ptboat_piece",];
   let computerShipsOnBoardLengths = [5, 4, 3, 3, 2,];
   for (let i = 0; i < 5; i++){
     let currentShipCheck = computerShipsOnBoard[i];
@@ -300,12 +302,12 @@ function beginGame(whosTurnIsIt){
       player_ship_announcements.innerHTML = "Your Battleship has been destroyed!";
     }
   }
-  if ($("#player_destoryer_piece1").hasClass("hit_on_player") && $("#player_destoryer_piece2").hasClass("hit_on_player") && $("#player_destoryer_piece3").hasClass("hit_on_player")){
+  if ($("#player_destroyer_piece1").hasClass("hit_on_player") && $("#player_destroyer_piece2").hasClass("hit_on_player") && $("#player_destroyer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     for (let i = 0; i < 4; i++){
-      $("#player_destoryer_piece"+i).removeClass("hit_on_player");
-      $("#player_destoryer_piece"+i).addClass("player_ship_destroyed");
-      player_ship_announcements.innerHTML = "Your Destoryer has been destroyed!";
+      $("#player_destroyer_piece"+i).removeClass("hit_on_player");
+      $("#player_destroyer_piece"+i).addClass("player_ship_destroyed");
+      player_ship_announcements.innerHTML = "Your Destroyer has been destroyed!";
     }
   }
   if ($("#player_submarine_piece1").hasClass("hit_on_player") && $("#player_submarine_piece2").hasClass("hit_on_player") && $("#player_submarine_piece3").hasClass("hit_on_player")){
@@ -332,9 +334,9 @@ function beginGame(whosTurnIsIt){
     computerFoundPlayerShip = true;
     player_ship_announcements.innerHTML = "Your Battleship is under attack!";
   }
-  if ($("#player_destoryer_piece1").hasClass("hit_on_player") || $("#player_destoryer_piece2").hasClass("hit_on_player") || $("#player_destoryer_piece3").hasClass("hit_on_player")){
+  if ($("#player_destroyer_piece1").hasClass("hit_on_player") || $("#player_destroyer_piece2").hasClass("hit_on_player") || $("#player_destroyer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
-    player_ship_announcements.innerHTML = "Your Destoryer is under attack!";
+    player_ship_announcements.innerHTML = "Your destroyer is under attack!";
   }
   if ($("#player_submarine_piece1").hasClass("hit_on_player") || $("#player_submarine_piece2").hasClass("hit_on_player") || $("#player_submarine_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
@@ -559,7 +561,7 @@ function drop(ev) {
       moveItems(5);
     } else if (data === "player_battleship"){
       moveItems(4);
-    } else if (data === "player_destoryer" || data === "player_submarine"){
+    } else if (data === "player_destroyer" || data === "player_submarine"){
       moveItems(3);
     } else if (data === "player_ptboat"){
       moveItems(2);
