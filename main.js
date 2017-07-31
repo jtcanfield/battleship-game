@@ -4,7 +4,6 @@ let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
 let computerFoundPlayerShip = false;
-let computerFoundPlayerShipDestoryed = false;
 function main() {
 }
 $(document).ready(main);
@@ -12,8 +11,7 @@ $(document).ready(function() {
 //START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
-    // if (boatsDown !== 5){
-      if (boatsDown > 6){
+    if (boatsDown !== 5){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 1;
@@ -117,7 +115,7 @@ function drop(ev) {
                 boatsDown -= 1;
                 break;
             }
-            theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+            theTarget = $(findNextRow[0].childNodes[rowIndexing+1])[0];
           }
         }
         //VERTICAL PLAYER OTEHR PIECE DETECTION
@@ -126,7 +124,7 @@ function drop(ev) {
           for (let i = 0; i < repeat-1; i++){
             let rowIndexing = $(theTarget).prevUntil(".label").length;
             let findNextRow = $(theTarget).parent().next();
-            theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+            theTarget = $(findNextRow[0].childNodes[rowIndexing+1])[0];
             if ($(theTarget).hasClass("player_pieces")){
                 announcements.innerHTML = "Your ship would collide with other ships!";
                 isActionLegal = 0;
@@ -147,7 +145,7 @@ function drop(ev) {
             if (findNextRow[0] === undefined){
                 break;
             }
-            theTarget = $(findNextRow[0].childNodes[rowIndexing+2])[0];
+            theTarget = $(findNextRow[0].childNodes[rowIndexing+1])[0];
           }
         }
       } else {
@@ -205,7 +203,6 @@ function computerPlaceShips(){
         let selectedPieceForDetection = $("#computer_battleship_board tr:nth-child("+verticalPosition+") td:nth-child("+horizontalPosition+")");
         let actionLegal = 1;
         //HORIZONTAL DETECTION
-        console.log($(selectedPieceForDetection));
         if ($(selectedPieceForDetection).hasClass("computer_pieces")){
           actionLegal = 0;
         }
@@ -277,7 +274,6 @@ function beginGame(whosTurnIsIt){
     while (l < shipCheckLength+1){
       if ($("#"+currentShipCheck+l).hasClass("hit_on_computer")){
         totalHitsOnShip = totalHitsOnShip + 1;
-        console.log(("#"+currentShipCheck+l));
         if (totalHitsOnShip === computerShipsOnBoardLengths[i]){
           for (let b = 0; b < 6; b++){
           $("#"+currentShipCheck+b).addClass("player_ship_destoryed");
@@ -290,7 +286,6 @@ function beginGame(whosTurnIsIt){
   let playerShipsOnBoard = [];
   if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
-    computerFoundPlayerShipDestoryed = false;
     for (let i = 0; i < 6; i++){
       $("#player_aircraft_carrier_piece"+i).removeClass("hit_on_player");
       $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destoryed");
@@ -298,7 +293,6 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_battleship_piece1").hasClass("hit_on_player") && $("#player_battleship_piece2").hasClass("hit_on_player") && $("#player_battleship_piece3").hasClass("hit_on_player") && $("#player_battleship_piece4").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
-    computerFoundPlayerShipDestoryed = false;
     for (let i = 0; i < 5; i++){
       $("#player_battleship_piece"+i).removeClass("hit_on_player");
       $("#player_battleship_piece"+i).addClass("player_ship_destoryed");
@@ -306,7 +300,6 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_destoryer_piece1").hasClass("hit_on_player") && $("#player_destoryer_piece2").hasClass("hit_on_player") && $("#player_destoryer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
-    computerFoundPlayerShipDestoryed = false;
     for (let i = 0; i < 4; i++){
       $("#player_destoryer_piece"+i).removeClass("hit_on_player");
       $("#player_destoryer_piece"+i).addClass("player_ship_destoryed");
@@ -314,7 +307,6 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_submarine_piece1").hasClass("hit_on_player") && $("#player_submarine_piece2").hasClass("hit_on_player") && $("#player_submarine_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
-    computerFoundPlayerShipDestoryed = false;
     for (let i = 0; i < 4; i++){
       $("#player_submarine_piece"+i).removeClass("hit_on_player");
       $("#player_submarine_piece"+i).addClass("player_ship_destoryed");
@@ -322,12 +314,28 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_ptboat_piece1").hasClass("hit_on_player") && $("#player_ptboat_piece2").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
-    computerFoundPlayerShipDestoryed = false;
     for (let i = 0; i < 3; i++){
       $("#player_ptboat_piece"+i).removeClass("hit_on_player");
       $("#player_ptboat_piece"+i).addClass("player_ship_destoryed");
     }
   }
+  if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
+    computerFoundPlayerShip = true;
+  }
+  if ($("#player_battleship_piece1").hasClass("hit_on_player") || $("#player_battleship_piece2").hasClass("hit_on_player") || $("#player_battleship_piece3").hasClass("hit_on_player") || $("#player_battleship_piece4").hasClass("hit_on_player")){
+    computerFoundPlayerShip = true;
+  }
+  if ($("#player_destoryer_piece1").hasClass("hit_on_player") || $("#player_destoryer_piece2").hasClass("hit_on_player") || $("#player_destoryer_piece3").hasClass("hit_on_player")){
+    computerFoundPlayerShip = true;
+  }
+  if ($("#player_submarine_piece1").hasClass("hit_on_player") || $("#player_submarine_piece2").hasClass("hit_on_player") || $("#player_submarine_piece3").hasClass("hit_on_player")){
+    computerFoundPlayerShip = true;
+  }
+  if ($("#player_ptboat_piece1").hasClass("hit_on_player") || $("#player_ptboat_piece2").hasClass("hit_on_player")){
+    computerFoundPlayerShip = true;
+  }
+  console.log(computerFoundPlayerShip);
+  //END DESTRUCTION DETECTION
   if (whosTurnIsIt === 0){
     playerTurnBegin();
   }
@@ -340,14 +348,11 @@ function beginGame(whosTurnIsIt){
 function computerTurnBegin(){
   //SPECIFIC COMPUTER RANDOMIZER
   //What if i turned this into a switch statement?
-    if (computerFoundPlayerShip === true && computerFoundPlayerShipDestoryed === false){
+    if (computerFoundPlayerShip === true){
         let lastHitsMade = document.querySelectorAll(".hit_on_player");
         let lastHitArray = $(lastHitsMade).not(document.getElementsByClassName("player_ship_destoryed"));
         let lastHitLength = lastHitArray.length
         let lastHitSelector = Math.floor(Math.random()*(lastHitLength-0+1)+0);
-        console.log(lastHitLength);
-        console.log(lastHitSelector);
-        console.log(lastHitArray[lastHitSelector]);
         let lastHit = lastHitArray[lastHitSelector];
       let computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
       if (computerSpecificSelection === 1){
@@ -438,8 +443,6 @@ function computerTurnBegin(){
             beginGame(0);
         }
       } else {
-        computerFoundPlayerShip = true;
-        computerFoundPlayerShipDestoryed = false;
         computerTurnBegin();
         console.log("Not sure how you ended up here");
       }
@@ -457,7 +460,6 @@ function computerTurnBegin(){
       // $(computerTargetonPlayerBoard).addClass("computer_last_hit");
       $(computerTargetonPlayerBoard).addClass("hit_on_player");
       computerFoundPlayerShip = true;
-      computerFoundPlayerShipDestoryed = false;
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
     }
