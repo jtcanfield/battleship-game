@@ -1,3 +1,6 @@
+@keyframes pop {
+    from {transform: scale(2);}
+    to {transform: scale(1);}}
 html {
   text-align: center;
   background-color: white;
@@ -80,15 +83,19 @@ button{
 }
 .hit_on_player{
   background-color: red !important;
+  animation-name: pop;
+  animation-duration: 1500ms;
 }
 .miss_on_player{
   background-color: grey !important;
+  animation-name: pop;
+  animation-duration: 1500ms;
 }
 .clickable:hover{
   background-color: pink;
 }
 .explosion_container{
-  background-image: url("images/explosion2.gif");
+  background-image: url("images/explosion.gif");
   background-size: contain;
 }
 .player_ship_destroyed{

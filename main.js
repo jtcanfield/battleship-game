@@ -501,6 +501,10 @@ function computerTurnBegin(){
     let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
     $(computerTargetonPlayerBoard).addClass("dont_touch_this");
     if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
+      $(computerTargetonPlayerBoard).addClass("explosion_container").delay(1000).queue(function(next){
+        $(computerTargetonPlayerBoard).removeClass("explosion_container");
+        next();
+      });
       $(computerTargetonPlayerBoard).addClass("hit_on_player");
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_normal");
@@ -526,7 +530,10 @@ function playerTurnBegin(){
       $(clickableEnemyBoard).off("click");
       $(clickableEnemyBoard).removeClass("clickable");
       if ($(this).hasClass("computer_pieces")){
-        $(this).addClass("explosion_container");
+        $(this).addClass("explosion_container").delay(1000).queue(function(next){
+          $(this).removeClass("explosion_container");
+          next();
+        });
         $(this).addClass("hit_on_computer");
         $("#computer_player_avatar").removeClass();
         $("#computer_player_avatar").addClass("avatar_angry");
