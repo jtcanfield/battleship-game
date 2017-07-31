@@ -556,24 +556,33 @@ function playerTurnBegin(){
   }
 }
 //END PLAYER TURN HANDLER
+//The below must be called on an ID
+//BEGIN AVATAR RANDOMIZATION
+function makeNewPosition(){
+    let top = $(window).height();
+    let left = $(window).width();
+    let computer_player_box_top = (document.getElementById("computer_player_box").getBoundingClientRect()).top;
+    let computer_player_box_left = (document.getElementById("computer_player_box").getBoundingClientRect()).left;
 
+    let starttop = Math.floor(Math.random()*(top-0+1)+0);
+    let startleft = Math.floor(Math.random()*((left+80)-left+20)+left);
+    let finaltop = computer_player_box_top - 110;
+    let finalleft = computer_player_box_left - 110;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    let time = Math.floor(Math.random()*(4000-1000+1)+1000);
+    let scale = Math.floor(Math.random()*(10-5+1)+5);
+    return [starttop,startleft,finaltop,finalleft,time,scale];
+}
+function animateAvatarStart(name){
+    var newq = makeNewPosition();
+    $(name).hide(0);
+    $(name).animate({ top: newq[0], left: newq[1] },function(){
+    });
+    $(name).fadeIn(0);
+    $(name).animate({ top: newq[2], left: newq[3] }, newq[4], function(){
+});
+};
+//END AVATAR RANDOMIZATION
 
 
 /*Super Cool REPLICATION:
@@ -630,28 +639,3 @@ function drop(ev) {
     }
     }
 }*/
-//The below must be called on an ID
-function makeNewPosition(){
-    let top = $(window).height();
-    let left = $(window).width();
-    let computer_player_box_top = (document.getElementById("computer_player_box").getBoundingClientRect()).top;
-    let computer_player_box_left = (document.getElementById("computer_player_box").getBoundingClientRect()).left;
-
-    let starttop = Math.floor(Math.random()*(top-0+1)+0);
-    let startleft = Math.floor(Math.random()*((left+80)-left+20)+left);
-    let finaltop = computer_player_box_top - 110;
-    let finalleft = computer_player_box_left - 110;
-
-    let time = Math.floor(Math.random()*(4000-1000+1)+1000);
-    let scale = Math.floor(Math.random()*(10-5+1)+5);
-    return [starttop,startleft,finaltop,finalleft,time,scale];
-}
-function animateAvatarStart(name){
-    var newq = makeNewPosition();
-    $(name).hide(0);
-    $(name).animate({ top: newq[0], left: newq[1] },function(){
-    });
-    $(name).fadeIn(0);
-    $(name).animate({ top: newq[2], left: newq[3] }, newq[4], function(){
-});
-};
