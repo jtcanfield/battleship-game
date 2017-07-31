@@ -5,6 +5,8 @@ let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
 let playerShipsOnBoard = [];
 let computerShipsOnBoard = [];
+let computerFoundPlayerShip = false;
+let computerFoundPlayerShipDestoryed = false;
 function main() {
 }
 $(document).ready(main);
@@ -266,87 +268,153 @@ function beginGame(whosTurnIsIt){
     playerTurnBegin();
   }
   if (whosTurnIsIt === 1){
+  if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
+    computerFoundPlayerShip = false;
+    computerFoundPlayerShipDestoryed = false;
+    for (let i = 0; i < 5; i++){
+      $("#player_aircraft_carrier_piece"+i).removeClass("hit_on_player");
+      $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destoryed");
+    }
+  }
+  if ($("#player_battleship_piece1").hasClass("hit_on_player") && $("#player_battleship_piece2").hasClass("hit_on_player") && $("#player_battleship_piece3").hasClass("hit_on_player") && $("#player_battleship_piece4").hasClass("hit_on_player")){
+    computerFoundPlayerShip = false;
+    computerFoundPlayerShipDestoryed = false;
+    for (let i = 0; i < 4; i++){
+      $("#player_battleship_piece"+i).removeClass("hit_on_player");
+      $("#player_battleship_piece"+i).addClass("player_ship_destoryed");
+    }
+  }
+  if ($("#player_destoryer_piece1").hasClass("hit_on_player") && $("#player_destoryer_piece2").hasClass("hit_on_player") && $("#player_destoryer_piece3").hasClass("hit_on_player")){
+    computerFoundPlayerShip = false;
+    computerFoundPlayerShipDestoryed = false;
+    for (let i = 0; i < 3; i++){
+      $("#player_destoryer_piece"+i).removeClass("hit_on_player");
+      $("#player_destoryer_piece"+i).addClass("player_ship_destoryed");
+    }
+  }
+  if ($("#player_submarine_piece1").hasClass("hit_on_player") && $("#player_submarine_piece2").hasClass("hit_on_player") && $("#player_submarine_piece3").hasClass("hit_on_player")){
+    computerFoundPlayerShip = false;
+    computerFoundPlayerShipDestoryed = false;
+    for (let i = 0; i < 3; i++){
+      $("#player_submarine_piece"+i).removeClass("hit_on_player");
+      $("#player_submarine_piece"+i).addClass("player_ship_destoryed");
+    }
+  }
+  if ($("#player_ptboat_piece1").hasClass("hit_on_player") && $("#player_ptboat_piece2").hasClass("hit_on_player")){
+    computerFoundPlayerShip = false;
+    computerFoundPlayerShipDestoryed = false;
+    for (let i = 0; i < 2; i++){
+      $("#player_ptboat_piece"+i).removeClass("hit_on_player");
+      $("#player_ptboat_piece"+i).addClass("player_ship_destoryed");
+    }
+  }
   computerTurnBegin();
   }
 }
+//END TURN DETECTION
 //BEGIN COMPUTER TURN HANDLER
-let computerFoundPlayerShip = false;
 function computerTurnBegin(){
-  console.log(computerFoundPlayerShip);
   //SPECIFIC COMPUTER RANDOMIZER
-  if (computerFoundPlayerShip === true){
-    let lastHit = document.querySelector(".computer_last_hit");
-    let computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
-    let timesReturned = 0;
-    if (computerSpecificSelection === 1){
-      let toTheRight = $(lastHit).next()[0]
-      if ($(toTheRight).hasClass("dont_touch_this")){
-        timesReturned += 1;
-        return
-      } else if ($(toTheRight).hasClass("player_pieces")){
-        let computerLastHit = document.getElementsByClassName(".computer_last_hit");
-        $(computerLastHit).removeClass("computer_last_hit");
-        $(toTheRight).addClass("dont_touch_this");
-        $(toTheRight).addClass("computer_last_hit");
-        $(toTheRight).addClass("hit_on_player");
+  //What if i turned this into a switch statement?
+    if (computerFoundPlayerShip === true && computerFoundPlayerShipDestoryed === false){
+        let lastHitsMade = document.querySelectorAll(".hit_on_player");
+        let lastHitArray = $(lastHitsMade).not(document.getElementsByClassName("player_ship_destoryed"));
+        let lastHitLength = lastHitArray.length
+        let lastHitSelector = Math.floor(Math.random()*(lastHitLength-0+1)+0);
+        console.log(lastHitLength);
+        console.log(lastHitSelector);
+        console.log(lastHitArray[lastHitSelector]);
+        let lastHit = lastHitArray[lastHitSelector];
+      let computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
+      if (computerSpecificSelection === 1){
+        let toTheRight = $(lastHit).next()[0]
+        if (toTheRight === undefined){
+          computerTurnBegin();
+          return
+        }
+        if ($(toTheRight).hasClass("dont_touch_this")){
+          computerTurnBegin();
+          return
+        } else if ($(toTheRight).hasClass("player_pieces")){
+          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
+          // $(computerLastHit).removeClass("computer_last_hit");
+          $(toTheRight).addClass("dont_touch_this");
+          // $(toTheRight).addClass("computer_last_hit");
+          $(toTheRight).addClass("hit_on_player");
+            beginGame(0);
+        } else {
+          $(toTheRight).addClass("miss_on_player");
+            beginGame(0);
+        }
+      } else if (computerSpecificSelection === 2){
+        let toTheLeft = $(lastHit).prev()[0]
+        if (toTheLeft === undefined){
+          computerTurnBegin();
+          return
+        } else if ($(toTheLeft).hasClass("dont_touch_this")){
+          computerTurnBegin();
+          return
+        } else if ($(toTheLeft).hasClass("player_pieces")){
+          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
+          // $(computerLastHit).removeClass("computer_last_hit");
+          $(toTheLeft).addClass("dont_touch_this");
+          // $(toTheLeft).addClass("computer_last_hit");
+          $(toTheLeft).addClass("hit_on_player");
+          beginGame(0);
+        } else {
+          $(toTheLeft).addClass("miss_on_player");
+          beginGame(0);
+        }
+      } else if (computerSpecificSelection === 3){
+        let rowIndexing = $(lastHit).prevUntil(".label").length;
+        let findNextRow = $(lastHit).parent().next();
+        if (findNextRow[0] === undefined){
+          computerTurnBegin();
+          return
+        }
+        let toTheBottom = $(findNextRow[0].childNodes[rowIndexing+1])[0];
+        if ($(toTheBottom).hasClass("dont_touch_this")){
+          computerTurnBegin();
+          return
+        } else if ($(toTheBottom).hasClass("player_pieces")){
+          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
+          // $(computerLastHit).removeClass("computer_last_hit");
+          $(toTheBottom).addClass("dont_touch_this");
+          // $(toTheBottom).addClass("computer_last_hit");
+          $(toTheBottom).addClass("hit_on_player");
+            beginGame(0);
+        } else {
+          $(toTheBottom).addClass("miss_on_player");
+            beginGame(0);
+        }
+      } else if (computerSpecificSelection === 4){
+        let rowIndexing = $(lastHit).prevUntil(".label").length;
+        let findNextRow = $(lastHit).parent().prev();
+        if (findNextRow[0] === undefined){
+          computerTurnBegin();
+          return
+        }
+        let toTheTop = $(findNextRow[0].childNodes[rowIndexing+1])[0];
+        if ($(toTheTop).hasClass("dont_touch_this")){
+          computerTurnBegin();
+          return
+        } else if ($(toTheTop).hasClass("player_pieces")){
+          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
+          // $(computerLastHit).removeClass("computer_last_hit");
+          $(toTheTop).addClass("dont_touch_this");
+          // $(toTheTop).addClass("computer_last_hit");
+          $(toTheTop).addClass("hit_on_player");
+            beginGame(0);
+        } else {
+          $(toTheTop).addClass("miss_on_player");
+            beginGame(0);
+        }
       } else {
-        $(toTheRight).addClass("miss_on_player");
+        computerFoundPlayerShip = true;
+        computerFoundPlayerShipDestoryed = false;
+        computerTurnBegin();
       }
-    }
-    if (computerSpecificSelection === 2){
-      let toTheLeft = $(lastHit).prev()[0]
-      if ($(toTheLeft).hasClass("dont_touch_this")){
-        timesReturned += 1;
-        return
-      } else if ($(toTheLeft).hasClass("player_pieces")){
-        let computerLastHit = document.getElementsByClassName(".computer_last_hit");
-        $(computerLastHit).removeClass("computer_last_hit");
-        $(toTheLeft).addClass("dont_touch_this");
-        $(toTheLeft).addClass("computer_last_hit");
-        $(toTheLeft).addClass("hit_on_player");
-      } else {
-        $(toTheLeft).addClass("miss_on_player");
-      }
-    }
-    if (computerSpecificSelection === 3){
-      let rowIndexing = $(lastHit).prevUntil(".label").length;
-      let findNextRow = $(lastHit).parent().next();
-      let toTheBottom = $(findNextRow[0].childNodes[rowIndexing+1])[0];
-      if ($(toTheBottom).hasClass("dont_touch_this")){
-        timesReturned += 1;
-        return
-      } else if ($(toTheBottom).hasClass("player_pieces")){
-        let computerLastHit = document.getElementsByClassName(".computer_last_hit");
-        $(computerLastHit).removeClass("computer_last_hit");
-        $(toTheBottom).addClass("dont_touch_this");
-        $(toTheBottom).addClass("computer_last_hit");
-        $(toTheBottom).addClass("hit_on_player");
-      } else {
-        $(toTheBottom).addClass("miss_on_player");
-      }
-    }
-    if (computerSpecificSelection === 4){
-      let rowIndexing = $(lastHit).prevUntil(".label").length;
-      let findNextRow = $(lastHit).parent().prev();
-      let toTheTop = $(findNextRow[0].childNodes[rowIndexing+1])[0];
-      if ($(toTheTop).hasClass("dont_touch_this")){
-        timesReturned += 1;
-        return
-      } else if ($(toTheTop).hasClass("player_pieces")){
-        let computerLastHit = document.getElementsByClassName(".computer_last_hit");
-        $(computerLastHit).removeClass("computer_last_hit");
-        $(toTheTop).addClass("dont_touch_this");
-        $(toTheTop).addClass("computer_last_hit");
-        $(toTheTop).addClass("hit_on_player");
-      } else {
-        $(toTheTop).addClass("miss_on_player");
-      }
-    }
-    if (timesReturned >= 20){
-      computerFoundPlayerShip = false;
-      computerTurnBegin();
-    }
-  } else {
+    } else {
     //NORMAL COMPUTER RANDOMIZER
     let allClickablePlayerBoard = document.querySelectorAll("#player_battleship_board > table > tbody > tr > td");
     let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
@@ -355,16 +423,17 @@ function computerTurnBegin(){
     let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
     $(computerTargetonPlayerBoard).addClass("dont_touch_this");
     if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
-      let computerLastHit = document.getElementsByClassName(".computer_last_hit");
-      $(computerLastHit).removeClass("computer_last_hit");
-      $(computerTargetonPlayerBoard).addClass("computer_last_hit");
+      // let computerLastHit = document.getElementsByClassName(".computer_last_hit");
+      // $(computerLastHit).removeClass("computer_last_hit");
+      // $(computerTargetonPlayerBoard).addClass("computer_last_hit");
       $(computerTargetonPlayerBoard).addClass("hit_on_player");
       computerFoundPlayerShip = true;
+      computerFoundPlayerShipDestoryed = false;
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
     }
+      beginGame(0);
   }
-  beginGame(0);
 }
 //END COMPUTER TURN HANDLER
 //BEGIN PLAYER TURN HANDLER

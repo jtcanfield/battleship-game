@@ -63,6 +63,10 @@ th, td{
 .clickable:hover{
   background-color: pink;
 }
+.player_ship_destoryed{
+  background-image: url("images/destoryed.gif");
+  background-size: contain;
+}
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {
