@@ -273,7 +273,8 @@ function beginGame(whosTurnIsIt){
   computer_ship_announcements.innerHTML = "Enemy Ships Destroyed: " + enemyShipsDestroyed + "<br>Turns Taken: " + turns;
   if (enemyShipsDestroyed >= 5){
     computer_ship_announcements.innerHTML = "YOU WON! <br>Turns Taken: " + turns;
-    player_ship_announcements.innerHTML = "YOU WON! <br>Turns Taken: " + turns;
+    announcements.innerHTML = "YOU WON!";
+    player_ship_announcements.innerHTML = "Turns Taken: " + turns;
     alert("YOU WIN THE GAME!");
     alert("You won the game in " + turns + " turns!");
     alert("Refresh to play again!");
@@ -284,7 +285,8 @@ function beginGame(whosTurnIsIt){
   }
   if (playerShipsDestroyed >= 5){
     computer_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
-    player_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
+    announcements.innerHTML = "You lost....";
+    player_ship_announcements.innerHTML = "Turns Taken: " + turns;
     alert("You lost the game....");
     alert("You lost the game in " + turns + " turns....");
     alert("Refresh to play again!");
@@ -674,21 +676,25 @@ function animateAvatarStart(name){
 //     });
 
 function animateBullet(objectToShootAt, player){
-  // let divBullet = document.createElement( "div" );
-  // divBullet.id = "bullet_animation";
   function getOffset(selectedThing) {
-  selectedThing = selectedThing.getBoundingClientRect();
-  return {
-    left: selectedThing.left + window.scrollX,
-    top: selectedThing.top + window.scrollY
+    if (selectedThing === undefined){
+      return{
+        left: 0,
+        top: 0
+      }
+    } else {
+      selectedThing = selectedThing.getBoundingClientRect();
+      return {
+        left: selectedThing.left + window.scrollX,
+        top: selectedThing.top + window.scrollY
+      }
+    }
   }
-}
     function angle(cx, cy, ex, ey) {
     var dy = ey - cy;
     var dx = ex - cx;
-    var theta = Math.atan2(dy, dx); // range (-PI, PI]
-    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-    //if (theta < 0) theta = 360 + theta; // range [0, 360)
+    var theta = Math.atan2(dy, dx);
+    theta *= 180 / Math.PI;
     return theta;
     }
   if (player === true){
