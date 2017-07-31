@@ -1,4 +1,4 @@
-# To view in your browser, click here:
-this actually dosent exist yet
+# TO PLAY, CLICK HERE:
+https://jtcanfield.github.io/battleship-game/
 
 Animated game of battleship
