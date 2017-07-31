@@ -54,6 +54,12 @@ th, td{
 .miss_on_computer{
   background-color: grey !important;
 }
+.hit_on_player{
+  background-color: red !important;
+}
+.miss_on_player{
+  background-color: grey !important;
+}
 .clickable:hover{
   background-color: pink;
 }
