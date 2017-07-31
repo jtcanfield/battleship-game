@@ -67,6 +67,10 @@ th, td{
   background-image: url("images/destoryed.gif");
   background-size: contain;
 }
+.explosion_container{
+  background-image: url("images/explosion2.gif");
+  background-size: contain;
+}
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {

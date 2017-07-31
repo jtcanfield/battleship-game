@@ -341,7 +341,7 @@ function beginGame(whosTurnIsIt){
     playerTurnBegin();
   }
   if (whosTurnIsIt === 1){
-  setTimeout(computerTurnBegin, 3000)
+  setTimeout(computerTurnBegin, 2000)
   announcements.innerHTML = "Computer Is Thinking...";
   // computerTurnBegin();
   }
@@ -484,6 +484,7 @@ function playerTurnBegin(){
       $(clickableEnemyBoard).off("click");
       $(clickableEnemyBoard).removeClass("clickable");
       if ($(this).hasClass("computer_pieces")){
+        $(this).addClass("explosion_container");
         $(this).addClass("hit_on_computer");
         beginGame(1);
       } else {
