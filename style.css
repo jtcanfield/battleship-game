@@ -30,10 +30,30 @@ th, td{
 #computer_player_avatar{
   border-radius: 100%;
   position:fixed;
-  background-color: yellow;
+  /*background-color: yellow;*/
   margin: 8% 15%;
   height:  50px;
   width:  50px;
+}
+.avatar_normal{
+  background-image: url("images/normal.png");
+  background-size: contain;
+}
+.avatar_omg{
+  background-image: url("images/omg.png");
+  background-size: contain;
+}
+.avatar_devil{
+  background-image: url("images/devil.png");
+  background-size: contain;
+}
+.avatar_angry{
+  background-image: url("images/angry.png");
+  background-size: contain;
+}
+.avatar_cry{
+  background-image: url("images/cry.png");
+  background-size: contain;
 }
 #computer_player_box{
   position:fixed;

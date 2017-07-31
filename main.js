@@ -279,6 +279,7 @@ function beginGame(whosTurnIsIt){
         if (totalHitsOnShip === computerShipsOnBoardLengths[i]){
           for (let b = 0; b < 6; b++){
           $("#"+currentShipCheck+b).addClass("player_ship_destroyed");
+          $("#computer_player_avatar").css("background-image", "url('images/omg.png');")
           }
         }
       }
