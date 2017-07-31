@@ -269,10 +269,20 @@ function beginGame(){
     //LETS find ever clickable object
     let allClickableEnemyBoard = document.querySelectorAll("#computer_battleship_board > table > tbody > tr > td");
     let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
-    for (let i = 0; i < clickableEnemyBoard.length; i++){
-
-    }
-    console.log(clickableEnemyBoard.length);
+    $(clickableEnemyBoard).hover(function(){
+      $(this).css("background-color", "red");
+      }, function(){
+      $(this).css("background-color", "white");
+    });
+    $(clickableEnemyBoard).click(function(){
+      console.log("SHOT FIRED!");
+      console.log(this);
+      if ($(this).hasClass(computer_pieces)){
+        console.log("HIT ON ENEMY!");
+      }
+      
+    });
+    console.log($(clickableEnemyBoard));
   }
 }
 
