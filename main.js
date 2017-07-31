@@ -329,39 +329,41 @@ function computerTurnBegin(){
       if (computerSpecificSelection === 1){
         let toTheRight = $(lastHit).next()[0]
         if (toTheRight === undefined){
-          computerTurnBegin();
+          beginGame(1);
           return
         }
         if ($(toTheRight).hasClass("dont_touch_this")){
-          computerTurnBegin();
+          beginGame(1);
           return
         } else if ($(toTheRight).hasClass("player_pieces")){
           // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
           // $(computerLastHit).removeClass("computer_last_hit");
-          $(toTheRight).addClass("dont_touch_this");
           // $(toTheRight).addClass("computer_last_hit");
+          $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("hit_on_player");
             beginGame(0);
         } else {
+          $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("miss_on_player");
             beginGame(0);
         }
       } else if (computerSpecificSelection === 2){
         let toTheLeft = $(lastHit).prev()[0]
         if (toTheLeft === undefined){
-          computerTurnBegin();
+          beginGame(1);
           return
         } else if ($(toTheLeft).hasClass("dont_touch_this")){
-          computerTurnBegin();
+          beginGame(1);
           return
         } else if ($(toTheLeft).hasClass("player_pieces")){
           // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
           // $(computerLastHit).removeClass("computer_last_hit");
-          $(toTheLeft).addClass("dont_touch_this");
           // $(toTheLeft).addClass("computer_last_hit");
+          $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("hit_on_player");
           beginGame(0);
         } else {
+          $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("miss_on_player");
           beginGame(0);
         }
@@ -369,21 +371,22 @@ function computerTurnBegin(){
         let rowIndexing = $(lastHit).prevUntil(".label").length;
         let findNextRow = $(lastHit).parent().next();
         if (findNextRow[0] === undefined){
-          computerTurnBegin();
+          beginGame(1);
           return
         }
         let toTheBottom = $(findNextRow[0].childNodes[rowIndexing+1])[0];
         if ($(toTheBottom).hasClass("dont_touch_this")){
-          computerTurnBegin();
+          beginGame(1);
           return
         } else if ($(toTheBottom).hasClass("player_pieces")){
           // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
           // $(computerLastHit).removeClass("computer_last_hit");
-          $(toTheBottom).addClass("dont_touch_this");
           // $(toTheBottom).addClass("computer_last_hit");
+          $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("hit_on_player");
             beginGame(0);
         } else {
+          $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("miss_on_player");
             beginGame(0);
         }
@@ -391,12 +394,12 @@ function computerTurnBegin(){
         let rowIndexing = $(lastHit).prevUntil(".label").length;
         let findNextRow = $(lastHit).parent().prev();
         if (findNextRow[0] === undefined){
-          computerTurnBegin();
+          beginGame(1);
           return
         }
         let toTheTop = $(findNextRow[0].childNodes[rowIndexing+1])[0];
         if ($(toTheTop).hasClass("dont_touch_this")){
-          computerTurnBegin();
+          beginGame(1);
           return
         } else if ($(toTheTop).hasClass("player_pieces")){
           // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
@@ -407,12 +410,14 @@ function computerTurnBegin(){
             beginGame(0);
         } else {
           $(toTheTop).addClass("miss_on_player");
+          $(toTheTop).addClass("dont_touch_this");
             beginGame(0);
         }
       } else {
         computerFoundPlayerShip = true;
         computerFoundPlayerShipDestoryed = false;
         computerTurnBegin();
+        console.log("Not sure how you ended up here");
       }
     } else {
     //NORMAL COMPUTER RANDOMIZER
