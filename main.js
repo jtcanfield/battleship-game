@@ -678,7 +678,6 @@ function animateBullet(objectToShootAt){
   topPos = getOffset(startItem[0]).top;
   finalLeftPos = getOffset(objectToShootAt[0]).left;
   finalTopPos = getOffset(objectToShootAt[0]).top;
-  console.log($("#bullet_animation"));
   $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
   });
   $("#bullet_animation").show(0);
