@@ -416,6 +416,7 @@ function beginGame(whosTurnIsIt){
 function computerTurnBegin(){
   //SPECIFIC COMPUTER RANDOMIZER
   //What if i turned this into a switch statement?
+  console.log("1. DIRECTION DETECTED: " + detectDirection);
     if (computerFoundPlayerShip === true){
         let lastHitsMade = document.querySelectorAll(".hit_on_player");
         let lastHitArray = $(lastHitsMade).not(document.getElementsByClassName("player_ship_destroyed"));
@@ -426,8 +427,9 @@ function computerTurnBegin(){
         if (detectDirection === "horizontal"){
           computerSpecificSelection = Math.floor(Math.random()*(2-1+1)+1);
           timesAttemptInDirection += 1;
-          console.log(timesAttemptInDirection);
+          console.log("NUMBER OF TIMES ATTEMPTED HORIZONTAL: " + timesAttemptInDirection);
           if (timesAttemptInDirection >= 50){
+            console.log("CANCELLING HORIZONTAL");
             detectDirection = "";
             beginGame();
             return
@@ -436,17 +438,20 @@ function computerTurnBegin(){
         if (detectDirection === "vertical"){
           computerSpecificSelection = Math.floor(Math.random()*(4-3+1)+3);
           timesAttemptInDirection += 1;
-          console.log(timesAttemptInDirection);
+          console.log("NUMBER OF TIMES ATTEMPTED VERTICAL: " + timesAttemptInDirection);
           if (timesAttemptInDirection >= 50){
+            console.log("CANCELLING VERTICAL");
             detectDirection = "";
             beginGame();
             return
           }
-        } else {
+        } if (detectDirection === "") {
          computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
-        }
-        console.log(computerSpecificSelection);
-        console.log(detectDirection);
+       } else {
+         console.log("detectDirection STRING HAS RETURNED ELSE, PLEASE CHECK");
+       }
+        console.log("RANDOM NUMBER GEN: " + computerSpecificSelection);
+        console.log("2. DIRECTION DETECTED: " + detectDirection);
       if (computerSpecificSelection === 1){
         let toTheRight = $(lastHit).next()[0]
         if (toTheRight === undefined){
@@ -563,8 +568,8 @@ function computerTurnBegin(){
             beginGame(1);
         }
       } else {
-        computerTurnBegin();
-        console.log("Not sure how you ended up here");
+        beginGame();
+        console.log("IF YOU SEE THIS, THERE WAS AN ISSUE WITH THE RANDOM NUMBER GENERATOR");
       }
     } else {
     //NORMAL COMPUTER RANDOMIZER
