@@ -264,7 +264,7 @@ function computerPlaceShips(){
 //END COMPUTER PLACING
 //BEGIN TURN DETECTION
 function beginGame(whosTurnIsIt){
-  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed"
+  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed: " + enemyShipsDestroyed;
   //BEGIN DESTRUCTION DETECTION
   let computerShipsOnBoard = ["computer_aircraft_carrier_piece", "computer_battleship_piece", "computer_destroyer_piece", "computer_submarine_piece", "computer_ptboat_piece",];
   let computerShipsOnBoardLengths = [5, 4, 3, 3, 2,];
@@ -277,9 +277,12 @@ function beginGame(whosTurnIsIt){
       if ($("#"+currentShipCheck+l).hasClass("hit_on_computer")){
         totalHitsOnShip = totalHitsOnShip + 1;
         if (totalHitsOnShip === computerShipsOnBoardLengths[i]){
+          $("#computer_player_avatar").removeClass();
+          $("#computer_player_avatar").addClass("avatar_omg");
+          enemyShipsDestroyed = enemyShipsDestroyed + 1;
           for (let b = 0; b < 6; b++){
           $("#"+currentShipCheck+b).addClass("player_ship_destroyed");
-          $("#computer_player_avatar").css("background-image", "url('images/omg.png');")
+          $("#"+currentShipCheck+b).removeClass("hit_on_computer");
           }
         }
       }
@@ -292,6 +295,8 @@ function beginGame(whosTurnIsIt){
     for (let i = 0; i < 6; i++){
       $("#player_aircraft_carrier_piece"+i).removeClass("hit_on_player");
       $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destroyed");
+      $("#computer_player_avatar").removeClass();
+      $("#computer_player_avatar").addClass("avatar_devil");
       player_ship_announcements.innerHTML = "Your Aircraft Carrier has been destroyed!";
     }
   }
@@ -300,6 +305,8 @@ function beginGame(whosTurnIsIt){
     for (let i = 0; i < 5; i++){
       $("#player_battleship_piece"+i).removeClass("hit_on_player");
       $("#player_battleship_piece"+i).addClass("player_ship_destroyed");
+      $("#computer_player_avatar").removeClass();
+      $("#computer_player_avatar").addClass("avatar_devil");
       player_ship_announcements.innerHTML = "Your Battleship has been destroyed!";
     }
   }
@@ -308,6 +315,8 @@ function beginGame(whosTurnIsIt){
     for (let i = 0; i < 4; i++){
       $("#player_destroyer_piece"+i).removeClass("hit_on_player");
       $("#player_destroyer_piece"+i).addClass("player_ship_destroyed");
+      $("#computer_player_avatar").removeClass();
+      $("#computer_player_avatar").addClass("avatar_devil");
       player_ship_announcements.innerHTML = "Your Destroyer has been destroyed!";
     }
   }
@@ -316,6 +325,8 @@ function beginGame(whosTurnIsIt){
     for (let i = 0; i < 4; i++){
       $("#player_submarine_piece"+i).removeClass("hit_on_player");
       $("#player_submarine_piece"+i).addClass("player_ship_destroyed");
+      $("#computer_player_avatar").removeClass();
+      $("#computer_player_avatar").addClass("avatar_devil");
       player_ship_announcements.innerHTML = "Your Submarine has been destroyed!";
     }
   }
@@ -324,6 +335,8 @@ function beginGame(whosTurnIsIt){
     for (let i = 0; i < 3; i++){
       $("#player_ptboat_piece"+i).removeClass("hit_on_player");
       $("#player_ptboat_piece"+i).addClass("player_ship_destroyed");
+      $("#computer_player_avatar").removeClass();
+      $("#computer_player_avatar").addClass("avatar_devil");
       player_ship_announcements.innerHTML = "Your PT Boat has been destroyed!";
     }
   }
@@ -347,7 +360,6 @@ function beginGame(whosTurnIsIt){
     computerFoundPlayerShip = true;
     player_ship_announcements.innerHTML = "Your PT Boat is under attack!";
   }
-  console.log(computerFoundPlayerShip);
   //END DESTRUCTION DETECTION
   if (whosTurnIsIt === 0){
     announcements.innerHTML = "Your Turn!";
@@ -381,11 +393,10 @@ function computerTurnBegin(){
           beginGame(1);
           return
         } else if ($(toTheRight).hasClass("player_pieces")){
-          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
-          // $(computerLastHit).removeClass("computer_last_hit");
-          // $(toTheRight).addClass("computer_last_hit");
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("hit_on_player");
+          $("#computer_player_avatar").removeClass();
+          $("#computer_player_avatar").addClass("avatar_normal");
             beginGame(0);
         } else {
           $(toTheRight).addClass("dont_touch_this");
@@ -401,11 +412,10 @@ function computerTurnBegin(){
           beginGame(1);
           return
         } else if ($(toTheLeft).hasClass("player_pieces")){
-          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
-          // $(computerLastHit).removeClass("computer_last_hit");
-          // $(toTheLeft).addClass("computer_last_hit");
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("hit_on_player");
+          $("#computer_player_avatar").removeClass();
+          $("#computer_player_avatar").addClass("avatar_normal");
           beginGame(0);
         } else {
           $(toTheLeft).addClass("dont_touch_this");
@@ -424,11 +434,10 @@ function computerTurnBegin(){
           beginGame(1);
           return
         } else if ($(toTheBottom).hasClass("player_pieces")){
-          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
-          // $(computerLastHit).removeClass("computer_last_hit");
-          // $(toTheBottom).addClass("computer_last_hit");
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("hit_on_player");
+          $("#computer_player_avatar").removeClass();
+          $("#computer_player_avatar").addClass("avatar_normal");
             beginGame(0);
         } else {
           $(toTheBottom).addClass("dont_touch_this");
@@ -447,9 +456,8 @@ function computerTurnBegin(){
           beginGame(1);
           return
         } else if ($(toTheTop).hasClass("player_pieces")){
-          // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
-          // $(computerLastHit).removeClass("computer_last_hit");
-          // $(toTheTop).addClass("computer_last_hit");
+          $("#computer_player_avatar").removeClass();
+          $("#computer_player_avatar").addClass("avatar_normal");
           $(toTheTop).addClass("dont_touch_this");
           $(toTheTop).addClass("hit_on_player");
             beginGame(0);
@@ -471,10 +479,9 @@ function computerTurnBegin(){
     let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
     $(computerTargetonPlayerBoard).addClass("dont_touch_this");
     if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
-      // let computerLastHit = document.getElementsByClassName(".computer_last_hit");
-      // $(computerLastHit).removeClass("computer_last_hit");
-      // $(computerTargetonPlayerBoard).addClass("computer_last_hit");
       $(computerTargetonPlayerBoard).addClass("hit_on_player");
+      $("#computer_player_avatar").removeClass();
+      $("#computer_player_avatar").addClass("avatar_normal");
       computerFoundPlayerShip = true;
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
@@ -499,6 +506,8 @@ function playerTurnBegin(){
       if ($(this).hasClass("computer_pieces")){
         $(this).addClass("explosion_container");
         $(this).addClass("hit_on_computer");
+        $("#computer_player_avatar").removeClass();
+        $("#computer_player_avatar").addClass("avatar_angry");
         beginGame(1);
       } else {
         $(this).addClass("miss_on_computer");
