@@ -23,17 +23,17 @@ $(document).ready(function() {
       computerPlaceShips();
     }
   });
-  // $("#start_game_fiveshots").click(function() {
-  //   if (boatsDown !== 5){
-  //     start_game_announcements.innerHTML = "Please Place all boats before starting!"
-  //   } else {
-  //     start_game_announcements.innerHTML = "This Option is not avaiable yet. Please start a One Shot Game!"
-  //     playerShotsPerTurn = 5;
-  //     computerShotsPerTurn = 5;
-  //     $("#pregame_box").hide(1000);
-  //     computerPlaceShips();
-  //   }
-  // });
+  $("#start_game_fiveshots").click(function() {
+    if (boatsDown !== 5){
+      start_game_announcements.innerHTML = "Please Place all boats before starting!"
+    } else {
+      start_game_announcements.innerHTML = "This Option is not avaiable yet. Please start a One Shot Game!"
+      playerShotsPerTurn = 5;
+      computerShotsPerTurn = 5;
+      $("#pregame_box").hide(1000);
+      computerPlaceShips();
+    }
+  });
 });
 //END START GAME FUNCTIONS
 //PLAYER ROTATE SHIP SCRIPTS

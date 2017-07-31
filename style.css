@@ -22,14 +22,14 @@ th, td{
   width: 25px;
 }
 .computer_pieces {
-  border: 1px solid red;
+  /*border: 1px solid red;
   background-color: black;
   height: 25px;
-  width: 25px;
+  width: 25px;*/
 }
 #computer_player_avatar{
   border-radius: 100%;
-  position:fixed;
+  position:absolute;
   margin: 8% 15%;
   height:  50px;
   width:  50px;
@@ -62,7 +62,6 @@ button{
 }
 #computer_player_box{
   position:fixed;
-  /*background-color: grey;*/
   margin: 10% 15%;
   height:  60px;
   width:  60px;
@@ -109,3 +108,14 @@ button{
     text-align: center;
   }
 }
+/*OVERSIZED VERSION*/
+/*@media (min-width: 1200px) {
+  #battleship_board_container{
+    display: flex;
+    justify-content: space-around;
+  }
+  #computer_player_box{
+    margin-left: 44%;
+    margin-right: 50%;
+  }
+}*/
