@@ -270,19 +270,26 @@ function beginGame(whosTurnIsIt){
   }
 }
 //BEGIN COMPUTER TURN HANDLER
+let computerFoundPlayerShip = false;
 function computerTurnBegin(){
-  //NORMAL COMPUTER RANDOMIZER
-  let allClickablePlayerBoard = document.querySelectorAll("#player_battleship_board > table > tbody > tr > td");
-  let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
-  let playerSpotsLeft = $(clickablePlayerBoard).length
-  let computerSelection = Math.floor(Math.random()*(playerSpotsLeft-0+1)+0);
-  let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
-  console.log(computerTargetonPlayerBoard);
-  $(computerTargetonPlayerBoard).addClass("dont_touch_this");
-  if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
-    $(computerTargetonPlayerBoard).addClass("hit_on_player");
+  console.log(computerFoundPlayerShip);
+  if (computerFoundPlayerShip === true){
+
   } else {
-    $(computerTargetonPlayerBoard).addClass("miss_on_player");
+    //NORMAL COMPUTER RANDOMIZER
+    let allClickablePlayerBoard = document.querySelectorAll("#player_battleship_board > table > tbody > tr > td");
+    let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
+    let playerSpotsLeft = $(clickablePlayerBoard).length
+    let computerSelection = Math.floor(Math.random()*(playerSpotsLeft-0+1)+0);
+    let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
+    console.log(computerTargetonPlayerBoard);
+    $(computerTargetonPlayerBoard).addClass("dont_touch_this");
+    if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
+      $(computerTargetonPlayerBoard).addClass("hit_on_player");
+      computerFoundPlayerShip = true;
+    } else {
+      $(computerTargetonPlayerBoard).addClass("miss_on_player");
+    }
   }
   beginGame(0);
 }
