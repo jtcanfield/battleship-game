@@ -279,63 +279,72 @@ function computerTurnBegin(){
     let computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
     let timesReturned = 0;
     if (computerSpecificSelection === 1){
-      let toTheRight = $(computerTargetonPlayerBoard).next()[0]
+      let toTheRight = $(lastHit).next()[0]
       if ($(toTheRight).hasClass("dont_touch_this")){
         timesReturned += 1;
         return
-      } else {
+      } else if ($(toTheRight).hasClass("player_pieces")){
         let computerLastHit = document.getElementsByClassName(".computer_last_hit");
         $(computerLastHit).removeClass("computer_last_hit");
         $(toTheRight).addClass("dont_touch_this");
         $(toTheRight).addClass("computer_last_hit");
         $(toTheRight).addClass("hit_on_player");
+      } else {
+        $(toTheRight).addClass("miss_on_player");
       }
     }
     if (computerSpecificSelection === 2){
-      let toTheLeft = $(computerTargetonPlayerBoard).prev()[0]
+      let toTheLeft = $(lastHit).prev()[0]
       if ($(toTheLeft).hasClass("dont_touch_this")){
         timesReturned += 1;
         return
-      } else {
+      } else if ($(toTheLeft).hasClass("player_pieces")){
         let computerLastHit = document.getElementsByClassName(".computer_last_hit");
         $(computerLastHit).removeClass("computer_last_hit");
         $(toTheLeft).addClass("dont_touch_this");
         $(toTheLeft).addClass("computer_last_hit");
         $(toTheLeft).addClass("hit_on_player");
+      } else {
+        $(toTheLeft).addClass("miss_on_player");
       }
     }
     if (computerSpecificSelection === 3){
-      let rowIndexing = $(computerTargetonPlayerBoard).prevUntil(".label").length;
-      let findNextRow = $(computerTargetonPlayerBoard).parent().next();
+      let rowIndexing = $(lastHit).prevUntil(".label").length;
+      let findNextRow = $(lastHit).parent().next();
       let toTheBottom = $(findNextRow[0].childNodes[rowIndexing+1])[0];
       if ($(toTheBottom).hasClass("dont_touch_this")){
         timesReturned += 1;
         return
-      } else {
+      } else if ($(toTheBottom).hasClass("player_pieces")){
         let computerLastHit = document.getElementsByClassName(".computer_last_hit");
         $(computerLastHit).removeClass("computer_last_hit");
         $(toTheBottom).addClass("dont_touch_this");
         $(toTheBottom).addClass("computer_last_hit");
         $(toTheBottom).addClass("hit_on_player");
+      } else {
+        $(toTheBottom).addClass("miss_on_player");
       }
     }
     if (computerSpecificSelection === 4){
-      let rowIndexing = $(computerTargetonPlayerBoard).prevUntil(".label").length;
-      let findNextRow = $(computerTargetonPlayerBoard).parent().prev();
+      let rowIndexing = $(lastHit).prevUntil(".label").length;
+      let findNextRow = $(lastHit).parent().prev();
       let toTheTop = $(findNextRow[0].childNodes[rowIndexing+1])[0];
       if ($(toTheTop).hasClass("dont_touch_this")){
         timesReturned += 1;
         return
-      } else {
+      } else if ($(toTheTop).hasClass("player_pieces")){
         let computerLastHit = document.getElementsByClassName(".computer_last_hit");
         $(computerLastHit).removeClass("computer_last_hit");
         $(toTheTop).addClass("dont_touch_this");
         $(toTheTop).addClass("computer_last_hit");
         $(toTheTop).addClass("hit_on_player");
+      } else {
+        $(toTheTop).addClass("miss_on_player");
       }
     }
     if (timesReturned >= 20){
       computerFoundPlayerShip = false;
+      computerTurnBegin();
     }
   } else {
     //NORMAL COMPUTER RANDOMIZER
@@ -353,10 +362,6 @@ function computerTurnBegin(){
       computerFoundPlayerShip = true;
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
-      let rowIndexing = $(computerTargetonPlayerBoard).prevUntil(".label").length;
-      let findNextRow = $(computerTargetonPlayerBoard).parent().prev();
-      let nextOne = $(findNextRow[0].childNodes[rowIndexing+1])[0];
-      console.log(nextOne);
     }
   }
   beginGame(0);
