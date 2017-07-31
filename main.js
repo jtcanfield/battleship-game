@@ -3,8 +3,6 @@ $(".direction_detector").hide(0);
 let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
-let playerShipsOnBoard = [];
-let computerShipsOnBoard = [];
 let computerFoundPlayerShip = false;
 let computerFoundPlayerShipDestoryed = false;
 function main() {
@@ -207,6 +205,10 @@ function computerPlaceShips(){
         let selectedPieceForDetection = $("#computer_battleship_board tr:nth-child("+verticalPosition+") td:nth-child("+horizontalPosition+")");
         let actionLegal = 1;
         //HORIZONTAL DETECTION
+        console.log($(selectedPieceForDetection));
+        if ($(selectedPieceForDetection).hasClass("computer_pieces")){
+          actionLegal = 0;
+        }
         for (let d = 0; d < lengthOfShips; d++){
           if ($(selectedPieceForDetection).nextUntil(".computer_pieces").length+1 < lengthOfShips){
             actionLegal = 0;
@@ -226,18 +228,18 @@ function computerPlaceShips(){
         }
       } else {
         //VERTICAL
+        let actionLegal = 1;
         let verticalPosition = Math.floor(Math.random()*(maxVertPosition-1+1)+1);
         let horizontalPosition = Math.floor(Math.random()*(11-2+1)+2);
         let selectedPiece = $("#computer_battleship_board tr:nth-child("+verticalPosition+") td:nth-child("+horizontalPosition+")");
         let selectedPieceForDetection = $("#computer_battleship_board tr:nth-child("+verticalPosition+") td:nth-child("+horizontalPosition+")");
-        let actionLegal = 1;
         //VERTICAL DETECTION
         for (let z = 0; z < lengthOfShips; z++){
-          let rowIndexing = $(selectedPieceForDetection).prevUntil(".label").length;
-          let findNextRow = $(selectedPieceForDetection).parent().next();
           if ($(selectedPieceForDetection).hasClass("computer_pieces")){
               actionLegal = 0;
           } else {
+          let rowIndexing = $(selectedPieceForDetection).prevUntil(".label").length;
+          let findNextRow = $(selectedPieceForDetection).parent().next();
           selectedPieceForDetection = $(findNextRow[0].childNodes[rowIndexing+1])[0];
           }
         }
@@ -264,10 +266,28 @@ function computerPlaceShips(){
 //END COMPUTER PLACING
 //BEGIN TURN DETECTION
 function beginGame(whosTurnIsIt){
-  if (whosTurnIsIt === 0){
-    playerTurnBegin();
+  //BEGIN DESTRUCTION DETECTION
+  let computerShipsOnBoard = ["computer_aircraft_carrier_piece", "computer_battleship_piece", "computer_destoryer_piece", "computer_submarine_piece", "computer_ptboat_piece",];
+  let computerShipsOnBoardLengths = [5, 4, 3, 3, 2,];
+  for (let i = 0; i < 5; i++){
+    let currentShipCheck = computerShipsOnBoard[i];
+    let shipCheckLength = computerShipsOnBoardLengths[i];
+    let l = 1
+    let totalHitsOnShip = 0;
+    while (l < shipCheckLength+1){
+      if ($("#"+currentShipCheck+l).hasClass("hit_on_computer")){
+        totalHitsOnShip = totalHitsOnShip + 1;
+        console.log(("#"+currentShipCheck+l));
+        if (totalHitsOnShip === computerShipsOnBoardLengths[i]){
+          for (let b = 0; b < 6; b++){
+          $("#"+currentShipCheck+b).addClass("player_ship_destoryed");
+          }
+        }
+      }
+      l++
+    }
   }
-  if (whosTurnIsIt === 1){
+  let playerShipsOnBoard = [];
   if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     computerFoundPlayerShipDestoryed = false;
@@ -308,6 +328,10 @@ function beginGame(whosTurnIsIt){
       $("#player_ptboat_piece"+i).addClass("player_ship_destoryed");
     }
   }
+  if (whosTurnIsIt === 0){
+    playerTurnBegin();
+  }
+  if (whosTurnIsIt === 1){
   computerTurnBegin();
   }
 }
