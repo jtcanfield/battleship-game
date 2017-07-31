@@ -273,8 +273,26 @@ function beginGame(whosTurnIsIt){
 let computerFoundPlayerShip = false;
 function computerTurnBegin(){
   console.log(computerFoundPlayerShip);
+  //SPECIFIC COMPUTER RANDOMIZER
   if (computerFoundPlayerShip === true){
-
+    let lastHit = document.querySelector(".computer_last_hit");
+    let computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
+    if (computerSpecificSelection === 1){
+      let toTheRight = $(computerTargetonPlayerBoard).next()[0]
+    }
+    if (computerSpecificSelection === 2){
+      let toTheLeft = $(computerTargetonPlayerBoard).prev()[0]
+    }
+    if (computerSpecificSelection === 3){
+      let rowIndexing = $(computerTargetonPlayerBoard).prevUntil(".label").length;
+      let findNextRow = $(computerTargetonPlayerBoard).parent().next();
+      let toTheBottom = $(findNextRow[0].childNodes[rowIndexing+1])[0];
+    }
+    if (computerSpecificSelection === 4){
+      let rowIndexing = $(computerTargetonPlayerBoard).prevUntil(".label").length;
+      let findNextRow = $(computerTargetonPlayerBoard).parent().prev();
+      let toTheTop = $(findNextRow[0].childNodes[rowIndexing+1])[0];
+    }
   } else {
     //NORMAL COMPUTER RANDOMIZER
     let allClickablePlayerBoard = document.querySelectorAll("#player_battleship_board > table > tbody > tr > td");
@@ -282,13 +300,19 @@ function computerTurnBegin(){
     let playerSpotsLeft = $(clickablePlayerBoard).length
     let computerSelection = Math.floor(Math.random()*(playerSpotsLeft-0+1)+0);
     let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
-    console.log(computerTargetonPlayerBoard);
     $(computerTargetonPlayerBoard).addClass("dont_touch_this");
     if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
+      let computerLastHit = document.getElementsByClassName(".computer_last_hit");
+      $(computerLastHit).removeClass("computer_last_hit");
+      $(computerTargetonPlayerBoard).addClass("computer_last_hit");
       $(computerTargetonPlayerBoard).addClass("hit_on_player");
       computerFoundPlayerShip = true;
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
+      let rowIndexing = $(computerTargetonPlayerBoard).prevUntil(".label").length;
+      let findNextRow = $(computerTargetonPlayerBoard).parent().prev();
+      let nextOne = $(findNextRow[0].childNodes[rowIndexing+1])[0];
+      console.log(nextOne);
     }
   }
   beginGame(0);
@@ -301,7 +325,6 @@ function playerTurnBegin(){
   let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
   $(clickableEnemyBoard).addClass("clickable");
   //jQuery Function for Click
-    // $(document.getElementsByClassName("clickable")).click(function(){
     if ($(clickableEnemyBoard).hasClass("clickable")){
     $(clickableEnemyBoard).on("click", function(){
       $(this).addClass("dont_touch_this");
