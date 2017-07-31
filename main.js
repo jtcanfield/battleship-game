@@ -492,10 +492,10 @@ function computerTurnBegin(){
             $(toTheLeft).removeClass("explosion_container");
             next();
           });
+          timesHitInDirection += 1;
           if (timesHitInDirection >= 1){
             detectDirection = "horizontal";
           }
-          timesHitInDirection += 1;
           beginGame(1);
         } else {
           $(toTheLeft).addClass("dont_touch_this");
@@ -522,10 +522,10 @@ function computerTurnBegin(){
             $(toTheBottom).removeClass("explosion_container");
             next();
           });
+          timesHitInDirection += 1;
           if (timesHitInDirection >= 1){
             detectDirection = "vertical";
           }
-          timesHitInDirection += 1;
             beginGame(1);
         } else {
           $(toTheBottom).addClass("dont_touch_this");
@@ -552,10 +552,10 @@ function computerTurnBegin(){
             $(toTheTop).removeClass("explosion_container");
             next();
           });
+          timesHitInDirection += 1;
           if (timesHitInDirection >= 1){
             detectDirection = "vertical";
           }
-          timesHitInDirection += 1;
             beginGame(1);
         } else {
           $(toTheTop).addClass("miss_on_player");
