@@ -273,8 +273,9 @@ function beginGame(whosTurnIsIt){
 function computerTurnBegin(){
   let allClickablePlayerBoard = document.querySelectorAll("#player_battleship_board > table > tbody > tr > td");
   let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
-  $(clickablePlayerBoard).addClass("clickable");
-  console.log($(clickablePlayerBoard));
+  let playerSpotsLeft = $(clickablePlayerBoard).length
+  let computerSelection = Math.floor(Math.random()*(playerSpotsLeft-0+1)+0);
+  console.log(computerSelection);
 }
 //END COMPUTER TURN HANDLER
 //BEGIN PLAYER TURN HANDLER
@@ -283,7 +284,6 @@ function playerTurnBegin(){
   let allClickableEnemyBoard = document.querySelectorAll("#computer_battleship_board > table > tbody > tr > td");
   let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
   $(clickableEnemyBoard).addClass("clickable");
-  console.log($(clickableEnemyBoard));
   //jQuery Function for Click
     // $(document.getElementsByClassName("clickable")).click(function(){
     if ($(clickableEnemyBoard).hasClass("clickable")){
