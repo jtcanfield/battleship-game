@@ -3,7 +3,8 @@
     to {transform: scale(1);}}
 html {
   text-align: center;
-  background-color: white;
+  background-color: #A7D5FF;
+
 }
 #battleship_board_container{
   display: inline-block;
