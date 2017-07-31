@@ -31,7 +31,7 @@ th, td{
 #bullet_animation{
   position: absolute;
   background-image: url("images/howitzer_shell.png");
-  background-size: contain;
+  background-size: cover;
   width: 25px;
   height: 25px;
   z-index: 99;

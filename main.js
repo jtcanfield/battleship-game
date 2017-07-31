@@ -694,32 +694,33 @@ function animateBullet(objectToShootAt, player){
   if (player === true){
     let pullBody = document.querySelector("body");
     let createDiv = document.createElement("div");
+    $(createDiv).hide(0);
     createDiv.setAttribute("id", "bullet_animation");
     pullBody.appendChild(createDiv);
     let startItem = getStartSpot("player_battleship_board");
-    console.log(startItem);
     leftPos = getOffset(startItem).left;
     topPos = getOffset(startItem).top;
     finalLeftPos = getOffset(objectToShootAt[0]).left;
     finalTopPos = getOffset(objectToShootAt[0]).top;
     let degree = Math.floor(angle(leftPos, topPos, finalLeftPos, finalTopPos));
     degree = degree + 90;
-    console.log(createDiv);
     $(createDiv).animate({ top: topPos, left: leftPos }, function(){
     });
+    $(createDiv).hide(0);
     createDiv.setAttribute("style", "transform: rotate(" + degree + "deg)");
     $(createDiv).show(0);
     $(createDiv).animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
       $(createDiv).hide(0);
+      createDiv.remove();
     });
   }
   if (player === false){
     let pullBody = document.querySelector("body");
     let createDiv = document.createElement("div");
+    $(createDiv).hide(0);
     createDiv.setAttribute("id", "bullet_animation");
     pullBody.appendChild(createDiv);
     let startItem = getStartSpot("computer_battleship_board");
-    console.log(startItem);
     leftPos = getOffset(startItem).left;
     topPos = getOffset(startItem).top;
     finalLeftPos = getOffset(objectToShootAt[0]).left;
@@ -728,14 +729,15 @@ function animateBullet(objectToShootAt, player){
     degree = degree + 90;
     $(createDiv).animate({ top: topPos, left: leftPos }, function(){
     });
+    $(createDiv).hide(0);
     createDiv.setAttribute("style", "transform: rotate(" + degree + "deg)");
     $(createDiv).show(0);
     $(createDiv).animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
       $(createDiv).hide(0);
+      createDiv.remove();
     });
   }
   function getStartSpot(add){
-    console.log(add);
     let allClickablePlayerBoard = document.querySelectorAll("#"+add+" > table > tbody > tr > td");
     let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
     let playerSpotsLeft = $(clickablePlayerBoard).length
