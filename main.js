@@ -457,7 +457,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheRight).hasClass("player_pieces")){
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheRight), false);
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
@@ -472,7 +472,7 @@ function computerTurnBegin(){
           }
             beginGame(1);
         } else {
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheRight), false);
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("miss_on_player");
             beginGame(1);
@@ -486,7 +486,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheLeft).hasClass("player_pieces")){
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheLeft), false);
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
@@ -501,7 +501,7 @@ function computerTurnBegin(){
           }
           beginGame(1);
         } else {
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheLeft), false);
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("miss_on_player");
           beginGame(1);
@@ -518,7 +518,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheBottom).hasClass("player_pieces")){
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheBottom), false);
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
@@ -533,7 +533,7 @@ function computerTurnBegin(){
           }
             beginGame(1);
         } else {
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheBottom), false);
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("miss_on_player");
             beginGame(1);
@@ -550,7 +550,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheTop).hasClass("player_pieces")){
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheTop), false);
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
           $(toTheTop).addClass("dont_touch_this");
@@ -565,7 +565,7 @@ function computerTurnBegin(){
           }
             beginGame(1);
         } else {
-          animateBullet($(computerTargetonPlayerBoard), false);
+          animateBullet($(toTheTop), false);
           $(toTheTop).addClass("miss_on_player");
           $(toTheTop).addClass("dont_touch_this");
             beginGame(1);
