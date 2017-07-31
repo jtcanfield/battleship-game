@@ -1,4 +1,5 @@
 $("#computer_player_avatar").hide(0);
+$("#bullet_animation").hide(0);
 let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
@@ -663,6 +664,8 @@ function animateAvatarStart(name){
 //     });
 
 function animateBullet(objectToShootAt){
+  // let divBullet = document.createElement( "div" );
+  // divBullet.id = "bullet_animation";
   function getOffset(selectedThing) {
   selectedThing = selectedThing.getBoundingClientRect();
   return {
@@ -670,33 +673,19 @@ function animateBullet(objectToShootAt){
     top: selectedThing.top + window.scrollY
   }
 }
-  let divBullet = document.createElement( "div" );
-  divBullet.id = "bullet_animation";
   let startItem = $("#player_bullet_start_area");
   leftPos = getOffset(startItem[0]).left;
   topPos = getOffset(startItem[0]).top;
   finalLeftPos = getOffset(objectToShootAt[0]).left;
   finalTopPos = getOffset(objectToShootAt[0]).top;
-  $(divBullet).animate({ top: topPos, left: leftPos }, function(){});
-  $(divBullet).animate({ top: finalTopPos, left: finalLeftPos }, 3000, function(){});
-//   function myMove() {
-//   var pos = 0;
-//   var id = setInterval(frame, 10);
-//   function frame() {
-//       elem.style.top = pos + 'px';
-//       elem.style.left = pos + 'px';
-//   }
-// }
+  console.log($("#bullet_animation"));
+  $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
+  });
+  $("#bullet_animation").show(0);
+  $("#bullet_animation").animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
+    $("#bullet_animation").hide(0);
+  });
 
-    // var xi = $(this).offset().left;
-    // var yi = $(this).offset().top;
-    // $(this).css('left', xi).css('top', yi);
-    // $(this).click(function(){
-    //      $(this).animate({
-    // left: x,
-    // top: y
-    //      })
-    // })
 
 };
 //END BULLET ANIMATION
