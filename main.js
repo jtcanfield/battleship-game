@@ -692,52 +692,56 @@ function animateBullet(objectToShootAt, player){
     return theta;
     }
   if (player === true){
-    let startItem = $("#player_bullet_start_area");
-    leftPos = getOffset(startItem[0]).left;
-    topPos = getOffset(startItem[0]).top;
+    let pullBody = document.querySelector("body");
+    let createDiv = document.createElement("div");
+    createDiv.setAttribute("id", "bullet_animation");
+    pullBody.appendChild(createDiv);
+    let startItem = getStartSpot("player_battleship_board");
+    console.log(startItem);
+    leftPos = getOffset(startItem).left;
+    topPos = getOffset(startItem).top;
     finalLeftPos = getOffset(objectToShootAt[0]).left;
     finalTopPos = getOffset(objectToShootAt[0]).top;
     let degree = Math.floor(angle(leftPos, topPos, finalLeftPos, finalTopPos));
-    console.log(degree);
-    $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
+    degree = degree + 90;
+    console.log(createDiv);
+    $(createDiv).animate({ top: topPos, left: leftPos }, function(){
     });
-    // $("#bullet_animation").setAttribute("style", "transform: rotate(" + degree + "deg)");
-    $("#bullet_animation").animate({
-          '-webkit-transform': 'rotate(' + degree + 'deg)',
-          '-moz-transform': 'rotate(' + degree + 'deg)',
-          '-ms-transform': 'rotate(' + degree + 'deg)',
-          '-o-transform': 'rotate(' + degree + 'deg)',
-          'transform': 'rotate(' + degree + 'deg)',
-        }, 0);
-    $("#bullet_animation").show(0);
-    $("#bullet_animation").animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
-      $("#bullet_animation").hide(0);
+    createDiv.setAttribute("style", "transform: rotate(" + degree + "deg)");
+    $(createDiv).show(0);
+    $(createDiv).animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
+      $(createDiv).hide(0);
     });
   }
   if (player === false){
-    let startItem = $("#computer_bullet_start_area");
-    leftPos = getOffset(startItem[0]).left;
-    topPos = getOffset(startItem[0]).top;
+    let pullBody = document.querySelector("body");
+    let createDiv = document.createElement("div");
+    createDiv.setAttribute("id", "bullet_animation");
+    pullBody.appendChild(createDiv);
+    let startItem = getStartSpot("computer_battleship_board");
     console.log(startItem);
-    console.log(objectToShootAt);
+    leftPos = getOffset(startItem).left;
+    topPos = getOffset(startItem).top;
     finalLeftPos = getOffset(objectToShootAt[0]).left;
     finalTopPos = getOffset(objectToShootAt[0]).top;
     let degree = Math.floor(angle(leftPos, topPos, finalLeftPos, finalTopPos));
-    console.log(degree);
-    $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
+    degree = degree + 90;
+    $(createDiv).animate({ top: topPos, left: leftPos }, function(){
     });
-    // $("#bullet_animation").setAttribute("style", "transform: rotate(" + degree + "deg)");
-    $("#bullet_animation").animate({
-          '-webkit-transform': 'rotate(' + degree + 'deg)',
-          '-moz-transform': 'rotate(' + degree + 'deg)',
-          '-ms-transform': 'rotate(' + degree + 'deg)',
-          '-o-transform': 'rotate(' + degree + 'deg)',
-          'transform': 'rotate(' + degree + 'deg)',
-        }, 0);
-    $("#bullet_animation").show(0);
-    $("#bullet_animation").animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
-      $("#bullet_animation").hide(0);
+    createDiv.setAttribute("style", "transform: rotate(" + degree + "deg)");
+    $(createDiv).show(0);
+    $(createDiv).animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
+      $(createDiv).hide(0);
     });
+  }
+  function getStartSpot(add){
+    console.log(add);
+    let allClickablePlayerBoard = document.querySelectorAll("#"+add+" > table > tbody > tr > td");
+    let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
+    let playerSpotsLeft = $(clickablePlayerBoard).length
+    let computerSelection = Math.floor(Math.random()*(playerSpotsLeft-0+1)+0);
+    let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
+    return computerTargetonPlayerBoard
   }
 };
 //END BULLET ANIMATION
