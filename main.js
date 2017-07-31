@@ -6,6 +6,7 @@ let computerFoundPlayerShip = false;
 let enemyShipsDestroyed = 0;
 let playerShipsDestroyed = 0;
 let turns = 0;
+let detectDirection = "";
 function main() {
 }
 $(document).ready(main);
@@ -321,6 +322,7 @@ function beginGame(whosTurnIsIt){
       $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destroyed");
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
+      detectDirection = "";
       player_ship_announcements.innerHTML = "Your Aircraft Carrier has been destroyed!";
     }
   }
@@ -332,6 +334,7 @@ function beginGame(whosTurnIsIt){
       $("#player_battleship_piece"+i).addClass("player_ship_destroyed");
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
+      detectDirection = "";
       player_ship_announcements.innerHTML = "Your Battleship has been destroyed!";
     }
   }
@@ -343,6 +346,7 @@ function beginGame(whosTurnIsIt){
       $("#player_destroyer_piece"+i).addClass("player_ship_destroyed");
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
+      detectDirection = "";
       player_ship_announcements.innerHTML = "Your Destroyer has been destroyed!";
     }
   }
@@ -354,6 +358,7 @@ function beginGame(whosTurnIsIt){
       $("#player_submarine_piece"+i).addClass("player_ship_destroyed");
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
+      detectDirection = "";
       player_ship_announcements.innerHTML = "Your Submarine has been destroyed!";
     }
   }
@@ -365,6 +370,7 @@ function beginGame(whosTurnIsIt){
       $("#player_ptboat_piece"+i).addClass("player_ship_destroyed");
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
+      detectDirection = "";
       player_ship_announcements.innerHTML = "Your PT Boat has been destroyed!";
     }
   }
@@ -390,7 +396,7 @@ function beginGame(whosTurnIsIt){
   }
   //END DESTRUCTION DETECTION
   if (whosTurnIsIt === 1){
-    announcements.innerHTML = "Your Turn!";
+    announcements.innerHTML = "Your Turn! Click on the enemy's board";
     turns = turns + 1;
     playerTurnBegin();
   } else {
@@ -409,7 +415,16 @@ function computerTurnBegin(){
         let lastHitLength = lastHitArray.length
         let lastHitSelector = Math.floor(Math.random()*(lastHitLength-0+1)+0);
         let lastHit = lastHitArray[lastHitSelector];
-      let computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
+        let computerSpecificSelection = 0;
+        if (detectDirection === "horizontal"){
+          computerSpecificSelection = Math.floor(Math.random()*(2-1+1)+1);
+        }
+        if (detectDirection === "vertical"){
+          computerSpecificSelection = Math.floor(Math.random()*(4-3+1)+3);
+        } else {
+         computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
+        }
+        console.log(computerSpecificSelection);
       if (computerSpecificSelection === 1){
         let toTheRight = $(lastHit).next()[0]
         if (toTheRight === undefined){
