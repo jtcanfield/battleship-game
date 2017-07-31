@@ -269,28 +269,28 @@ function beginGame(whosTurnIsIt){
     console.log("computer turn");
   }
 }
-let playerStop = false
-  function playerTurnBegin(){
-    //LETS find ever clickable object
-    let allClickableEnemyBoard = document.querySelectorAll("#computer_battleship_board > table > tbody > tr > td");
-    let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
-    console.log($(clickableEnemyBoard));
-    //Function for hover
-    $(clickableEnemyBoard).hover(function(){
-      $(this).css("background-color", "pink");
-      }, function(){
-      $(this).css("background-color", "white");
-    });
+function playerTurnBegin(){
+  //LETS find ever clickable object
+  let allClickableEnemyBoard = document.querySelectorAll("#computer_battleship_board > table > tbody > tr > td");
+  let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
+  $(clickableEnemyBoard).addClass("clickable");
+  console.log($(clickableEnemyBoard));
+
+  //jQuery Function for Click
     $(clickableEnemyBoard).click(function(){
       $(this).addClass("dont_touch_this");
       if ($(this).hasClass("computer_pieces")){
         $(this).addClass("hit_on_computer");
+        $(this).removeClass("clickable");
+        $(clickableEnemyBoard).removeClass("clickable");
+        clickableEnemyBoard = [];
         // beginGame(1);
-        playerStop = true;
       } else {
         $(this).addClass("miss_on_computer");
+        $(this).removeClass("clickable");
+        $(clickableEnemyBoard).removeClass("clickable");
+        clickableEnemyBoard = [];
         // beginGame(1);
-        playerStop = true;
       }
     });
 }

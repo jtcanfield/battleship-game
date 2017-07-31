@@ -54,6 +54,9 @@ th, td{
 .miss_on_computer{
   background-color: grey !important;
 }
+.clickable:hover{
+  background-color: pink;
+}
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {
