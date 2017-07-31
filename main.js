@@ -274,6 +274,9 @@ function beginGame(whosTurnIsIt){
     alert("You won the game in " + turns + " turns!");
     alert("Refresh to play again!");
     $("*").off("click");
+    $("#computer_player_avatar").removeClass();
+    $("#computer_player_avatar").addClass("avatar_cry");
+    console.log(theGameBreakingVariableThatShallNeverBeDefined);
   }
   if (playerShipsDestroyed >= 5){
     computer_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
@@ -282,6 +285,9 @@ function beginGame(whosTurnIsIt){
     alert("You lost the game in " + turns + " turns....");
     alert("Refresh to play again!");
     $("*").off("click");
+    $("#computer_player_avatar").removeClass();
+    $("#computer_player_avatar").addClass("avatar_devil");
+    console.log(theGameBreakingVariableThatShallNeverBeDefined);
   }
   //END VICTORY CONDITION DETECTION
   //BEGIN DESTRUCTION DETECTION
