@@ -337,10 +337,13 @@ function beginGame(whosTurnIsIt){
   console.log(computerFoundPlayerShip);
   //END DESTRUCTION DETECTION
   if (whosTurnIsIt === 0){
+    announcements.innerHTML = "Your Turn!";
     playerTurnBegin();
   }
   if (whosTurnIsIt === 1){
-  computerTurnBegin();
+  setTimeout(computerTurnBegin, 3000)
+  announcements.innerHTML = "Computer Is Thinking...";
+  // computerTurnBegin();
   }
 }
 //END TURN DETECTION
