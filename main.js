@@ -23,18 +23,17 @@ $(document).ready(function() {
       computerPlaceShips();
     }
   });
-  $("#start_game_fiveshots").click(function() {
-    // if (boatsDown !== 5){
-      if (boatsDown > 6){
-      start_game_announcements.innerHTML = "Please Place all boats before starting!"
-    } else {
-      start_game_announcements.innerHTML = "This Option is not avaiable yet. Please start a One Shot Game!"
-      // playerShotsPerTurn = 5;
-      // computerShotsPerTurn = 5;
-      // $("#pregame_box").hide(1000);
-      // computerPlaceShips();
-    }
-  });
+  // $("#start_game_fiveshots").click(function() {
+  //   if (boatsDown !== 5){
+  //     start_game_announcements.innerHTML = "Please Place all boats before starting!"
+  //   } else {
+  //     start_game_announcements.innerHTML = "This Option is not avaiable yet. Please start a One Shot Game!"
+  //     playerShotsPerTurn = 5;
+  //     computerShotsPerTurn = 5;
+  //     $("#pregame_box").hide(1000);
+  //     computerPlaceShips();
+  //   }
+  // });
 });
 //END START GAME FUNCTIONS
 //PLAYER ROTATE SHIP SCRIPTS
@@ -261,7 +260,7 @@ function computerPlaceShips(){
       }
     }
   }
-  beginGame(0);
+  beginGame(1);
 }
 //END COMPUTER PLACING
 //BEGIN TURN DETECTION
@@ -274,6 +273,7 @@ function beginGame(whosTurnIsIt){
     alert("YOU WIN THE GAME!");
     alert("You won the game in " + turns + " turns!");
     alert("Refresh to play again!");
+    $("*").off("click");
   }
   if (playerShipsDestroyed >= 5){
     computer_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
@@ -281,6 +281,7 @@ function beginGame(whosTurnIsIt){
     alert("You lost the game....");
     alert("You lost the game in " + turns + " turns....");
     alert("Refresh to play again!");
+    $("*").off("click");
   }
   //END VICTORY CONDITION DETECTION
   //BEGIN DESTRUCTION DETECTION
@@ -383,15 +384,13 @@ function beginGame(whosTurnIsIt){
     player_ship_announcements.innerHTML = "Your PT Boat is under attack!";
   }
   //END DESTRUCTION DETECTION
-  if (whosTurnIsIt === 0){
+  if (whosTurnIsIt === 1){
     announcements.innerHTML = "Your Turn!";
     turns = turns + 1;
     playerTurnBegin();
-  }
-  if (whosTurnIsIt === 1){
-  setTimeout(computerTurnBegin, 2000)
+  } else {
   announcements.innerHTML = "Computer Is Thinking...";
-  // computerTurnBegin();
+  computerTurnBegin();
   }
 }
 //END TURN DETECTION
@@ -409,85 +408,85 @@ function computerTurnBegin(){
       if (computerSpecificSelection === 1){
         let toTheRight = $(lastHit).next()[0]
         if (toTheRight === undefined){
-          beginGame(1);
+          beginGame();
           return
         }
         if ($(toTheRight).hasClass("dont_touch_this")){
-          beginGame(1);
+          beginGame();
           return
         } else if ($(toTheRight).hasClass("player_pieces")){
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
-            beginGame(0);
+            beginGame(1);
         } else {
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("miss_on_player");
-            beginGame(0);
+            beginGame(1);
         }
       } else if (computerSpecificSelection === 2){
         let toTheLeft = $(lastHit).prev()[0]
         if (toTheLeft === undefined){
-          beginGame(1);
+          beginGame();
           return
         } else if ($(toTheLeft).hasClass("dont_touch_this")){
-          beginGame(1);
+          beginGame();
           return
         } else if ($(toTheLeft).hasClass("player_pieces")){
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
-          beginGame(0);
+          beginGame(1);
         } else {
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("miss_on_player");
-          beginGame(0);
+          beginGame(1);
         }
       } else if (computerSpecificSelection === 3){
         let rowIndexing = $(lastHit).prevUntil(".label").length;
         let findNextRow = $(lastHit).parent().next();
         if (findNextRow[0] === undefined){
-          beginGame(1);
+          beginGame();
           return
         }
         let toTheBottom = $(findNextRow[0].childNodes[rowIndexing+1])[0];
         if ($(toTheBottom).hasClass("dont_touch_this")){
-          beginGame(1);
+          beginGame();
           return
         } else if ($(toTheBottom).hasClass("player_pieces")){
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
-            beginGame(0);
+            beginGame(1);
         } else {
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("miss_on_player");
-            beginGame(0);
+            beginGame(1);
         }
       } else if (computerSpecificSelection === 4){
         let rowIndexing = $(lastHit).prevUntil(".label").length;
         let findNextRow = $(lastHit).parent().prev();
         if (findNextRow[0] === undefined){
-          beginGame(1);
+          beginGame();
           return
         }
         let toTheTop = $(findNextRow[0].childNodes[rowIndexing+1])[0];
         if ($(toTheTop).hasClass("dont_touch_this")){
-          beginGame(1);
+          beginGame();
           return
         } else if ($(toTheTop).hasClass("player_pieces")){
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
           $(toTheTop).addClass("dont_touch_this");
           $(toTheTop).addClass("hit_on_player");
-            beginGame(0);
+            beginGame(1);
         } else {
           $(toTheTop).addClass("miss_on_player");
           $(toTheTop).addClass("dont_touch_this");
-            beginGame(0);
+            beginGame(1);
         }
       } else {
         computerTurnBegin();
@@ -509,7 +508,7 @@ function computerTurnBegin(){
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
     }
-      beginGame(0);
+      beginGame(1);
   }
 }
 //END COMPUTER TURN HANDLER
@@ -531,10 +530,14 @@ function playerTurnBegin(){
         $(this).addClass("hit_on_computer");
         $("#computer_player_avatar").removeClass();
         $("#computer_player_avatar").addClass("avatar_angry");
-        beginGame(1);
+        announcements.innerHTML = "Computer Is Thinking...";
+        setTimeout(beginGame, 2000)
+        // beginGame(1);
       } else {
         $(this).addClass("miss_on_computer");
-        beginGame(1);
+        announcements.innerHTML = "Computer Is Thinking...";
+        setTimeout(beginGame, 2000)
+        // beginGame(1);
       }
     });
   }

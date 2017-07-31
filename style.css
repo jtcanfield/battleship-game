@@ -30,7 +30,6 @@ th, td{
 #computer_player_avatar{
   border-radius: 100%;
   position:fixed;
-  /*background-color: yellow;*/
   margin: 8% 15%;
   height:  50px;
   width:  50px;
@@ -54,6 +53,12 @@ th, td{
 .avatar_cry{
   background-image: url("images/cry.png");
   background-size: contain;
+}
+p{
+  font-size: 20px;
+}
+button{
+  font-size: 25px;
 }
 #computer_player_box{
   position:fixed;
