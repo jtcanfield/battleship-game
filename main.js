@@ -457,6 +457,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheRight).hasClass("player_pieces")){
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
@@ -471,6 +472,7 @@ function computerTurnBegin(){
           }
             beginGame(1);
         } else {
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("miss_on_player");
             beginGame(1);
@@ -484,6 +486,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheLeft).hasClass("player_pieces")){
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
@@ -498,6 +501,7 @@ function computerTurnBegin(){
           }
           beginGame(1);
         } else {
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheLeft).addClass("dont_touch_this");
           $(toTheLeft).addClass("miss_on_player");
           beginGame(1);
@@ -514,6 +518,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheBottom).hasClass("player_pieces")){
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
@@ -528,6 +533,7 @@ function computerTurnBegin(){
           }
             beginGame(1);
         } else {
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheBottom).addClass("dont_touch_this");
           $(toTheBottom).addClass("miss_on_player");
             beginGame(1);
@@ -544,6 +550,7 @@ function computerTurnBegin(){
           beginGame();
           return
         } else if ($(toTheTop).hasClass("player_pieces")){
+          animateBullet($(computerTargetonPlayerBoard), false);
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
           $(toTheTop).addClass("dont_touch_this");
@@ -558,6 +565,7 @@ function computerTurnBegin(){
           }
             beginGame(1);
         } else {
+          animateBullet($(computerTargetonPlayerBoard), false);
           $(toTheTop).addClass("miss_on_player");
           $(toTheTop).addClass("dont_touch_this");
             beginGame(1);
@@ -575,6 +583,7 @@ function computerTurnBegin(){
     let computerTargetonPlayerBoard = clickablePlayerBoard[computerSelection];
     $(computerTargetonPlayerBoard).addClass("dont_touch_this");
     if ($(computerTargetonPlayerBoard).hasClass("player_pieces")){
+      animateBullet($(computerTargetonPlayerBoard), false);
       $(computerTargetonPlayerBoard).addClass("explosion_container").delay(1000).queue(function(next){
         $(computerTargetonPlayerBoard).removeClass("explosion_container");
         next();
@@ -585,6 +594,7 @@ function computerTurnBegin(){
       computerFoundPlayerShip = true;
     } else {
       $(computerTargetonPlayerBoard).addClass("miss_on_player");
+      animateBullet($(computerTargetonPlayerBoard), false);
     }
       beginGame(1);
   }
@@ -602,7 +612,7 @@ function playerTurnBegin(){
       $(this).addClass("dont_touch_this");
       $(this).removeClass("clickable");
       $(clickableEnemyBoard).off("click");
-      animateBullet($(this));
+      animateBullet($(this), true);
       $(clickableEnemyBoard).removeClass("clickable");
       if ($(this).hasClass("computer_pieces")){
         $(this).addClass("explosion_container").delay(1000).queue(function(next){
@@ -663,7 +673,7 @@ function animateAvatarStart(name){
 //     })
 //     });
 
-function animateBullet(objectToShootAt){
+function animateBullet(objectToShootAt, player){
   // let divBullet = document.createElement( "div" );
   // divBullet.id = "bullet_animation";
   function getOffset(selectedThing) {
@@ -673,21 +683,91 @@ function animateBullet(objectToShootAt){
     top: selectedThing.top + window.scrollY
   }
 }
-  let startItem = $("#player_bullet_start_area");
-  leftPos = getOffset(startItem[0]).left;
-  topPos = getOffset(startItem[0]).top;
-  finalLeftPos = getOffset(objectToShootAt[0]).left;
-  finalTopPos = getOffset(objectToShootAt[0]).top;
-  $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
-  });
-  $("#bullet_animation").show(0);
-  $("#bullet_animation").animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
-    $("#bullet_animation").hide(0);
-  });
-
-
+    function angle(cx, cy, ex, ey) {
+    var dy = ey - cy;
+    var dx = ex - cx;
+    var theta = Math.atan2(dy, dx); // range (-PI, PI]
+    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+    //if (theta < 0) theta = 360 + theta; // range [0, 360)
+    return theta;
+    }
+  if (player === true){
+    let startItem = $("#player_bullet_start_area");
+    leftPos = getOffset(startItem[0]).left;
+    topPos = getOffset(startItem[0]).top;
+    finalLeftPos = getOffset(objectToShootAt[0]).left;
+    finalTopPos = getOffset(objectToShootAt[0]).top;
+    let degree = Math.floor(angle(leftPos, topPos, finalLeftPos, finalTopPos));
+    console.log(degree);
+    $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
+    });
+    // $("#bullet_animation").setAttribute("style", "transform: rotate(" + degree + "deg)");
+    $("#bullet_animation").animate({
+          '-webkit-transform': 'rotate(' + degree + 'deg)',
+          '-moz-transform': 'rotate(' + degree + 'deg)',
+          '-ms-transform': 'rotate(' + degree + 'deg)',
+          '-o-transform': 'rotate(' + degree + 'deg)',
+          'transform': 'rotate(' + degree + 'deg)',
+        }, 0);
+    $("#bullet_animation").show(0);
+    $("#bullet_animation").animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
+      $("#bullet_animation").hide(0);
+    });
+  }
+  if (player === false){
+    let startItem = $("#computer_bullet_start_area");
+    leftPos = getOffset(startItem[0]).left;
+    topPos = getOffset(startItem[0]).top;
+    console.log(startItem);
+    console.log(objectToShootAt);
+    finalLeftPos = getOffset(objectToShootAt[0]).left;
+    finalTopPos = getOffset(objectToShootAt[0]).top;
+    let degree = Math.floor(angle(leftPos, topPos, finalLeftPos, finalTopPos));
+    console.log(degree);
+    $("#bullet_animation").animate({ top: topPos, left: leftPos }, function(){
+    });
+    // $("#bullet_animation").setAttribute("style", "transform: rotate(" + degree + "deg)");
+    $("#bullet_animation").animate({
+          '-webkit-transform': 'rotate(' + degree + 'deg)',
+          '-moz-transform': 'rotate(' + degree + 'deg)',
+          '-ms-transform': 'rotate(' + degree + 'deg)',
+          '-o-transform': 'rotate(' + degree + 'deg)',
+          'transform': 'rotate(' + degree + 'deg)',
+        }, 0);
+    $("#bullet_animation").show(0);
+    $("#bullet_animation").animate({ top: finalTopPos, left: finalLeftPos }, 2000, function(){
+      $("#bullet_animation").hide(0);
+    });
+  }
 };
 //END BULLET ANIMATION
+
+
+
+/*HOW TO PUT OBJECTS THAT ARE DEFINED INTO AN ARRAY:
+let portfolioData = [
+    {
+        img : "img/boat.jpg",
+        h2 : "Boats"
+    },
+    {
+        img : "img/hair.jpg",
+        h2 : "Hair Styles"
+    },
+    {
+        img : "img/shirts.jpg",
+        h2 : "t Shirts"
+    },
+    {
+        img : "img/dirt.jpg",
+        h2 : "Dirt"
+    }
+];
+
+SELECTING THEM:
+(portfolioData[0].h2) //would output "Boats"
+*/
+
 
 
 
