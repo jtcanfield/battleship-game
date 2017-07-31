@@ -37,7 +37,7 @@ th, td{
 }
 #computer_player_box{
   position:fixed;
-  background-color: grey;
+  /*background-color: grey;*/
   margin: 10% 15%;
   height:  60px;
   width:  60px;
