@@ -63,12 +63,12 @@ th, td{
 .clickable:hover{
   background-color: pink;
 }
-.player_ship_destoryed{
-  background-image: url("images/destoryed.gif");
-  background-size: contain;
-}
 .explosion_container{
   background-image: url("images/explosion2.gif");
+  background-size: contain;
+}
+.player_ship_destroyed{
+  background-image: url("images/destroyed.gif");
   background-size: contain;
 }
 /*TABLET VERSION*/

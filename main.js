@@ -276,7 +276,7 @@ function beginGame(whosTurnIsIt){
         totalHitsOnShip = totalHitsOnShip + 1;
         if (totalHitsOnShip === computerShipsOnBoardLengths[i]){
           for (let b = 0; b < 6; b++){
-          $("#"+currentShipCheck+b).addClass("player_ship_destoryed");
+          $("#"+currentShipCheck+b).addClass("player_ship_destroyed");
           }
         }
       }
@@ -288,51 +288,61 @@ function beginGame(whosTurnIsIt){
     computerFoundPlayerShip = false;
     for (let i = 0; i < 6; i++){
       $("#player_aircraft_carrier_piece"+i).removeClass("hit_on_player");
-      $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destoryed");
+      $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destroyed");
+      player_ship_announcements.innerHTML = "Your Aircraft Carrier has been destroyed!"
     }
   }
   if ($("#player_battleship_piece1").hasClass("hit_on_player") && $("#player_battleship_piece2").hasClass("hit_on_player") && $("#player_battleship_piece3").hasClass("hit_on_player") && $("#player_battleship_piece4").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     for (let i = 0; i < 5; i++){
       $("#player_battleship_piece"+i).removeClass("hit_on_player");
-      $("#player_battleship_piece"+i).addClass("player_ship_destoryed");
+      $("#player_battleship_piece"+i).addClass("player_ship_destroyed");
+      player_ship_announcements.innerHTML = "Your Battleship has been destroyed!"
     }
   }
   if ($("#player_destoryer_piece1").hasClass("hit_on_player") && $("#player_destoryer_piece2").hasClass("hit_on_player") && $("#player_destoryer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     for (let i = 0; i < 4; i++){
       $("#player_destoryer_piece"+i).removeClass("hit_on_player");
-      $("#player_destoryer_piece"+i).addClass("player_ship_destoryed");
+      $("#player_destoryer_piece"+i).addClass("player_ship_destroyed");
+      player_ship_announcements.innerHTML = "Your Destoryer has been destroyed!"
     }
   }
   if ($("#player_submarine_piece1").hasClass("hit_on_player") && $("#player_submarine_piece2").hasClass("hit_on_player") && $("#player_submarine_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     for (let i = 0; i < 4; i++){
       $("#player_submarine_piece"+i).removeClass("hit_on_player");
-      $("#player_submarine_piece"+i).addClass("player_ship_destoryed");
+      $("#player_submarine_piece"+i).addClass("player_ship_destroyed");
+      player_ship_announcements.innerHTML = "Your Submarine has been destroyed!"
     }
   }
   if ($("#player_ptboat_piece1").hasClass("hit_on_player") && $("#player_ptboat_piece2").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     for (let i = 0; i < 3; i++){
       $("#player_ptboat_piece"+i).removeClass("hit_on_player");
-      $("#player_ptboat_piece"+i).addClass("player_ship_destoryed");
+      $("#player_ptboat_piece"+i).addClass("player_ship_destroyed");
+      player_ship_announcements.innerHTML = "Your PT Boat has been destroyed!"
     }
   }
   if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") || $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
+    player_ship_announcements.innerHTML = "Your Aircraft Carrier is under attack!"
   }
   if ($("#player_battleship_piece1").hasClass("hit_on_player") || $("#player_battleship_piece2").hasClass("hit_on_player") || $("#player_battleship_piece3").hasClass("hit_on_player") || $("#player_battleship_piece4").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
+    player_ship_announcements.innerHTML = "Your Battleship is under attack!"
   }
   if ($("#player_destoryer_piece1").hasClass("hit_on_player") || $("#player_destoryer_piece2").hasClass("hit_on_player") || $("#player_destoryer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
+    player_ship_announcements.innerHTML = "Your Destoryer is under attack!"
   }
   if ($("#player_submarine_piece1").hasClass("hit_on_player") || $("#player_submarine_piece2").hasClass("hit_on_player") || $("#player_submarine_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
+    player_ship_announcements.innerHTML = "Your Submarine is under attack!"
   }
   if ($("#player_ptboat_piece1").hasClass("hit_on_player") || $("#player_ptboat_piece2").hasClass("hit_on_player")){
     computerFoundPlayerShip = true;
+    player_ship_announcements.innerHTML = "Your PT Boat is under attack!"
   }
   console.log(computerFoundPlayerShip);
   //END DESTRUCTION DETECTION
@@ -353,7 +363,7 @@ function computerTurnBegin(){
   //What if i turned this into a switch statement?
     if (computerFoundPlayerShip === true){
         let lastHitsMade = document.querySelectorAll(".hit_on_player");
-        let lastHitArray = $(lastHitsMade).not(document.getElementsByClassName("player_ship_destoryed"));
+        let lastHitArray = $(lastHitsMade).not(document.getElementsByClassName("player_ship_destroyed"));
         let lastHitLength = lastHitArray.length
         let lastHitSelector = Math.floor(Math.random()*(lastHitLength-0+1)+0);
         let lastHit = lastHitArray[lastHitSelector];
