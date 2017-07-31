@@ -271,7 +271,7 @@ function beginGame(whosTurnIsIt){
   if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     computerFoundPlayerShipDestoryed = false;
-    for (let i = 0; i < 5; i++){
+    for (let i = 0; i < 6; i++){
       $("#player_aircraft_carrier_piece"+i).removeClass("hit_on_player");
       $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destoryed");
     }
@@ -279,7 +279,7 @@ function beginGame(whosTurnIsIt){
   if ($("#player_battleship_piece1").hasClass("hit_on_player") && $("#player_battleship_piece2").hasClass("hit_on_player") && $("#player_battleship_piece3").hasClass("hit_on_player") && $("#player_battleship_piece4").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     computerFoundPlayerShipDestoryed = false;
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 5; i++){
       $("#player_battleship_piece"+i).removeClass("hit_on_player");
       $("#player_battleship_piece"+i).addClass("player_ship_destoryed");
     }
@@ -287,7 +287,7 @@ function beginGame(whosTurnIsIt){
   if ($("#player_destoryer_piece1").hasClass("hit_on_player") && $("#player_destoryer_piece2").hasClass("hit_on_player") && $("#player_destoryer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     computerFoundPlayerShipDestoryed = false;
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 4; i++){
       $("#player_destoryer_piece"+i).removeClass("hit_on_player");
       $("#player_destoryer_piece"+i).addClass("player_ship_destoryed");
     }
@@ -295,7 +295,7 @@ function beginGame(whosTurnIsIt){
   if ($("#player_submarine_piece1").hasClass("hit_on_player") && $("#player_submarine_piece2").hasClass("hit_on_player") && $("#player_submarine_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     computerFoundPlayerShipDestoryed = false;
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 4; i++){
       $("#player_submarine_piece"+i).removeClass("hit_on_player");
       $("#player_submarine_piece"+i).addClass("player_ship_destoryed");
     }
@@ -303,7 +303,7 @@ function beginGame(whosTurnIsIt){
   if ($("#player_ptboat_piece1").hasClass("hit_on_player") && $("#player_ptboat_piece2").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
     computerFoundPlayerShipDestoryed = false;
-    for (let i = 0; i < 2; i++){
+    for (let i = 0; i < 3; i++){
       $("#player_ptboat_piece"+i).removeClass("hit_on_player");
       $("#player_ptboat_piece"+i).addClass("player_ship_destoryed");
     }
@@ -404,8 +404,8 @@ function computerTurnBegin(){
         } else if ($(toTheTop).hasClass("player_pieces")){
           // let computerLastHit = document.getElementsByClassName("computer_last_hit")[0];
           // $(computerLastHit).removeClass("computer_last_hit");
-          $(toTheTop).addClass("dont_touch_this");
           // $(toTheTop).addClass("computer_last_hit");
+          $(toTheTop).addClass("dont_touch_this");
           $(toTheTop).addClass("hit_on_player");
             beginGame(0);
         } else {
