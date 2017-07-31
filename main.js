@@ -1,5 +1,4 @@
 $("#computer_player_avatar").hide(0);
-$(".direction_detector").hide(0);
 let boatsDown = 0;
 let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
