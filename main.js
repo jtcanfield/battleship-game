@@ -325,6 +325,7 @@ function beginGame(whosTurnIsIt){
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
       detectDirection = "";
+      timesHitInDirection = 0;
       player_ship_announcements.innerHTML = "Your Aircraft Carrier has been destroyed!";
     }
   }
@@ -337,6 +338,7 @@ function beginGame(whosTurnIsIt){
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
       detectDirection = "";
+      timesHitInDirection = 0;
       player_ship_announcements.innerHTML = "Your Battleship has been destroyed!";
     }
   }
@@ -349,6 +351,7 @@ function beginGame(whosTurnIsIt){
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
       detectDirection = "";
+      timesHitInDirection = 0;
       player_ship_announcements.innerHTML = "Your Destroyer has been destroyed!";
     }
   }
@@ -361,6 +364,7 @@ function beginGame(whosTurnIsIt){
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
       detectDirection = "";
+      timesHitInDirection = 0;
       player_ship_announcements.innerHTML = "Your Submarine has been destroyed!";
     }
   }
@@ -373,6 +377,7 @@ function beginGame(whosTurnIsIt){
       $("#computer_player_avatar").removeClass();
       $("#computer_player_avatar").addClass("avatar_devil");
       detectDirection = "";
+      timesHitInDirection = 0;
       player_ship_announcements.innerHTML = "Your PT Boat has been destroyed!";
     }
   }
@@ -421,6 +426,7 @@ function computerTurnBegin(){
         if (detectDirection === "horizontal"){
           computerSpecificSelection = Math.floor(Math.random()*(2-1+1)+1);
           timesAttemptInDirection += 1;
+          console.log(timesAttemptInDirection);
           if (timesAttemptInDirection >= 50){
             detectDirection = "";
             beginGame();
@@ -430,6 +436,7 @@ function computerTurnBegin(){
         if (detectDirection === "vertical"){
           computerSpecificSelection = Math.floor(Math.random()*(4-3+1)+3);
           timesAttemptInDirection += 1;
+          console.log(timesAttemptInDirection);
           if (timesAttemptInDirection >= 50){
             detectDirection = "";
             beginGame();
@@ -439,6 +446,7 @@ function computerTurnBegin(){
          computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
         }
         console.log(computerSpecificSelection);
+        console.log(detectDirection);
       if (computerSpecificSelection === 1){
         let toTheRight = $(lastHit).next()[0]
         if (toTheRight === undefined){
@@ -457,15 +465,16 @@ function computerTurnBegin(){
             $(toTheRight).removeClass("explosion_container");
             next();
           });
+          timesHitInDirection += 1;
+          if (timesHitInDirection >= 2){
+            detectDirection = "horizontal";
+          }
             beginGame(1);
         } else {
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("miss_on_player");
             beginGame(1);
         }
-        /*
-        let timesHitInDirection = 0;
-        */
       } else if (computerSpecificSelection === 2){
         let toTheLeft = $(lastHit).prev()[0]
         if (toTheLeft === undefined){
@@ -483,6 +492,10 @@ function computerTurnBegin(){
             $(toTheLeft).removeClass("explosion_container");
             next();
           });
+          if (timesHitInDirection >= 2){
+            detectDirection = "horizontal";
+          }
+          timesHitInDirection += 1;
           beginGame(1);
         } else {
           $(toTheLeft).addClass("dont_touch_this");
@@ -509,6 +522,10 @@ function computerTurnBegin(){
             $(toTheBottom).removeClass("explosion_container");
             next();
           });
+          if (timesHitInDirection >= 2){
+            detectDirection = "vertical";
+          }
+          timesHitInDirection += 1;
             beginGame(1);
         } else {
           $(toTheBottom).addClass("dont_touch_this");
@@ -535,6 +552,10 @@ function computerTurnBegin(){
             $(toTheTop).removeClass("explosion_container");
             next();
           });
+          if (timesHitInDirection >= 2){
+            detectDirection = "vertical";
+          }
+          timesHitInDirection += 1;
             beginGame(1);
         } else {
           $(toTheTop).addClass("miss_on_player");
