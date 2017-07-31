@@ -5,6 +5,8 @@ let playerShotsPerTurn = 1;
 let computerShotsPerTurn = 1;
 let computerFoundPlayerShip = false;
 let enemyShipsDestroyed = 0;
+let playerShipsDestroyed = 0;
+let turns = 0;
 function main() {
 }
 $(document).ready(main);
@@ -264,7 +266,23 @@ function computerPlaceShips(){
 //END COMPUTER PLACING
 //BEGIN TURN DETECTION
 function beginGame(whosTurnIsIt){
-  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed: " + enemyShipsDestroyed;
+  //BEGIN VICTORY CONDITION DETECTION
+  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed: " + enemyShipsDestroyed + "<br>Turns Taken: " + turns;
+  if (enemyShipsDestroyed >= 5){
+    computer_ship_announcements.innerHTML = "YOU WON! <br>Turns Taken: " + turns;
+    player_ship_announcements.innerHTML = "YOU WON! <br>Turns Taken: " + turns;
+    alert("YOU WIN THE GAME!");
+    alert("You won the game in " + turns + " turns!");
+    alert("Refresh to play again!");
+  }
+  if (playerShipsDestroyed >= 5){
+    computer_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
+    player_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
+    alert("You lost the game....");
+    alert("You lost the game in " + turns + " turns....");
+    alert("Refresh to play again!");
+  }
+  //END VICTORY CONDITION DETECTION
   //BEGIN DESTRUCTION DETECTION
   let computerShipsOnBoard = ["computer_aircraft_carrier_piece", "computer_battleship_piece", "computer_destroyer_piece", "computer_submarine_piece", "computer_ptboat_piece",];
   let computerShipsOnBoardLengths = [5, 4, 3, 3, 2,];
@@ -289,9 +307,9 @@ function beginGame(whosTurnIsIt){
       l++
     }
   }
-  let playerShipsOnBoard = [];
   if ($("#player_aircraft_carrier_piece1").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece2").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece3").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece4").hasClass("hit_on_player") && $("#player_aircraft_carrier_piece5").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
+    playerShipsDestroyed = playerShipsDestroyed + 1;
     for (let i = 0; i < 6; i++){
       $("#player_aircraft_carrier_piece"+i).removeClass("hit_on_player");
       $("#player_aircraft_carrier_piece"+i).addClass("player_ship_destroyed");
@@ -302,6 +320,7 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_battleship_piece1").hasClass("hit_on_player") && $("#player_battleship_piece2").hasClass("hit_on_player") && $("#player_battleship_piece3").hasClass("hit_on_player") && $("#player_battleship_piece4").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
+    playerShipsDestroyed = playerShipsDestroyed + 1;
     for (let i = 0; i < 5; i++){
       $("#player_battleship_piece"+i).removeClass("hit_on_player");
       $("#player_battleship_piece"+i).addClass("player_ship_destroyed");
@@ -312,6 +331,7 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_destroyer_piece1").hasClass("hit_on_player") && $("#player_destroyer_piece2").hasClass("hit_on_player") && $("#player_destroyer_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
+    playerShipsDestroyed = playerShipsDestroyed + 1;
     for (let i = 0; i < 4; i++){
       $("#player_destroyer_piece"+i).removeClass("hit_on_player");
       $("#player_destroyer_piece"+i).addClass("player_ship_destroyed");
@@ -322,6 +342,7 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_submarine_piece1").hasClass("hit_on_player") && $("#player_submarine_piece2").hasClass("hit_on_player") && $("#player_submarine_piece3").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
+    playerShipsDestroyed = playerShipsDestroyed + 1;
     for (let i = 0; i < 4; i++){
       $("#player_submarine_piece"+i).removeClass("hit_on_player");
       $("#player_submarine_piece"+i).addClass("player_ship_destroyed");
@@ -332,6 +353,7 @@ function beginGame(whosTurnIsIt){
   }
   if ($("#player_ptboat_piece1").hasClass("hit_on_player") && $("#player_ptboat_piece2").hasClass("hit_on_player")){
     computerFoundPlayerShip = false;
+    playerShipsDestroyed = playerShipsDestroyed + 1;
     for (let i = 0; i < 3; i++){
       $("#player_ptboat_piece"+i).removeClass("hit_on_player");
       $("#player_ptboat_piece"+i).addClass("player_ship_destroyed");
@@ -363,6 +385,7 @@ function beginGame(whosTurnIsIt){
   //END DESTRUCTION DETECTION
   if (whosTurnIsIt === 0){
     announcements.innerHTML = "Your Turn!";
+    turns = turns + 1;
     playerTurnBegin();
   }
   if (whosTurnIsIt === 1){
