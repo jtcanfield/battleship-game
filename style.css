@@ -48,6 +48,12 @@ th, td{
   height: 150px;
   align-items: center;
 }
+.hit_on_computer{
+  background-color: red !important;
+}
+.miss_on_computer{
+  background-color: grey !important;
+}
 /*TABLET VERSION*/
 @media (max-width: 900px) {
   html {
