@@ -416,7 +416,6 @@ function beginGame(whosTurnIsIt){
 function computerTurnBegin(){
   //SPECIFIC COMPUTER RANDOMIZER
   //What if i turned this into a switch statement?
-  console.log("1. DIRECTION DETECTED: " + detectDirection);
     if (computerFoundPlayerShip === true){
         let lastHitsMade = document.querySelectorAll(".hit_on_player");
         let lastHitArray = $(lastHitsMade).not(document.getElementsByClassName("player_ship_destroyed"));
@@ -427,9 +426,7 @@ function computerTurnBegin(){
         if (detectDirection === "horizontal"){
           computerSpecificSelection = Math.floor(Math.random()*(2-1+1)+1);
           timesAttemptInDirection += 1;
-          console.log("NUMBER OF TIMES ATTEMPTED HORIZONTAL: " + timesAttemptInDirection);
           if (timesAttemptInDirection >= 50){
-            console.log("CANCELLING HORIZONTAL");
             detectDirection = "";
             beginGame();
             return
@@ -438,9 +435,7 @@ function computerTurnBegin(){
         if (detectDirection === "vertical"){
           computerSpecificSelection = Math.floor(Math.random()*(4-3+1)+3);
           timesAttemptInDirection += 1;
-          console.log("NUMBER OF TIMES ATTEMPTED VERTICAL: " + timesAttemptInDirection);
           if (timesAttemptInDirection >= 50){
-            console.log("CANCELLING VERTICAL");
             detectDirection = "";
             beginGame();
             return
@@ -450,8 +445,6 @@ function computerTurnBegin(){
        } else {
          console.log("detectDirection STRING HAS RETURNED ELSE, PLEASE CHECK");
        }
-        console.log("RANDOM NUMBER GEN: " + computerSpecificSelection);
-        console.log("2. DIRECTION DETECTED: " + detectDirection);
       if (computerSpecificSelection === 1){
         let toTheRight = $(lastHit).next()[0]
         if (toTheRight === undefined){
