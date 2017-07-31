@@ -271,7 +271,10 @@ function beginGame(whosTurnIsIt){
 }
 //BEGIN COMPUTER TURN HANDLER
 function computerTurnBegin(){
-
+  let allClickablePlayerBoard = document.querySelectorAll("#player_battleship_board > table > tbody > tr > td");
+  let clickablePlayerBoard = $(allClickablePlayerBoard).not(document.getElementsByClassName("dont_touch_this"));
+  $(clickablePlayerBoard).addClass("clickable");
+  console.log($(clickablePlayerBoard));
 }
 //END COMPUTER TURN HANDLER
 //BEGIN PLAYER TURN HANDLER
