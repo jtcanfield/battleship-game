@@ -12,7 +12,8 @@ $(document).ready(function() {
 //START GAME BUTTON FUNCTIONS
   animateAvatarStart("#computer_player_avatar");
   $("#start_game_oneshotperturn").click(function() {
-    if (boatsDown !== 5){
+    // if (boatsDown !== 5){
+      if (boatsDown > 6){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       playerShotsPerTurn = 1;
@@ -22,7 +23,8 @@ $(document).ready(function() {
     }
   });
   $("#start_game_fiveshots").click(function() {
-    if (boatsDown !== 5){
+    // if (boatsDown !== 5){
+      if (boatsDown > 6){
       start_game_announcements.innerHTML = "Please Place all boats before starting!"
     } else {
       start_game_announcements.innerHTML = "This Option is not avaiable yet. Please start a One Shot Game!"
@@ -205,7 +207,6 @@ function computerPlaceShips(){
         //HORIZONTAL DETECTION
         for (let d = 0; d < lengthOfShips; d++){
           if ($(selectedPieceForDetection).nextUntil(".computer_pieces").length+1 < lengthOfShips){
-            console.log("HORIZONTAL CLASH");
             actionLegal = 0;
           } else {
             selectedPieceForDetection = $(selectedPieceForDetection).nextUntil()[0];
@@ -233,10 +234,8 @@ function computerPlaceShips(){
           let rowIndexing = $(selectedPieceForDetection).prevUntil(".label").length;
           let findNextRow = $(selectedPieceForDetection).parent().next();
           if ($(selectedPieceForDetection).hasClass("computer_pieces")){
-              console.log("VERTICAL CRASH");
               actionLegal = 0;
           } else {
-          console.log(selectedPieceForDetection);
           selectedPieceForDetection = $(findNextRow[0].childNodes[rowIndexing+1])[0];
           }
         }
@@ -258,11 +257,24 @@ function computerPlaceShips(){
       }
     }
   }
+  beginGame();
 }
 //END COMPUTER PLACING
+//BEGIN TURN DETECTION
+let isPlayerTurn = 1;
+function beginGame(){
+  if (isPlayerTurn === 0){
+  }
+  if (isPlayerTurn === 1){
+    //LETS find ever clickable object
+    let allClickableEnemyBoard = document.querySelectorAll("#computer_battleship_board > table > tbody > tr > td");
+    let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
+    for (let i = 0; i < clickableEnemyBoard.length; i++){
 
-
-
+    }
+    console.log(clickableEnemyBoard.length);
+  }
+}
 
 
 
