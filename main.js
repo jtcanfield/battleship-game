@@ -7,6 +7,8 @@ let enemyShipsDestroyed = 0;
 let playerShipsDestroyed = 0;
 let turns = 0;
 let detectDirection = "";
+let timesHitInDirection = 0;
+let timesAttemptInDirection = 0;
 function main() {
 }
 $(document).ready(main);
@@ -418,9 +420,21 @@ function computerTurnBegin(){
         let computerSpecificSelection = 0;
         if (detectDirection === "horizontal"){
           computerSpecificSelection = Math.floor(Math.random()*(2-1+1)+1);
+          timesAttemptInDirection += 1;
+          if (timesAttemptInDirection >= 50){
+            detectDirection = "";
+            beginGame();
+            return
+          }
         }
         if (detectDirection === "vertical"){
           computerSpecificSelection = Math.floor(Math.random()*(4-3+1)+3);
+          timesAttemptInDirection += 1;
+          if (timesAttemptInDirection >= 50){
+            detectDirection = "";
+            beginGame();
+            return
+          }
         } else {
          computerSpecificSelection = Math.floor(Math.random()*(4-1+1)+1);
         }
@@ -439,12 +453,19 @@ function computerTurnBegin(){
           $(toTheRight).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
+          $(toTheRight).addClass("explosion_container").delay(1000).queue(function(next){
+            $(toTheRight).removeClass("explosion_container");
+            next();
+          });
             beginGame(1);
         } else {
           $(toTheRight).addClass("dont_touch_this");
           $(toTheRight).addClass("miss_on_player");
             beginGame(1);
         }
+        /*
+        let timesHitInDirection = 0;
+        */
       } else if (computerSpecificSelection === 2){
         let toTheLeft = $(lastHit).prev()[0]
         if (toTheLeft === undefined){
@@ -458,6 +479,10 @@ function computerTurnBegin(){
           $(toTheLeft).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
+          $(toTheLeft).addClass("explosion_container").delay(1000).queue(function(next){
+            $(toTheLeft).removeClass("explosion_container");
+            next();
+          });
           beginGame(1);
         } else {
           $(toTheLeft).addClass("dont_touch_this");
@@ -480,6 +505,10 @@ function computerTurnBegin(){
           $(toTheBottom).addClass("hit_on_player");
           $("#computer_player_avatar").removeClass();
           $("#computer_player_avatar").addClass("avatar_normal");
+          $(toTheBottom).addClass("explosion_container").delay(1000).queue(function(next){
+            $(toTheBottom).removeClass("explosion_container");
+            next();
+          });
             beginGame(1);
         } else {
           $(toTheBottom).addClass("dont_touch_this");
@@ -502,6 +531,10 @@ function computerTurnBegin(){
           $("#computer_player_avatar").addClass("avatar_normal");
           $(toTheTop).addClass("dont_touch_this");
           $(toTheTop).addClass("hit_on_player");
+          $(toTheTop).addClass("explosion_container").delay(1000).queue(function(next){
+            $(toTheTop).removeClass("explosion_container");
+            next();
+          });
             beginGame(1);
         } else {
           $(toTheTop).addClass("miss_on_player");
