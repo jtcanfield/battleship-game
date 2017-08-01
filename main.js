@@ -269,33 +269,6 @@ function computerPlaceShips(){
 //END COMPUTER PLACING
 //BEGIN TURN DETECTION
 function beginGame(whosTurnIsIt){
-  //BEGIN VICTORY CONDITION DETECTION
-  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed: " + enemyShipsDestroyed + "<br>Turns Taken: " + turns;
-  if (enemyShipsDestroyed >= 5){
-    computer_ship_announcements.innerHTML = "YOU WON! <br>Turns Taken: " + turns;
-    announcements.innerHTML = "YOU WON!";
-    player_ship_announcements.innerHTML = "Turns Taken: " + turns;
-    alert("YOU WIN THE GAME!");
-    alert("You won the game in " + turns + " turns!");
-    alert("Refresh to play again!");
-    $("*").off("click");
-    $("#computer_player_avatar").removeClass();
-    $("#computer_player_avatar").addClass("avatar_cry");
-    console.log(theGameBreakingVariableThatShallNeverBeDefined);
-  }
-  if (playerShipsDestroyed >= 5){
-    computer_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
-    announcements.innerHTML = "You lost....";
-    player_ship_announcements.innerHTML = "Turns Taken: " + turns;
-    alert("You lost the game....");
-    alert("You lost the game in " + turns + " turns....");
-    alert("Refresh to play again!");
-    $("*").off("click");
-    $("#computer_player_avatar").removeClass();
-    $("#computer_player_avatar").addClass("avatar_devil");
-    console.log(theGameBreakingVariableThatShallNeverBeDefined);
-  }
-  //END VICTORY CONDITION DETECTION
   //BEGIN DESTRUCTION DETECTION
   let computerShipsOnBoard = ["computer_aircraft_carrier_piece", "computer_battleship_piece", "computer_destroyer_piece", "computer_submarine_piece", "computer_ptboat_piece",];
   let computerShipsOnBoardLengths = [5, 4, 3, 3, 2,];
@@ -406,6 +379,33 @@ function beginGame(whosTurnIsIt){
     player_ship_announcements.innerHTML = "Your PT Boat is under attack!";
   }
   //END DESTRUCTION DETECTION
+  //BEGIN VICTORY CONDITION DETECTION
+  computer_ship_announcements.innerHTML = "Enemy Ships Destroyed: " + enemyShipsDestroyed + "<br>Turns Taken: " + turns;
+  if (enemyShipsDestroyed >= 5){
+    computer_ship_announcements.innerHTML = "YOU WON! <br>Turns Taken: " + turns;
+    announcements.innerHTML = "YOU WON!";
+    player_ship_announcements.innerHTML = "Turns Taken: " + turns;
+    alert("YOU WIN THE GAME!");
+    alert("You won the game in " + turns + " turns!");
+    alert("Refresh to play again!");
+    $("*").off("click");
+    $("#computer_player_avatar").removeClass();
+    $("#computer_player_avatar").addClass("avatar_cry");
+    console.log(theGameBreakingVariableThatShallNeverBeDefined);
+  }
+  if (playerShipsDestroyed >= 5){
+    computer_ship_announcements.innerHTML = "You lost.... <br>Turns Taken: " + turns;
+    announcements.innerHTML = "You lost....";
+    player_ship_announcements.innerHTML = "Turns Taken: " + turns;
+    alert("You lost the game....");
+    alert("You lost the game in " + turns + " turns....");
+    alert("Refresh to play again!");
+    $("*").off("click");
+    $("#computer_player_avatar").removeClass();
+    $("#computer_player_avatar").addClass("avatar_devil");
+    console.log(theGameBreakingVariableThatShallNeverBeDefined);
+  }
+  //END VICTORY CONDITION DETECTION
   if (whosTurnIsIt === 1){
     announcements.innerHTML = "Your Turn! Click on the enemy's board";
     turns = turns + 1;
