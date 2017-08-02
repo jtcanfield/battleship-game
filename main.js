@@ -388,7 +388,6 @@ function beginGame(whosTurnIsIt){
     alert("YOU WIN THE GAME!");
     alert("You won the game in " + turns + " turns!");
     alert("Refresh to play again!");
-    $("*").off("click");
     $("#computer_player_avatar").removeClass();
     $("#computer_player_avatar").addClass("avatar_cry");
     console.log(theGameBreakingVariableThatShallNeverBeDefined);
@@ -400,7 +399,6 @@ function beginGame(whosTurnIsIt){
     alert("You lost the game....");
     alert("You lost the game in " + turns + " turns....");
     alert("Refresh to play again!");
-    $("*").off("click");
     $("#computer_player_avatar").removeClass();
     $("#computer_player_avatar").addClass("avatar_devil");
     console.log(theGameBreakingVariableThatShallNeverBeDefined);
