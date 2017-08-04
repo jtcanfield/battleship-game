@@ -408,6 +408,7 @@ function beginGame(whosTurnIsIt){
     announcements.innerHTML = "Your Turn! Click on the enemy's board";
     turns = turns + 1;
     playerTurnBegin();
+    setTimeout(window.scrollTo(0, 0), 2000);
   } else {
   announcements.innerHTML = "Computer Is Thinking...";
   computerTurnBegin();
@@ -416,6 +417,7 @@ function beginGame(whosTurnIsIt){
 //END TURN DETECTION
 //BEGIN COMPUTER TURN HANDLER
 function computerTurnBegin(){
+  window.scrollTo(0, 500);
   //SPECIFIC COMPUTER RANDOMIZER
   //What if i turned this into a switch statement?
     if (computerFoundPlayerShip === true){
@@ -602,7 +604,7 @@ function computerTurnBegin(){
 //END COMPUTER TURN HANDLER
 //BEGIN PLAYER TURN HANDLER
 function playerTurnBegin(){
-  //LETS find ever clickable object
+  //LETS find every clickable object
   let allClickableEnemyBoard = document.querySelectorAll("#computer_battleship_board > table > tbody > tr > td");
   let clickableEnemyBoard = $(allClickableEnemyBoard).not(document.getElementsByClassName("dont_touch_this"));
   $(clickableEnemyBoard).addClass("clickable");
@@ -623,13 +625,13 @@ function playerTurnBegin(){
         $("#computer_player_avatar").removeClass();
         $("#computer_player_avatar").addClass("avatar_angry");
         announcements.innerHTML = "Computer Is Thinking...";
-        setTimeout(beginGame, 2000)
-        // beginGame(1);
+        window.scrollTo(0, 99999);
+        setTimeout(beginGame, 2000);
       } else {
         $(this).addClass("miss_on_computer");
         announcements.innerHTML = "Computer Is Thinking...";
-        setTimeout(beginGame, 2000)
-        // beginGame(1);
+        window.scrollTo(0, 99999);
+        setTimeout(beginGame, 2000);
       }
     });
   }
