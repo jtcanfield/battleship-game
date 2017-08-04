@@ -5,6 +5,7 @@ html {
   text-align: center;
   background-color: #A7D5FF;
   padding-bottom: 5%;
+  cursor:default;
 }
 #battleship_board_container{
   display: inline-block;
